@@ -8,6 +8,7 @@ import javax.persistence.Id;
 public class ParkingLot {
 	@Id
 	private Long parkinglotId;//주차장 id
+	private String parkingName; //주차장명
 	private String addr;//주차장 주소
 	private String wido;//위도
 	private String geongdo;//경도
