@@ -48,14 +48,17 @@
 			</div>
 		</c:if>
 
+		<button type="button" class="btn btn-dark" id="btnParkinglotList"
+			onclick="location.href='/member/parkinglotList'">주차장 조회</button>
+
 		<button type="button" class="btn btn-success" id="btnUpdateAcc">update
 			account</button>
 		<button type="button" class="btn btn-danger" id="btnDelAcc">delete
 			account</button>
 		<button type="button" class="btn btn-dark" id="btnCancle"
 			onclick="location.href='/'">cancle</button>
-			
-			<button type="button" class="btn btn-dark" id="btnLogout"
+
+		<button type="button" class="btn btn-dark" id="btnLogout"
 			onclick="location.href='/member/logout'">로그아웃</button>
 
 	</div>

@@ -1,5 +1,7 @@
 package com.example.parking.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,14 +22,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.parking.config.auth.PrincipalDetails;
 import com.example.parking.model.Member;
+import com.example.parking.model.ParkingLot;
 import com.example.parking.repository.MemberRepository;
 import com.example.parking.service.MemberService;
+import com.example.parking.service.ParkingLotService;
 
 @RequestMapping("/member/*")
 @Controller
 public class MemberController {
 	@Autowired
 	MemberService memberService;
+
+	@Autowired
+	ParkingLotService parkingLotService;
 
 	@GetMapping("join")
 	public String join() {
@@ -92,8 +99,23 @@ public class MemberController {
 	@DeleteMapping("delete")
 	public ResponseEntity<String> delete(String username) {
 		memberService.delete(username);
-		
+
 		return new ResponseEntity<>("success", HttpStatus.OK);
 	}
+
+	////////////
+
+	@GetMapping("parkinglotList")
+	public String parkingList() {
+		return "/member/parkinglotList";
+	}
+	
+	@PostMapping("parkinglotList")
+	@ResponseBody
+	public List<ParkingLot> getparkingList() {
+
+		return parkingLotService.list();
+	}
+
 
 }

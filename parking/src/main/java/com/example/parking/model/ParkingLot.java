@@ -17,6 +17,7 @@ public class ParkingLot {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long parkinglotId;//주차장 id
+	// 사장님 id 넣어야함
 	private String parkingName; //주차장명
 	private String addr;//주차장 주소
 	private String wido;//위도
