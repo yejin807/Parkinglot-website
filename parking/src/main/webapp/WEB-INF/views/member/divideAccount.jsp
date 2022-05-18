@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,8 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<button class="btn-sm btn-outline-secondary" onclick="location.href='/member/login/owner'">ÀÚµ¿Â÷ °ü¸®ÀÚ È¸¿ø °¡ÀÔ</button>
-	<button class="btn-sm btn-outline-secondary" onclick="location.href='/member/login/user'">ÀÏ¹Ý
-		»ç¿ëÀÚ È¸¿ø °¡ÀÔ</button>
+	<button class="btn-sm btn-outline-secondary"
+		onclick="location.href='/member/join/owner'">ìžë™ì°¨ ê´€ë¦¬ìž íšŒì› ê°€ìž…</button>
+	<button class="btn-sm btn-outline-secondary"
+		onclick="location.href='/member/join/user'">ì¼ë°˜ ì‚¬ìš©ìž íšŒì› ê°€ìž…</button>
 </body>
 </html>

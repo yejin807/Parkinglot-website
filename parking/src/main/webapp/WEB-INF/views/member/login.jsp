@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,12 +11,12 @@
 
 		<form action="login" method="post">
 			<div class="form-group">
-				<label for="id">���̵�:</label> <input type="text" class="form-control"
+				<label for="id">아이디:</label> <input type="text" class="form-control"
 					id="username" placeholder="Enter ID" name="username">
 			</div>
 
 			<div class="form-group">
-				<label for="pwd">��й�ȣ:</label> <input type="password"
+				<label for="pwd">비밀번호:</label> <input type="password"
 					class="form-control" id="password" placeholder="Enter password"
 					name="password">
 			</div>
