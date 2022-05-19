@@ -12,56 +12,50 @@ import lombok.Data;
 
 @Data
 public class PrincipalDetails implements UserDetails {
-	
-	private Member member;
-	
-	public PrincipalDetails(Member member) {
-		this.member = member;
-	}
-	
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		Collection<GrantedAuthority> collect = new ArrayList<GrantedAuthority>();
-		collect.add(()->{
-			return member.getRole();
-		});
-		return collect;
-	}
 
-	@Override
-	public String getPassword() {
-		// TODO Auto-generated method stub
-		return member.getPassword();
-	}
+    private Member member;
 
-	@Override
-	public String getUsername() {
-		// TODO Auto-generated method stub
-		return member.getUsername();
-	}
+    public PrincipalDetails(Member member) {
+        this.member = member;
+    }
 
-	@Override
-	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
-		return true;
-	}
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        Collection<GrantedAuthority> collect = new ArrayList<GrantedAuthority>();
+        collect.add(() -> {
+            return member.getRole();
+        });
+        return collect;
+    }
 
-	@Override
-	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
-		return true;
-	}
+    @Override
+    public String getPassword() {
+        return member.getPassword();
+    }
 
-	@Override
-	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
-		return true;
-	}
+    @Override
+    public String getUsername() {
+        return member.getUsername();
+    }
 
-	@Override
-	public boolean isEnabled() {
-		// TODO Auto-generated method stub
-		return true;
-	}
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 
 }
