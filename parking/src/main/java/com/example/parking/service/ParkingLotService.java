@@ -92,4 +92,10 @@ public class ParkingLotService {
 		p.setFiles(uploadFileName);
 	}
 
+	//주차장 삭제
+	@Transactional
+	public void delete(Long id) {
+		pRepository.deleteById(id);
+	}
+
 }

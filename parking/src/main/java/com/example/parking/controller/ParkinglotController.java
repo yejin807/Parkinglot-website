@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.parking.model.ParkingLot;
 import com.example.parking.service.ParkingLotService;
@@ -31,8 +33,8 @@ public class ParkinglotController {
 	@PostMapping("insert")
 	public String insert(ParkingLot parkinglot, HttpSession session) {
 		
-		String uploadFolder = session.getServletContext().getRealPath("/")+"\\resources\\img";
-		//String uploadFolder = session.getServletContext().getRealPath("/");
+		//String uploadFolder = session.getServletContext().getRealPath("/")+"\\resources\\img";
+		String uploadFolder = session.getServletContext().getRealPath("/");
 		pService.insert(parkinglot, uploadFolder);
 		return "redirect:/parkinglot/list";
 	}
@@ -65,5 +67,14 @@ public class ParkinglotController {
 		String uploadFolder = session.getServletContext().getRealPath("/");
 		pService.update(parkinglot, uploadFolder);
 		return "redirect:/parkinglot/list";
+	}
+	
+	
+	//주차장삭제하기(사장님)
+	@DeleteMapping("delete/{id}")
+	@ResponseBody
+	public String delete(@PathVariable Long id) {
+		pService.delete(id);
+		return "success";
 	}
 }
