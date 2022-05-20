@@ -251,9 +251,6 @@
                     return false;
                 }
 
-                // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
-                // ps.keywordSearch(keyword, placesSearchCB);
-
                 keywordSearch(keyword)
 
             }
@@ -264,16 +261,15 @@
                     type: "get",
                     url: "/member/list",
                     data: {
-                        "keyword": keyword
+                        "keyword": keyword,
                     }
                 }).done(function (resp) {
 
-
                     var places = resp.content,
-                        pagination = resp
-
+                        respPagination = resp
+                    console.log(resp)
                     displayPlaces(places)
-                    displayPagination(pagination)
+                    displayPagination(keyword, respPagination)
                 })
             }
 
@@ -361,7 +357,7 @@
             }
 
             // 검색결과 목록 하단에 페이지번호를 표시는 함수입니다
-            function displayPagination(pagination) {
+            function displayPagination(keyword, respPagination) {
                 var paginationEl = document.getElementById('pagination'),
                     fragment = document.createDocumentFragment(),
                     i;
@@ -372,17 +368,17 @@
                     paginationEl.removeChild(paginationEl.lastChild);
                 }
 
-                for (i = 1; i <= pagination.totalPages; i++) {
+                for (i = 1; i <= respPagination.totalPages; i++) {
                     var el = document.createElement('a');
                     el.href = "#";
                     el.innerHTML = i;
 
-                    if (i === pagination.number) {
+                    if (i === respPagination.number - 1) {
                         el.className = 'on';
                     } else {
                         el.onclick = (function (i) {
                             return function () {
-                                gotoPage(i);
+                                gotoPage(keyword, i)
                             }
                         })(i);
                     }
@@ -393,18 +389,18 @@
             }
 
             // 페이지 번호 클릭시 발생 이벤트
-            function gotoPage(i) {
+            function gotoPage(keyword, i) {
 
                 $.ajax({
                     type: "get",
-                    url: "/member/list?page=" + (i - 1)
+                    url: "/member/list?keyword=" + keyword + "&page=" + (i - 1)
                 }).done(function (resp) {
 
                     var places = resp.content,
                         pagination = resp
 
                     displayPlaces(places)
-                    displayPagination(pagination)
+                    displayPagination(keyword, pagination)
                 })
 
             }

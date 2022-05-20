@@ -127,7 +127,7 @@ public class MemberController {
     @GetMapping("list")
     @ResponseBody
     public Page<ParkingLot> getparkingList(
-            @PageableDefault(size = 15, sort = "parkinglotId", direction = Sort.Direction.DESC) Pageable pageable,
+            @PageableDefault(size = 3, sort = "parkinglotId", direction = Sort.Direction.DESC, page = 0) Pageable pageable,
             @RequestParam(required = false, defaultValue = "") String keyword) {
         System.out.println("AAA");
         return memberService.listTotal(keyword, pageable);
