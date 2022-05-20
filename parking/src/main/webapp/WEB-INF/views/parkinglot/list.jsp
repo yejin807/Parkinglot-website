@@ -26,7 +26,7 @@
 		<td>${parkinglot.maxCnt}</td>
 		<td>${parkinglot.currentCnt}</td>
 		<td>
-			<button type="button" class="btn btn-primary" onclick="location.href='/ticket/insert/${parkinglot.parkinglotId}'">등록</button>
+			<button type="button" class="btn btn-primary" onclick="location.href='/ticket/sell/${parkinglot.parkinglotId}'">등록</button>
 		</td>
 		<td><button type="button" class="btn btn-danger" onclick="funDel(${parkinglot.parkinglotId})")>삭제</button></td>
 	</tr>

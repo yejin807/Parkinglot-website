@@ -23,15 +23,15 @@ public class TicketController {
 	private ParkingLotRepository pRepository;
 	
 	//정기권판매폼
-	@GetMapping("insert/{id}")
+	@GetMapping("sell/{id}")
 	public String insert(@PathVariable Long id, Model model) {
 		model.addAttribute("parkinglot", pRepository.findById(id).get());
 		model.addAttribute("ticket",tService.findByParkinglotId(id));
-		return "/ticket/insert";
+		return "/ticket/sell";
 	}
 	
 	//정기권판매등록
-	@PostMapping("insert")
+	@PostMapping("sell")
 	public String insert(Long parkinglotId, Ticket ticket) {
 		
 		ticket.setParkLot(pRepository.findById(parkinglotId).get());

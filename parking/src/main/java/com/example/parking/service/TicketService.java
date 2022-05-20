@@ -37,7 +37,7 @@ public class TicketService {
 	}
 	
 	//주차장별 정규권재고
-	public List<Ticket> findByParkinglotId(Long parkinglotId) {
+	public Ticket findByParkinglotId(Long parkinglotId) {
 		return tPepository.findByParkinglotId(parkinglotId);
 	}
 	

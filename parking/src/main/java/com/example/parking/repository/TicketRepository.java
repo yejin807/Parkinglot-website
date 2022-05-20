@@ -11,6 +11,6 @@ import com.example.parking.model.Ticket;
 public interface TicketRepository extends JpaRepository<Ticket, Long>{
 
 	@Query(value = "select * from ticket where parkinglot_id = ?1", nativeQuery = true)
-	public List<Ticket> findByParkinglotId(Long parkinglotId);
+	public Ticket findByParkinglotId(Long parkinglotId);
 
 }

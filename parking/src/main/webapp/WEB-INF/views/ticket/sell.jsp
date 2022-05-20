@@ -6,7 +6,7 @@
 <div class="container mt-3">
 <h3>정기권 재고등록(사장님)</h3>
 
-<form action="/ticket/insert" method="post">
+<form action="/ticket/sell" method="post">
 	<input type="hidden" name="parkinglotId" id="parkinglotId" value="${parkinglot.parkinglotId}" />
 	<input type="hidden" name="ticketId" id="ticketId" value="${ticket.ticketId}" />
 	
