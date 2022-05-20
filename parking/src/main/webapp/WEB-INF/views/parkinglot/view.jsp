@@ -64,8 +64,8 @@
 		</tr>
 		<tr>
 		<td colspan="3">
-		<button type="button" class="btn btn-primary" onclick="javascript:location.href='/parkinglot/update/${parkinglot.parkinglotId}'">수정하기</button>
-		<button type="button" class="btn btn-secondary">삭제하기</button></td>
+		<button type="button" class="btn btn-primary" onclick="location.href='/parkinglot/update/${parkinglot.parkinglotId}'">수정하기</button>
+		<button type="button" class="btn btn-info" onclick="location.href='/orderticket/buy/${parkinglot.parkinglotId}'">정기권구매</button>
 		</tr>
 	</table>
 </div>
