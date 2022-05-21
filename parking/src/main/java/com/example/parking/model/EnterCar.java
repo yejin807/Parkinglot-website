@@ -22,17 +22,13 @@ public class EnterCar {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long enterid;
 	
-	private Car car;
-	
-	@JoinColumn(name = "parkinglot_Id") 
-	private ParkingLot pakingLot; // 주차장
+	private String carNum;
+	private String parkingType;
 	
 	@CreationTimestamp
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "intime")
 	private Date intime;
-	
-	private String parkingType;
-	
+		
 	private int fee;
 }
