@@ -9,45 +9,49 @@
 
 <form>
 <input type="hidden" name="parkinglotId" id="parkinglotId" value="${parkinglot.parkinglotId }">
-<input type="hidden" name="parkinglotId" id="parkinglotId" value="${parkinglot.parkinglotId }">
-<input type="hidden" name="parkinglotId" id="parkinglotId" value="${parkinglot.parkinglotId }">
+
 차량번호 :<input type="text" id="carNum" placeholder="차 번호를 입력하세요" name="carNum"><br/>
-<button type="button" id="carnumSearch">검색</button>
-차종 :<input type="text" id="carName" placeholder="차종을 입력하세요" name="carName"><br/>
+<button type="button" id="ticketSearch">티켓 유무 검색</button>
 차량 종류 :  
 <label for="small">소형</label><input class="carType" type="radio" value = "소형" id = "carType" name ="carType" checked> 
 <label for="big">대형</label><input class="carType" type="radio" value = "대형" id = "carType" name ="carType"> <br/>
 
-
+<script>		
+	$("input:radio[name='carType']:input[value='${orderticket.car.carType}']").attr("checked",true)			
+</script>
 
 정기권 사용 :  
-<label for="month">월주차</label><input class="fee" type="radio" value = "300000" id = "month" name ="fee" > 
-<label for="week">주주차</label><input class="fee" type="radio" value = "100000" id = "week" name ="fee"> <br/>
-<label for="day">일주차</label><input class="fee" type="radio" value = "20000" id = "day" name ="fee"> <br/>
-<label for="non">사용 안함</label><input class="fee" type="radio" value = "1500" id = "non" name ="fee" checked> <br/>
+<label for="month">월주차</label><input class="parkingType" type="radio" value = "3" id = "parkingType" name ="parkingType" > 
+<label for="week">주주차</label><input class="parkingType" type="radio" value = "2" id = "parkingType" name ="parkingType"> 
+<label for="day">일주차</label><input class="parkingType" type="radio" value = "1" id = "parkingType" name ="parkingType"> 
+<label for="non">사용 안함</label><input class="parkingType" type="radio" value = "0" id = "parkingType" name ="parkingType" checked> <br/>
+
+<script>		
+	$("input:radio[name='parkingType']:input[value='${orderticket.ticketType}']").attr("checked",true)			
+</script>
 
 <br><br>
 <button type="button" class="btn btn-primary" id="btninsert">입차</button>
 </form>
 		 <script>
-			$("#carnumSearch").click(function(){
+			$("#ticketSearch").click(function(){
 								
 				//alert($('input[name="fee"]:checked').id)
 				if(!$("#carNum").val()){
 					alert("차 번호를 입력하세요");
 					$("#carNum").focus();
 					return false;
-				}		
-				
+				}
 				$.ajax({
-					type:"get",
-					url:"/car/search",
-					contentType:"application/json;charset=utf-8",
-					data:{"carNum" : $("#carNum").val()}
+					type:"post",
+					url:"/car/ticketcheck/"+$("#parkinglotId").val()+$("#carNum").val()
 				})
 				.done(function(resp){
-					if(resp=="success"){
-						alert("차 번호:"+$("#carNum").val()+"\n입차를 완료했습니다.")
+					if(resp=="2"){
+						alert("정기권 구매 차량입니다.")
+						location.href="/car/list";
+					}else{
+						alert("정기권 구매 차량아닙니다.\n입차 정보를 입력하세요")
 						location.href="/car/list";
 					}
 				})
@@ -55,6 +59,7 @@
 					alert("입차 실패")
 				})
 			})
+
 		$("#btninsert").click(function(){
 			
 		
@@ -80,20 +85,19 @@
 					"carNum" : $("#carNum").val(),
 					"carName" : $("#carName").val(),
 					"carType" : $('input[name="carType"]:checked').val(),
-					"fee" : $('input[name="fee"]:checked').val(),
-					"parkingId": $("#parkinglotId").val()
+					"parkingType" : $('input[name="fee"]:checked').val(),
 				}
 			
 			$.ajax({
 				type:"post",
-				url:"/car/insert",
+				url:"/car/insert/"+$("#parkinglotId").val(),
 				contentType:"application/json;charset=utf-8",
 				data:JSON.stringify(dataParam)
 			})
 			.done(function(resp){
 				if(resp=="success"){
 					alert("차 번호:"+$("#carNum").val()+"\n입차를 완료했습니다.")
-					location.href="/car/list";
+					location.href="/car/list/"+$("#parkinglotId").val();
 				}
 			})
 			.fail(function(e){

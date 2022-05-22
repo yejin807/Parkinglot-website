@@ -6,46 +6,56 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.parking.model.Car;
+import com.example.parking.model.EnterCar;
+import com.example.parking.model.ParkingLot;
 import com.example.parking.repository.CarRepository;
+import com.example.parking.repository.ParkingLotRepository;
 
 import lombok.RequiredArgsConstructor;
+
 
 @Service
 @RequiredArgsConstructor
 public class CarService {
 
 	private final CarRepository carRepository;
+
+	private final ParkingLotRepository pRepository;
 	
 	@Transactional
-	public void save(Car car) {
-		carRepository.save(car);		
+	public void save(EnterCar entercar) {
+		carRepository.save(entercar);		
 	}
 	@Transactional
-	public void parkingtypeset(Car car) {
-		Car c= carRepository.findById(car.getCarNum()).get();
-		if(c.getFee()==300000) {
+	public void parkingFeeset(Long parkid,EnterCar entercar) {
+		EnterCar c= carRepository.findById(entercar.getCarNum()).get();
+		ParkingLot p= pRepository.findById(parkid).get();
+		if(c.getParkingType().equals("3")) {
 			c.setParkingType("월주차");
+			c.setFee(p.getMonthFee());
 		}
-		else if(c.getFee()==100000) {
+		else if(c.getParkingType().equals("2")) {
 			c.setParkingType("주주차");
+			c.setFee(p.getDayFee()*7);
 		}
-		else if(c.getFee()==20000) {
+		else if(c.getParkingType().equals("1")) {
 			c.setParkingType("일주차");
+			c.setFee(p.getDayFee());
 		}
 		else{
 			c.setParkingType("자유주차");
+			c.setFee(p.getBasicFee());
 		} 
 	}
 	
-	public Page<Car> findAll(String word,Pageable pageable){
+	public Page<EnterCar> findAll(String word,Pageable pageable){
 		if(word.equals("전체보기"))
 			return carRepository.findAll(pageable);		
 			return carRepository.findByParkingTypeContaining(word,pageable);
 		
 	}
 	
-	public Page<Car> findSearch(String word,String field,Pageable pageable){
+	public Page<EnterCar> findSearch(String word,String field,Pageable pageable){
 		if(word.equals("전체보기"))
 			return carRepository.findByCarNumContaining(field,pageable);
 			return carRepository.bothSearch(word,field,pageable);		
@@ -72,18 +82,16 @@ public class CarService {
 	}
 	
 	@Transactional
-	public Car view(String carNum) {
-		Car car = carRepository.findById(carNum).get();
-		return car;
+	public EnterCar view(String carNum) {
+		EnterCar entercar = carRepository.findById(carNum).get();
+		return entercar;
 	}
 
 	@Transactional
-	public void update(String carNum,Car car) {
-		Car c = carRepository.findById(carNum).get();
+	public void update(String carNum,EnterCar entercar) {
+		EnterCar c = carRepository.findById(carNum).get();
 
-		c.setCarName(car.getCarName());
-		c.setCarType(car.getCarType());
-		c.setFee(car.getFee());
+		c.setFee(entercar.getFee());
 	}
 
 }

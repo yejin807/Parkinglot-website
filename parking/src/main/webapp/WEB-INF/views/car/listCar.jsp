@@ -15,7 +15,6 @@
 			<thead>
 				<tr>
 					<th>차번호</th>
-					<th>차종</th>
 					<th><select id="field" onchange="javascript:fieldBtn(this);">
 							<option value="전체보기">주차 유형 선택</option>
 							<option value="전체보기">전체보기</option>
@@ -32,37 +31,40 @@
 			</thead>
 			<tbody>
 
-
-
+				<input type="hidden" name="parkinglotId" id="parkinglotId" value="${parkinglot.parkinglotId }">
+				
 				<c:forEach items="${cars.content }" var="car" varStatus="st">
 					<tr>
-						<td><a href="/car/view/${car.carNum}">${car.carNum}</a> <input
-							type="hidden" id="fee" value="${car.fee }"> <input
-							type="hidden" id="intime" value="${car.intime }"></td>
-						<td>${car.carName }</td>
+						
+						<td><a href="/car/view/${car.carNum},${parkinglot.parkinglotId }">${car.carNum}</a> 
+							<input type="hidden" name="basicFee" id="basicFee" value="${parkinglot.basicFee }">
+							<input type="hidden" name="dayFee" id="dayFee" value="${parkinglot.dayFee }">
+							<input type="hidden" name="monthFee" id="monthFee" value="${parkinglot.monthFee }">
+							</td>
 						<td>${car.parkingType }</td>
 						<c:choose>
 							<c:when test="${car.parkingType eq '월주차' }">
-								<td><span id='spanID1${st.index}'></span>
-								<script>mleftdays('${car.intime }' ,'spanID1${st.index}')</script>
-									일 남음</td>
+								<td>
+								<script>leftday(${parkinglot.parkinglotId },'${car.carNum }')</script>
+								종료일: ${ticket.endDate } / <span id='spanID1${st.index}'></span> 
+								<script>leftdays('${ticket.endDate }' ,'spanID1${st.index}')</script>일 남음</td>
 								<td>월주차</td>
 								<td><button type="button" class="btn btn-danger"
-										onclick="outticketBtn(${car.carNum },'${car.parkingType }')">출차</button></td>
+										onclick="outticketBtn(${car.carNum },'${car.parkingType }',${parkinglot.monthFee })">출차</button></td>
 							</c:when>
 							<c:when test="${car.parkingType eq '주주차' }">
-								<td><span id='spanID2${st.index}'></span>
-								<script>wleftdays('${car.intime }' ,'spanID2${st.index}')</script>
-									일 남음</td>
+								<td><script>leftday(${parkinglot.parkinglotId },'${car.carNum }')</script>
+									종료일: ${ticket.endDate } / <span id='spanID2${st.index}'></span> 
+									<script>wleftdays('${ticket.endDate }' ,'spanID2${st.index}')</script>일 남음</td>
 								<td>주주차</td>
 								<td><button type="button" class="btn btn-danger"
-										onclick="outticketBtn(${car.carNum },'${car.parkingType }')">출차</button></td>
+										onclick="outticketBtn(${car.carNum },'${car.parkingType }',${parkinglot.dayFee })">출차</button></td>
 							</c:when>
 							<c:when test="${car.parkingType eq '일주차' }">
 								<td>일주차</td>
 								<td>일주차</td>
 								<td><button type="button" class="btn btn-danger"
-										onclick="outticketBtn(${car.carNum },'${car.parkingType }')">출차</button></td>
+										onclick="outticketBtn(${car.carNum },'${car.parkingType }',${parkinglot.dayFee })">출차</button></td>
 							</c:when>
 							<c:otherwise>
 								<td><span id='spanID3${st.index}'></span>
@@ -71,7 +73,7 @@
 								<td><span id='spanID4${st.index}'></span>
 								<script>fee('${car.intime }' ,'spanID4${st.index}')</script> 원</td>
 								<td><button type="button" class="btn btn-danger"
-										onclick="outBtn(${car.carNum },'${car.intime }')">출차</button></td>
+										onclick="outBtn(${car.carNum },'${car.intime }',${parkinglot.basicFee })">출차</button></td>
 							</c:otherwise>
 						</c:choose>
 					</tr>

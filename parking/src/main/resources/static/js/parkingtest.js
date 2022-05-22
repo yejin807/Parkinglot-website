@@ -12,27 +12,34 @@
 			document.getElementById(id).innerHTML = elapsedMin;
 		} 
 
-		function mleftdays(intime,id){
+		
+		function leftday(parkid,carNum){
+			
+			location.href= "/car/ticketendcheck/"+carNum,parkid;
+			
+		}
+		
+		function mleftdays(endtime,id){
 			
 			const date3 = new Date();
 			
-			const date4 = new Date(intime);
+			const date4 = new Date(endtime);
 	
-			const leftMSec = date3.getTime() - date4.getTime(); 
+			const leftMSec = date4.getTime() - date3.getTime(); 
 			
 			const useday = Math.floor(leftMSec / (1000 * 3600 * 24));
 			
 			const mleftday = 30 - useday;
 			document.getElementById(id).innerHTML = mleftday;
 		} 
-			
-		function wleftdays(intime,id){
+
+		function wleftdays(endtime,id){
 					
 					const date5 = new Date();
 					
-					const date6 = new Date(intime);
+					const date6 = new Date(endtime);
 			
-					const leftMSec = date5.getTime() - date6.getTime(); 
+					const leftMSec = date6.getTime() - date5.getTime(); 
 					
 					const useday = Math.floor(leftMSec / (1000 * 3600 * 24));
 					
@@ -61,7 +68,7 @@
 			}
 			
 			
-function outBtn(num,time){
+function outBtn(num,time,increasebasic){
 	if(!confirm("차 번호:"+num+" 출차 할까요?"))
 			return false;
 			
@@ -72,10 +79,10 @@ function outBtn(num,time){
 			
 	let useMin = Math.ceil(useMSec / 1000 / 60);
 			if(useMin <= 10){
-			alert("요금은 1500원 입니다.")
+			alert("요금은 "+increasebasic+" 원 입니다.")
 				
 			}else{
-			let usefee = 1000*((useMin - 10)/10)+1500;
+			let usefee = increasebasic*((useMin - 10)/10)+1500;
 			alert("요금은 "+usefee+"원 입니다.")				
 			}
 			
@@ -92,18 +99,11 @@ function outBtn(num,time){
 				})
 }
 
-function outticketBtn(num,ticket){
+function outticketBtn(num,ticket,increaseticket){
 	if(!confirm("차 번호:"+num+" 출차 할까요?"))
 			return false;
 			
-	if (ticket == "월주차"){
-		alert("요금은 300,000원 입니다.")
-	} else if(ticket == "주주차"){
-		alert("요금은 100,000원 입니다.")
-	} else{
-		alert("요금은 50,000원 입니다.")
-	}
-			
+		alert("요금은"+increaseticket+" 원 입니다.")
 			
 	$.ajax({
 		type : "DELETE",

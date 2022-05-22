@@ -12,4 +12,7 @@ public interface OrderTicketRepository extends JpaRepository<OrderTicket, Long>{
 	@Query(value = "select * from order_ticket where member_id=?1", nativeQuery = true)
 	List<OrderTicket> findByMemberId(String username);
 
+	//티켓확인
+	public OrderTicket findByparkinglotIdAndcarNum(Long parkid,String carNum);
+
 }

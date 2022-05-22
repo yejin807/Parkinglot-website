@@ -6,9 +6,7 @@
 <h1>${car.carNum} 입차 정보 수정</h1>
 
 <form>
-<input type="hidden" name="parkinglotId" id="parkinglotId" value="13">
 차량번호 :<input type="text" id="carNum" name="carNum" value="${car.carNum}" readonly="readonly"><br/>
-차종 :<input type="text" id="carName" value="${car.carName }" name="carName"><br/>
 차량 종류 :  
 <label for="small">소형</label><input class="carType" type="radio" value = "소형" id = "carType" name ="carType"> 
 <label for="big">대형</label><input class="carType" type="radio" value = "대형" id = "carType" name ="carType"> <br/>
@@ -39,7 +37,6 @@
 			
 				var dataParam = {
 						"carNum" : $("#carNum").val(),
-						"carName" : $("#carName").val(),
 						"carType" : $('input[name="carType"]:checked').val(),
 						"fee" : $('input[name="fee"]:checked').val(),
 						"parkingId": $("#parkinglotId").val()
