@@ -49,10 +49,10 @@
 				.done(function(resp){
 					if(resp=="2"){
 						alert("정기권 구매 차량입니다.")
-						location.href="/car/list";
+						location.href="/car/insertCar";
 					}else{
 						alert("정기권 구매 차량아닙니다.\n입차 정보를 입력하세요")
-						location.href="/car/list";
+						location.href="/car/insertCar";
 					}
 				})
 				.fail(function(e){
