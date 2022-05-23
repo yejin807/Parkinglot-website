@@ -15,7 +15,7 @@
 		
 		function leftday(parkid,carNum){
 			
-			location.href= "/car/ticketendcheck/"+carNum,parkid;
+			location.href= "/car/ticketendcheck/"+carNum/parkid;
 			
 		}
 		

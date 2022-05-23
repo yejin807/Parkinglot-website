@@ -102,24 +102,24 @@ public class EntercarController {
 	// }
 	
 	
-	@GetMapping("ticketendcheck/{carNum,parkid}")
+	@GetMapping("ticketendcheck/{carNum}/{parkid}")
 	public String ticketendcheck(@PathVariable String carNum,@PathVariable Long parkid,Model model) {
 	
-		model.addAttribute("ticket",oRepository.findByparkinglotIdAndcarNum(parkid,carNum));
+		//model.addAttribute("ticket",oRepository.findByParkinglotIdAndCarNum(parkid,carNum));
 		return "/car/listCar";
 		
 	}
 
-	@PostMapping("ticketcheck/{carNum,parkid}")
-	@ResponseBody
-	public String ticketcheck(@PathVariable String carNum,@PathVariable Long parkid,Model model) {
-		OrderTicket oTicket = oRepository.findByparkinglotIdAndcarNum(parkid,carNum);
-		if(oTicket==null){
-			return "1";
-		}else{
-			model.addAttribute("ticket",oRepository.findByparkinglotIdAndcarNum(parkid,carNum));
-			return "2";
-		}		
-	}
+//	@PostMapping("ticketcheck/{carNum}/{parkid}")
+//	@ResponseBody
+//	public String ticketcheck(@PathVariable String carNum,@PathVariable Long parkid,Model model) {
+////		//OrderTicket oTicket = oRepository.findByParkinglotIdAndCarNum(parkid,carNum);
+////		if(oTicket==null){
+////			return "1";
+////		}else{
+////			//model.addAttribute("ticket",oRepository.findByParkinglotIdAndCarNum(parkid,carNum));
+////			return "2";
+////		}		
+//	}
 	
 }

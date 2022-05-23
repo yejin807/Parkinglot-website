@@ -44,7 +44,7 @@
 				}
 				$.ajax({
 					type:"post",
-					url:"/car/ticketcheck/"+$("#parkinglotId").val()+$("#carNum").val()
+					url:"/car/ticketcheck/"+$("#parkinglotId").val()/$("#carNum").val()
 				})
 				.done(function(resp){
 					if(resp=="2"){
