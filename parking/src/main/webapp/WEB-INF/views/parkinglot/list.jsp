@@ -20,7 +20,7 @@
 </tr>
 <c:forEach items="${parkinglotlist}" var="parkinglot">
 	<tr>
-		<td>${parkinglot.parkinglotId}</td>
+		<td><a href="/car/insert/${parkinglot.parkinglotId}">${parkinglot.parkinglotId}</a></td>
 		<td><a href="/parkinglot/view/${parkinglot.parkinglotId}">${parkinglot.parkingName}</a></td>
 		<td>${parkinglot.addr}</td>
 		<td>${parkinglot.maxCnt}</td>

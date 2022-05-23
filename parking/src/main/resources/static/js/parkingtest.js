@@ -15,7 +15,7 @@
 		
 		function leftday(parkid,carNum){
 			
-			location.href= "/car/ticketendcheck/"+carNum/parkid;
+			location.href= "/car/ticketendcheck/"+carNum+"/"+parkid;
 			
 		}
 		
@@ -47,7 +47,7 @@
 					document.getElementById(id).innerHTML = wleftday;
 			}
 		
-		function fee(intime,id){
+		function fee(intime,id,increase){
 			
 			const date7 = new Date();
 			
@@ -58,17 +58,17 @@
 			const elapsedMin = Math.ceil(leftsMSec / 1000 / 60);
 			
 			if(elapsedMin <= 10){
-				document.getElementById(id).innerHTML = "1500";
+				document.getElementById(id).innerHTML = increase;
 				return;
 			}else{
-			const payfee = 1000*((elapsedMin - 10)/10)+1500;
+			const payfee = increase*((elapsedMin - 10)/10)+increase;
 			document.getElementById(id).innerHTML = payfee;			
 			}
 			
 			}
 			
 			
-function outBtn(num,time,increasebasic){
+function outBtn(num,time,increasebasic,parkid){
 	if(!confirm("차 번호:"+num+" 출차 할까요?"))
 			return false;
 			
@@ -88,18 +88,18 @@ function outBtn(num,time,increasebasic){
 			
 	$.ajax({
 		type : "DELETE",
-		url : "/car/delete/"+num
+		url : "/car/delete/"+num+"/"+parkid
 		})
 		.done( function(resp) {
 				alert("차 번호:"+num+"출차완료")
-				location.href = "/car/list"
+				location.href = "/car/list/"+parkid
 				})
 				.fail(function(e){
 					alert("차 번호:"+num+"출차실패")
 				})
 }
 
-function outticketBtn(num,ticket,increaseticket){
+function outticketBtn(num,ticket,increaseticket,parkid){
 	if(!confirm("차 번호:"+num+" 출차 할까요?"))
 			return false;
 			
@@ -107,18 +107,18 @@ function outticketBtn(num,ticket,increaseticket){
 			
 	$.ajax({
 		type : "DELETE",
-		url : "/car/delete/"+num
+		url : "/car/delete/"+num+"/"+parkid
 		})
 		.done( function(resp) {
 				alert("차 번호:"+num+"출차완료")
-				location.href = "/list"
+				location.href = "/car/list"+parkid
 				})
 				.fail(function(e){
 					alert("차 번호:"+num+"출차실패")
 				})
 }
 
-function fieldBtn(obj){
-	location.href="/car/list?word="+obj.value;
+function wordBtn(obj){
+	location.href="/car/list/"+$("#parkinglotId").val()+"/?word="+obj.value;
 
 }

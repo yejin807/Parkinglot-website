@@ -18,10 +18,10 @@ import lombok.Data;
 @Data
 @Entity
 public class EnterCar {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long enterid;
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	private Long enterid;
 	
+	@Id
 	private String carNum;
 	private String parkingType;
 	

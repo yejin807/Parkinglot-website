@@ -30,6 +30,7 @@ public class EntercarService {
 	public void parkingFeeset(Long parkid,EnterCar entercar) {
 		EnterCar c= carRepository.findById(entercar.getCarNum()).get();
 		ParkingLot p= pRepository.findById(parkid).get();
+		
 		if(c.getParkingType().equals("3")) {
 			c.setParkingType("월주차");
 			c.setFee(p.getMonthFee());
@@ -45,8 +46,10 @@ public class EntercarService {
 		else{
 			c.setParkingType("자유주차");
 			c.setFee(p.getBasicFee());
+			p.setCurrentCnt(p.getCurrentCnt()-1);
 		} 
 	}
+	
 	
 	public Page<EnterCar> findAll(String word,Pageable pageable){
 		if(word.equals("전체보기"))
@@ -77,21 +80,10 @@ public class EntercarService {
 	}
 	
 	@Transactional
-	public void delete(String carNum) {
+	public void delete(String carNum,Long parkid) {
+		ParkingLot p= pRepository.findById(parkid).get();
+		p.setCurrentCnt(p.getCurrentCnt()+1);
 		carRepository.deleteById(carNum);
-	}
-	
-	@Transactional
-	public EnterCar view(String carNum) {
-		EnterCar entercar = carRepository.findById(carNum).get();
-		return entercar;
-	}
-
-	@Transactional
-	public void update(String carNum,EnterCar entercar) {
-		EnterCar c = carRepository.findById(carNum).get();
-
-		c.setFee(entercar.getFee());
 	}
 
 }

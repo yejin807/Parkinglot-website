@@ -15,15 +15,15 @@ public interface EntercarRepository extends JpaRepository<EnterCar, String>{
 
 	Page<EnterCar> findByParkingTypeContaining(String word,Pageable pageable);
 	
-	@Query(value = "select * from car where parking_type like CONCAT('%',:field,'%') AND car_num like CONCAT('%',:word,'%')",nativeQuery = true)
-	public Page<EnterCar> bothSearch (@Param("field") String field,@Param("word") String word,Pageable pageable);
+	@Query(value = "select * from enter_car where parking_type like CONCAT('%',:word,'%') AND car_num like CONCAT('%',:field,'%')",nativeQuery = true)
+	public Page<EnterCar> bothSearch (@Param("word") String word,@Param("field") String field,Pageable pageable);
 	
-	@Query(value = "select count(*) from car where parking_type like CONCAT('%',:field,'%') AND car_num like CONCAT('%',:word,'%')",nativeQuery = true)
+	@Query(value = "select count(*) from enter_car where parking_type like CONCAT('%',:word,'%') AND car_num like CONCAT('%',:field,'%')",nativeQuery = true)
 	public Long cntbothSearch (@Param("word") String word,@Param("field") String field);
 	
-	@Query(value = "select count(*) from car where car_num like CONCAT('%',:word,'%')",nativeQuery = true)
+	@Query(value = "select count(*) from enter_car where car_num like CONCAT('%',:word,'%')",nativeQuery = true)
 	public Long cntCarNumSearch (@Param("word") String field);
 	
-	@Query(value = "select count(*) from car where parking_type like CONCAT('%',:word,'%')",nativeQuery = true)
+	@Query(value = "select count(*) from enter_car where parking_type like CONCAT('%',:word,'%')",nativeQuery = true)
 	public Long cntParkingTypeSearch(@Param("word") String word);
 }
