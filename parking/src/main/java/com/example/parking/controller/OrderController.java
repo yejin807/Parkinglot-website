@@ -38,15 +38,15 @@ public class OrderController {
 	
 	//티켓구매리스트(일반)
 	@GetMapping("list")
-	public String list(HttpSession session, Model model) {
+	public String list(Model model) {
 		//String username = session.getId()
-		model.addAttribute("orderTicketList", oService.list("1"));
+		model.addAttribute("orderTicketList", oService.list());
 		return "/orderticket/list";
 	}
 	
 	//티켓구매리스트(전체)
 	@GetMapping("listAll")
-	public String list(Model model) {
+	public String listAll(Model model) {
 		model.addAttribute("orderTicketList", oService.list());
 		return "/orderticket/listAll";
 	}

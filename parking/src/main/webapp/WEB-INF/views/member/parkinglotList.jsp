@@ -350,7 +350,7 @@
                 var el = document.createElement('li'),
                     itemStr = '<span class="markerbg marker_' + (index + 1) + '"></span>' +
                         '<div class="info">' +
-                        '   <h5>' + places.parkingName + '</h5>';
+                        '   <h5><a href="/parkinglot/view/'+places.parkinglotId+'">' + places.parkingName + '</a></h5>';
 
 
                 itemStr += '    <span>' + places.addr + '</span>';

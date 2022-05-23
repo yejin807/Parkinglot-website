@@ -108,13 +108,12 @@ public class EntercarController {
 
     @PostMapping("ticketcheck/{parkid}/{carNum}")
     @ResponseBody
-    public String ticketcheck(@PathVariable String carNum, @PathVariable Long parkid, Model model) {
+    public int ticketcheck(@PathVariable String carNum, @PathVariable Long parkid, Model model) {
         OrderTicket oTicket = oRepository.findByParkinglotIdAndCarNum(parkid, carNum);
         if (oTicket == null) {
-            return "1";
+            return 0;
         } else {
-            model.addAttribute("ticket", oRepository.findByParkinglotIdAndCarNum(parkid, carNum));
-            return "2";
+        	return oTicket.getTicketType();
         }
     }
 

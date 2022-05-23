@@ -8,8 +8,8 @@
 
 <div class="jumbotron jumbotron-fluid">
 	<div class="container mb-5">
-		<h1>입차 목록(${count })</h1>
-		<h5>주차 가능 대수(${parkinglot.currentCnt })</h5>
+		<h1>입차 목록(${count})</h1>
+		<h5>주차 가능 대수(${parkinglot.currentCnt})</h5>
 	</div>
 	<div class="container">
 		<table class="table table-hover">
@@ -32,7 +32,7 @@
 			</thead>
 			<tbody>
 
-				<input type="hidden" name="parkinglotId" id="parkinglotId" value="${parkinglot.parkinglotId }">
+				<input type="hidden" name="parkinglotId" id="parkinglotId" value="${parkinglot.parkinglotId}" />
 				
 				<c:forEach items="${cars.content }" var="car" varStatus="st">
 					<tr>

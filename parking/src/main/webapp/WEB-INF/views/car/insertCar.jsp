@@ -18,9 +18,9 @@
 <label for="small"> 소형</label><input class="carType" type="radio" value = "소형" id = "carType" name ="carType" checked> 
 <label for="big"> 대형</label><input class="carType" type="radio" value = "대형" id = "carType" name ="carType"> <br/>
 
-<script>		
+<!-- <script>		
 	$("input:radio[name='carType']:input[value='${orderticket.car.carType}']").attr("checked",true)			
-</script>
+</script>  -->
 
  정기권 사용 :  
 <label for="month"> 월주차</label><input class="parkingType" type="radio" value = "3" id = "parkingType" name ="parkingType" > 
@@ -49,10 +49,11 @@
 					url:"/car/ticketcheck/"+$("#parkinglotId").val()+"/"+$("#carNum").val()
 				})
 				.done(function(resp){
-					if(resp=="2"){
-						alert("정기권 구매 차량입니다.")
-					}else{
+					if(resp=="0"){
 						alert("정기권 구매 차량아닙니다.\n입차 정보를 입력하세요")
+					}else{
+						alert("정기권 구매 차량입니다.")
+						$("input:radio[name='parkingType']:input[value='"+resp+"']").attr("checked",true)
 					}
 				})
 				.fail(function(e){
