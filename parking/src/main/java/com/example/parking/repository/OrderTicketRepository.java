@@ -18,7 +18,6 @@ public interface OrderTicketRepository extends JpaRepository<OrderTicket, Long>{
 	@Query(value = "select * from order_ticket where parkinglot_id like CONCAT('%',:parkid,'%') AND car_num like CONCAT('%',:carNum,'%')",nativeQuery = true)
 	public OrderTicket findByParkinglotIdAndCarNum(@Param("parkid")Long parkid,@Param("carNum")String carNum);
 
-	@Query(value = "select count(*) from order_ticket where pakinglot_id =1 and ?")
-	void findByParkinglotId(Long parkid);
+	
 
 }
