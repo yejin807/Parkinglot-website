@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.parking.model.ParkingLot;
+import com.example.parking.service.OrderTicketService;
 import com.example.parking.service.ParkingLotService;
 
 @RequestMapping("/parkinglot/*")
@@ -20,7 +21,7 @@ public class ParkinglotController {
 
     @Autowired
     private ParkingLotService pService;
-
+    
     // 주차장등록폼(사장님)
     @GetMapping("insert")
     public String insert() {

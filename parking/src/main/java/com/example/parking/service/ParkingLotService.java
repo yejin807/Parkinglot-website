@@ -2,6 +2,8 @@ package com.example.parking.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
@@ -12,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.parking.model.ParkingLot;
+import com.example.parking.repository.OrderTicketRepository;
 import com.example.parking.repository.ParkingLotRepository;
 
 @Service
@@ -20,6 +23,9 @@ public class ParkingLotService {
 	
 	@Autowired
 	private ParkingLotRepository pRepository;
+	
+	@Autowired
+	private OrderTicketRepository oRepository;
 	
 	//주차장 등록
 	@Transactional
@@ -48,7 +54,7 @@ public class ParkingLotService {
 	}
 	
 	//주차장 리스트
-	public List<ParkingLot> list(){
+	public List<ParkingLot> list(){		
 		return pRepository.findAll();
 	}
 

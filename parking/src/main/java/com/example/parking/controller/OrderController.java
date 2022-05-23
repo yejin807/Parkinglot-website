@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.parking.model.OrderTicket;
+import com.example.parking.model.ParkingLot;
+import com.example.parking.repository.ParkingLotRepository;
 import com.example.parking.service.OrderTicketService;
 
 @Controller
@@ -20,6 +22,7 @@ public class OrderController {
 	@Autowired
 	private OrderTicketService oService;
 
+
 	//정기권 구매
 	@GetMapping("buy/{id}")
 	public String insert(@PathVariable Long id, Model model) {		
@@ -28,7 +31,7 @@ public class OrderController {
 	}
 	
 	@PostMapping("buy")
-	public String insert(OrderTicket orderticket) {	
+	public String insert(OrderTicket orderticket) {
 		oService.insert(orderticket);
 		return "redirect:/orderticket/list/";
 	}

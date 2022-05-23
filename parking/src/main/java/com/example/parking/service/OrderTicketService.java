@@ -7,9 +7,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.parking.model.OrderTicket;
+import com.example.parking.model.ParkingLot;
 import com.example.parking.model.Ticket;
 import com.example.parking.repository.MemberRepository;
 import com.example.parking.repository.OrderTicketRepository;
+import com.example.parking.repository.ParkingLotRepository;
 import com.example.parking.repository.TicketRepository;
 
 @Service
@@ -21,6 +23,9 @@ public class OrderTicketService {
 	
 	@Autowired
 	private OrderTicketRepository oRepository;
+	
+	@Autowired
+	private ParkingLotRepository pRepository;
 	
 	@Transactional
 	public void insert(OrderTicket orderticket) {
@@ -35,6 +40,12 @@ public class OrderTicketService {
 			if(t.getMonthStock()==0) return; //재고가 없음
 			t.setMonthStock(t.getMonthStock()-1);
 		}
+		
+		//정기권구매자수 업데이트
+		ParkingLot p = pRepository.findById(orderticket.getParkinglotId()).get();
+		p.setCurrentCnt(p.getCurrentCnt()-1);
+		p.setOrderTicketCount(p.getOrderTicketCount()+1);
+		
 		oRepository.save(orderticket);
 	}
 

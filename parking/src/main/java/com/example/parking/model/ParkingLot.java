@@ -33,5 +33,5 @@ public class ParkingLot {
     private String closeTime;// 종료 시간
     @Transient // 테이블생성시 제외
     private MultipartFile upload; // 업로드할 파일
-
+    private int orderTicketCount; // 정기권구매자수 
 }
