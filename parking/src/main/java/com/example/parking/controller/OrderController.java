@@ -1,5 +1,7 @@
 package com.example.parking.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,16 +28,16 @@ public class OrderController {
 	}
 	
 	@PostMapping("buy")
-	public String insert(Long parkinglotId, String username, OrderTicket orderticket) {	
-		oService.insert(parkinglotId, username, orderticket);
-		return "redirect:/orderticket/list/" + username;
+	public String insert(OrderTicket orderticket) {	
+		oService.insert(orderticket);
+		return "redirect:/orderticket/list/";
 	}
 	
 	//티켓구매리스트(일반)
-	@GetMapping("list/{username}")
-	public String list(@PathVariable String username, Model model) {
-		model.addAttribute("orderTicketList", oService.list(username));
-		model.addAttribute("username", username);
+	@GetMapping("list")
+	public String list(HttpSession session, Model model) {
+		//String username = session.getId()
+		model.addAttribute("orderTicketList", oService.list("1"));
 		return "/orderticket/list";
 	}
 	

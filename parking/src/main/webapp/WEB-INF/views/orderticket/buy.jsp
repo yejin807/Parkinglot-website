@@ -15,6 +15,7 @@
 <form action="/orderticket/buy" method="post">
 	<input type="hidden" name="parkinglotId" id="parkinglotId" value="${ticket.parkLot.parkinglotId}" />
 	<input type="text" name="username" id="username" value="username 입력" />
+	<input type="text" name="carNum" id="carNum" value="carNum 입력" />
 	
 	<table border="1">
 		<tr>

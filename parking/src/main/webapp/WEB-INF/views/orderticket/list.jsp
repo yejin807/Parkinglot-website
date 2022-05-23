@@ -5,19 +5,21 @@
 
 
 <div class="container mt-3">
-<h3>정기권 구매내역(${username} 님)</h3>
+<h3>정기권 구매내역</h3>
 	<table class="table">
 		<tr>
-			<td>주차장명</td>
-			<td>주소</td>
+			<td>주차장아이디(parkinglotId)</td>
+			<td>구매자아이디(username)</td>
+			<td>차량번호</td>
 			<td>티켓종류</td>
 			<td>시작일</td>
 			<td>만료일</td>
 		</tr>
 		<c:forEach items="${orderTicketList}" var="orderticket">
 			<tr>
-				<td>${orderticket.parkLot.parkingName}</td>
-				<td>${orderticket.parkLot.addr}</td>
+				<td>${orderticket.parkinglotId}</td>
+				<td>${orderticket.username}</td>
+				<td>${orderticket.carNum}</td>
 				<td><c:choose>
 						<c:when test="${orderticket.ticketType==1}">1일권</c:when>
 						<c:when test="${orderticket.ticketType==2}">7일권</c:when>
