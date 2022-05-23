@@ -18,19 +18,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.parking.model.EnterCar;
 import com.example.parking.model.OrderTicket;
-import com.example.parking.repository.CarRepository;
+import com.example.parking.repository.EntercarRepository;
 import com.example.parking.repository.OrderTicketRepository;
 import com.example.parking.repository.ParkingLotRepository;
-import com.example.parking.service.CarService;
+import com.example.parking.service.EntercarService;
 
 import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/car/*")
-public class CarController {
+public class EntercarController {
 	@Autowired
-	private CarService carService;
+	private EntercarService carService;
 	
 	private final ParkingLotRepository pRepository;
 	private final OrderTicketRepository oRepository;

@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 
 import com.example.parking.model.EnterCar;
 
-public interface CarRepository extends JpaRepository<EnterCar, String>{
+public interface EntercarRepository extends JpaRepository<EnterCar, String>{
 	
 	Page<EnterCar> findByCarNumContaining(String word,Pageable pageable);
 

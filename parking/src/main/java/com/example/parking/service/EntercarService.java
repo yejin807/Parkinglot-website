@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.parking.model.EnterCar;
 import com.example.parking.model.ParkingLot;
-import com.example.parking.repository.CarRepository;
+import com.example.parking.repository.EntercarRepository;
 import com.example.parking.repository.ParkingLotRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -16,9 +16,9 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class CarService {
+public class EntercarService {
 
-	private final CarRepository carRepository;
+	private final EntercarRepository  carRepository;
 
 	private final ParkingLotRepository pRepository;
 	
