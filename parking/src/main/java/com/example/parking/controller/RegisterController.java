@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -75,5 +76,10 @@ public class RegisterController {
     public String login(Model model) {
         model.addAttribute("errorMsg", "로그인 실패");
         return "/register/login";
+    }
+
+    @PutMapping("login")
+    public String loginn() {
+        return "/member/mypage";
     }
 }

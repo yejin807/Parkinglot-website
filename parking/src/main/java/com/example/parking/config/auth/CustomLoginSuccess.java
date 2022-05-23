@@ -20,9 +20,8 @@ public class CustomLoginSuccess implements AuthenticationSuccessHandler {
             Authentication authentication) throws IOException, ServletException {
         List<String> roleNames = new ArrayList<>();
         authentication.getAuthorities().forEach(authority -> roleNames.add(authority.getAuthority()));
-
-        System.out.println("roleNames : " + roleNames);
-        System.out.println("login success");
+        // System.out.println("roleNames : " + roleNames);
+        // System.out.println("login success");
         response.sendRedirect("/member/mypage");
 
     }

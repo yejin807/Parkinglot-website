@@ -268,9 +268,9 @@
                     }
                 }).done(function (resp) {
 
-                    var places = resp.content,
-                        respPagination = resp
-                    console.log(resp)
+                    var places = resp.parkingLot,
+                        respPagination = resp.parkingLotPagenation
+                    console.log(places)
                     displayPlaces(places)
                     displayPagination(keyword, respPagination)
                 })
@@ -398,7 +398,7 @@
                     el.href = "#";
                     el.innerHTML = i;
 
-                    if (i === respPagination.number - 1) {
+                    if (i === respPagination.currentPage - 1) {
                         el.className = 'on';
                     } else {
                         el.onclick = (function (i) {
@@ -421,11 +421,11 @@
                     url: "/member/list?keyword=" + keyword + "&page=" + (i - 1)
                 }).done(function (resp) {
 
-                    var places = resp.content,
-                        pagination = resp
-
+                    var places = resp.parkingLot,
+                        respPagination = resp.parkingLotPagenation
+                    // console.log(places)
                     displayPlaces(places)
-                    displayPagination(keyword, pagination)
+                    displayPagination(keyword, respPagination)
                 })
 
             }

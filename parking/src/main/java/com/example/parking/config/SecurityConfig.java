@@ -37,7 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf()
                 .disable()
                 .authorizeHttpRequests()
-                .antMatchers("/", "/register/**") // 접근 허용
+                .antMatchers("/", "/register/**", "/js/**", "/img/**", "/lib/**") // 접근 허용
                 .permitAll()
                 .anyRequest()
                 .permitAll()
@@ -47,6 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/register/login")
                 .successHandler(customLoginSuccess)
+                // .defaultSuccessUrl("/")
                 .failureUrl("/register/fail")
                 .and()
                 .logout()

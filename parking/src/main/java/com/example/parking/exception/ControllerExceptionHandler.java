@@ -26,6 +26,7 @@ public class ControllerExceptionHandler {
         for (FieldError error : bindingResult.getFieldErrors()) {
             errorMap.put(error.getField(), error.getDefaultMessage());
         }
+        System.out.println("errorMap >> " + errorMap);
         return new ResponseEntity<>(errorMap, HttpStatus.BAD_REQUEST);
 
     }

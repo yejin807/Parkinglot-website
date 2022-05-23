@@ -5,6 +5,7 @@
         <body>
             <div class="container mt-5">
                 <input type="hidden" id="gubun" value="${member.gubun}">
+                <input type="hidden" id="password" value="${member.password}">
                 <div class="form-group">
                     <label for="username">아이디:</label> <input type="text" class="form-control" id="username"
                         name="username" value="${member.username}" readonly>

@@ -10,7 +10,7 @@
     <body>
         <div class="container mt-5">
 
-            <form action="login" method="post">
+            <form action="/register/login" method="post">
                 <div class="form-group">
                     <label for="id">아이디:</label> <input type="text" class="form-control" id="username"
                         placeholder="Enter ID" name="username">

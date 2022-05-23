@@ -13,8 +13,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.example.parking.exception.ValidationSequence;
 import com.example.parking.model.Member;
+import com.example.parking.model.Pagenation;
 import com.example.parking.model.ParkingLot;
 import com.example.parking.repository.MemberRepository;
 import com.example.parking.repository.ParkingLotRepository;
@@ -53,9 +57,10 @@ public class MemberService {
     // 비밀번호 제외 update
     @Transactional
     public void update(Member member) {
-        // System.out.println("1>>" + SecurityContextHolder.getContext());
+        System.out.println(">> " + member.getUsername());
         Member contextMember = memberRepository.findById(member.getUsername()).get();
-
+        System.out.println("contextM >> " + member.getUsername());
+        System.out.println("contextM >> " + member.getPassword());
         contextMember.setEmail(member.getEmail());
         contextMember.setName(member.getName());
         contextMember.setBizNum(member.getBizNum());
@@ -66,9 +71,8 @@ public class MemberService {
         // Authentication authentication = authenticationManager.authenticate(
         // new UsernamePasswordAuthenticationToken(member.getUsername(),
         // member.getPassword()));
+        // System.out.println("service update member >>" + authentication);
         // SecurityContextHolder.getContext().setAuthentication(authentication);
-        // System.out.println("service update member" +
-        // SecurityContextHolder.getContext());
 
     }
 
@@ -97,10 +101,21 @@ public class MemberService {
     }
 
     public Page<ParkingLot> listTotal(String keyword, Pageable pageable) {
-
+        // Map<Page<ParkingLot>, Pagenation> mparking = new HashMap<>();
+        // Page<ParkingLot> parkinglotPage;
+        // Pagenation pagenation;
         if (keyword != "") {
             System.out.println("search");
-            return parkingLotRepository.findByAddrContainingOrParkingNameContaining(keyword, keyword, pageable);
+            // parkinglotPage =
+            // parkingLotRepository.findByAddrContainingOrParkingNameContaining(keyword,
+            // keyword,
+            // pageable);
+            // pagenation = new Pagenation(parkinglotPage.getNumberOfElements(),
+            // parkinglotPage.getNumber(),
+            // parkinglotPage.getSize());
+            // mparking.put(parkinglotPage, pagenation);
+            return parkingLotRepository.findByAddrContainingOrParkingNameContaining(keyword, keyword,
+                    pageable);
         }
         System.out.println("palin");
         return parkingLotRepository.findAll(pageable);

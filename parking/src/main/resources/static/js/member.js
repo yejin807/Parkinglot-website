@@ -57,6 +57,7 @@ $(document).ready(function () {
 
         var putStr = {
             "username": $("#username").val(),
+            "password": $("#password").val(),
             "email": $("#email").val(),
             "tel": $("#tel").val(),
             "name": $("#name").val(),
