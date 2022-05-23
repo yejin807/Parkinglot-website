@@ -28,6 +28,9 @@ public class ParkingLotService {
 		MultipartFile f= parkinglot.getUpload();
 		String uploadFileName="";
 		
+		//현재주차면수 초기값 = 최대주차면수 
+		parkinglot.setCurrentCnt(parkinglot.getMaxCnt());
+		
 		if(!f.isEmpty()) { //파일 선택됨
 			uploadFileName = uuid.toString() + "_" + f.getOriginalFilename(); //파일이름 생성(중복방지)
 			File saveFile = new File(uploadFolder, uploadFileName); 			

@@ -17,17 +17,14 @@ import com.example.parking.repository.TicketRepository;
 public class OrderTicketService {
 	
 	@Autowired
-	private MemberRepository mRepository;
-	
-	@Autowired
 	private TicketRepository tRepository;
 	
 	@Autowired
 	private OrderTicketRepository oRepository;
 	
 	@Transactional
-	public void insert(Long parkinglotId, String username, OrderTicket orderticket) {
-		Ticket t = tRepository.findByParkinglotId(parkinglotId);
+	public void insert(OrderTicket orderticket) {
+		Ticket t = tRepository.findByParkinglotId(orderticket.getParkinglotId());
 		if(orderticket.getTicketType()==1) {
 			if(t.getDayStock()==0) return; //재고가 없음
 			t.setDayStock(t.getDayStock()-1);
@@ -38,9 +35,6 @@ public class OrderTicketService {
 			if(t.getMonthStock()==0) return; //재고가 없음
 			t.setMonthStock(t.getMonthStock()-1);
 		}
-		
-		orderticket.setMember(mRepository.findById(username).get());
-		orderticket.setParkLot(t.getParkLot());
 		oRepository.save(orderticket);
 	}
 
@@ -51,7 +45,7 @@ public class OrderTicketService {
 	
 	//티켓구매리스트(일반)
 	public List<OrderTicket> list(String username) {
-		return oRepository.findByMemberId(username);
+		return oRepository.findByUsername(username);
 	}
 	
 	//구매티켓 개별조회
