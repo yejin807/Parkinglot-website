@@ -25,11 +25,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-//    @Bean
-//    @Override
-//    public AuthenticationManager authenticationManagerBean() throws Exception {
-//        return super.authenticationManagerBean();
-//    }
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -37,22 +37,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf()
                 .disable()
                 .authorizeHttpRequests()
-                .antMatchers("/member/user/*")
-                .authenticated()
-                // .antMatchers("/admin/*").hasRole("ROLE_ADMIN")
-                .anyRequest()
+                .antMatchers("/", "/register/**") // 접근 허용
                 .permitAll()
+                .anyRequest()
+                .authenticated()
+                // // .antMatchers("/admin/*").hasRole("ROLE_ADMIN")
                 .and()
                 .formLogin()
-                .loginPage("/member/login")
+                .loginPage("/register/login")
                 .successHandler(customLoginSuccess)
-                .failureUrl("/member/fail")
+                .failureUrl("/register/fail")
                 .and()
                 .logout()
-                .logoutUrl("/member/logout")
-                .logoutSuccessUrl("/")
+                .logoutUrl("/register/logout")
+                .logoutSuccessUrl("/register/login")
                 .invalidateHttpSession(true);
 
     }
 }
-

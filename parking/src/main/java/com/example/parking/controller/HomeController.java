@@ -5,9 +5,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class HomeController {
-	
-	@GetMapping("/")
-	public String home() {
-		return "/member/divideAccount";
-	}
+
+    @GetMapping("/")
+    public String home() {
+        return "/register/divideJoin";
+    }
 }

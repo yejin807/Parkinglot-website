@@ -227,11 +227,14 @@
             //지도를 생성할 때 필요한 기본 옵션
             var options = {
                 center: new daum.maps.LatLng(35.1795543, 129.0756416), // 지도의 중심좌표
-                level: 3
+                level: 10
                 //지도의 레벨(확대, 축소 정도)
             };
 
             var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+
+            // 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
+            var infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
 
             // ( 검색 ) 목록 요청
             searchPlaces();
@@ -290,7 +293,29 @@
                     // 마커를 생성하고 지도에 표시합니다
                     var placePosition = new kakao.maps.LatLng(places[i].wido, places[i].gyeongdo)
                     marker = addMarker(placePosition, i)
-                    itemEl = getListItem(i, places[i])
+                    itemEl = getListItem(i, places[i]);
+
+                    // 마커와 검색결과 항목에 mouseover 했을때
+                    // 해당 장소에 인포윈도우에 장소명을 표시합니다
+                    // mouseout 했을 때는 인포윈도우를 닫습니다
+                    (function (marker, parkinglotInfo) {
+                        kakao.maps.event.addListener(marker, 'mouseover', function () {
+                            displayInfowindow(marker, parkinglotInfo);
+                        });
+
+                        kakao.maps.event.addListener(marker, 'mouseout', function () {
+                            infowindow.close();
+                        });
+
+                        itemEl.onmouseover = function () {
+                            displayInfowindow(marker, parkinglotInfo);
+                        };
+
+                        itemEl.onmouseout = function () {
+                            infowindow.close();
+                        };
+                    })(marker, places[i]);
+
                     fragment.appendChild(itemEl);
                 }
                 listEl.appendChild(fragment);
@@ -403,5 +428,18 @@
                     displayPagination(keyword, pagination)
                 })
 
+            }
+
+            // 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
+            // 인포윈도우에 장소명을 표시합니다
+            function displayInfowindow(marker, parkinglotInfo) {
+                var content = '<div style="padding:5px;z-index:1;">' + parkinglotInfo.parkingName + '</div>'
+                    + '<div style="padding:5px;z-index:1;"> 위치 :' + parkinglotInfo.addr + '</div>'
+                    + '<div style="padding:5px;z-index:1;"> 기본 요금: ' + parkinglotInfo.basicFee + '</div>'
+                    + '<div style="padding:5px;z-index:1;"> 시작 시간: ' + parkinglotInfo.openTime + '</div>'
+                    + '<div style="padding:5px;z-index:1;"> 오픈 시간: ' + parkinglotInfo.closeTime + '</div>';
+
+                infowindow.setContent(content);
+                infowindow.open(map, marker);
             }
         </script>
