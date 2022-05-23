@@ -17,3 +17,15 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+<nav class="navbar navbar-expand-sm bg-success navbar-dark mb-5">
+<div class="container">
+  <!-- Links -->
+  <ul class="navbar-nav mr-auto">
+    <li class="nav-item">
+      <a class="navbar-brand" href="/parkinglot/list">parkingLotlist</a>
+    </li>
+  
+  </ul>
+  
+  </div>
+</nav>
