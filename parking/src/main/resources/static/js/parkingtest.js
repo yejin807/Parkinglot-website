@@ -13,26 +13,86 @@
 		} 
 
 		
-		function leftday(parkid,carNum){
+		function mleftday(parkid,carNum,id1,id2){
+		$.ajax({
+			type : "get",
+			url : "/car/ticketendcheck/"+carNum+"/"+parkid
+		})
+		.done( function(resp) {
+			if(resp=="non"){
+			const day = new Date();			
+			const day1 = new Date(day.setMonth(day.getMonth() + 1));
+			const day2 = day1.toISOString().substring(0,10);
+				document.getElementById(id1).innerHTML = day2;
+				
+				const leftMSec = day1.getTime() - day.getTime(); 
+				const useday = Math.floor(leftMSec / (1000 * 3600 * 24));
 			
-			location.href= "/car/ticketendcheck/"+carNum+"/"+parkid;
+			const mleftday = 30 - useday;
+			document.getElementById(id2).innerHTML = mleftday;
+				
+			}else{
+				document.getElementById(id1).innerHTML = resp;
+				const date3 = new Date();
 			
-		}
-		
-		function mleftdays(endtime,id){
-			
-			const date3 = new Date();
-			
-			const date4 = new Date(endtime);
-	
-			const leftMSec = date4.getTime() - date3.getTime(); 
+				const date4 = new Date(resp);
+				const leftMSec = date4.getTime() - date3.getTime(); 
 			
 			const useday = Math.floor(leftMSec / (1000 * 3600 * 24));
 			
 			const mleftday = 30 - useday;
-			document.getElementById(id).innerHTML = mleftday;
-		} 
-
+			document.getElementById(id2).innerHTML = mleftday;
+			
+			}
+				})
+				.fail(function(e){
+					alert("fail")
+				})
+			
+			
+		}
+		
+		
+		function wleftday(parkid,carNum,id1,id2){
+		$.ajax({
+			type : "get",
+			url : "/car/ticketendcheck/"+carNum+"/"+parkid
+		})
+		.done( function(resp) {
+			if(resp=="non"){
+			const day = new Date();			
+			const day1 = new Date(day.setDate(day.getDate() + 7));
+			const day2 = day1.toISOString().substring(0,10);
+				document.getElementById(id1).innerHTML = day2;
+				
+				const leftMSec = day1.getTime() - day.getTime(); 
+				const useday = Math.floor(leftMSec / (1000 * 3600 * 24));
+			
+			const mleftday = 7 - useday;
+			document.getElementById(id2).innerHTML = mleftday;
+				
+			}else{
+				document.getElementById(id1).innerHTML = resp;
+				const date3 = new Date();
+			
+				const date4 = new Date(resp);
+				const leftMSec = date4.getTime() - date3.getTime(); 
+			
+			const useday = Math.floor(leftMSec / (1000 * 3600 * 24));
+			
+			const mleftday = 7 - useday;
+			document.getElementById(id2).innerHTML = mleftday;
+			
+			}
+				})
+				.fail(function(e){
+					alert("fail")
+				})
+			
+			
+		}
+		
+		
 		function wleftdays(endtime,id){
 					
 					const date5 = new Date();

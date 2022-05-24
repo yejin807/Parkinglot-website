@@ -22,15 +22,12 @@
 	$("input:radio[name='carType']:input[value='${orderticket.car.carType}']").attr("checked",true)			
 </script>  -->
 
- 정기권 사용 :  
+ 정기권 사용 : 
+ 
 <label for="month"> 월주차</label><input class="parkingType" type="radio" value = "3" id = "parkingType" name ="parkingType" > 
 <label for="week"> 주주차</label><input class="parkingType" type="radio" value = "2" id = "parkingType" name ="parkingType"> 
 <label for="day"> 일주차</label><input class="parkingType" type="radio" value = "1" id = "parkingType" name ="parkingType"> 
-<label for="non"> 사용 안함</label><input class="parkingType" type="radio" value = "0" id = "parkingType" name ="parkingType" checked> <br/>
-
-<script>		
-	$("input:radio[name='parkingType']:input[value='${orderticket.ticketType}']").attr("checked",true)			
-</script>
+<label for="non"> 자유주차</label><input class="parkingType" type="radio" value = "0" id = "parkingType" name ="parkingType" checked> <br/>
 
 <br><br>
 <button type="button" class="btn btn-primary" id="btninsert">입차</button>
@@ -49,12 +46,17 @@
 					url:"/car/ticketcheck/"+$("#parkinglotId").val()+"/"+$("#carNum").val()
 				})
 				.done(function(resp){
+					alert(resp)
 					if(resp=="0"){
 						alert("정기권 구매 차량아닙니다.\n입차 정보를 입력하세요")
-					}else{
+						alert(resp)
+					}else if(resp=="5"){
+						alert("정기권 구매 차량이지만 입차 기간이 아닙니다.")
+					} else {
+						alert(resp)
 						alert("정기권 구매 차량입니다.")
-						$("input:radio[name='parkingType']:input[value='"+resp+"']").attr("checked",true)
 					}
+					$("input:radio[name='parkingType']:input[value='"+resp+"']").attr("checked",true)
 				})
 				.fail(function(e){
 					alert("실패")
@@ -84,7 +86,7 @@
 
 			var dataParam = {
 					"carNum" : $("#carNum").val(),
-					"parkingType" : $('input[name="parkingType"]:checked').val()
+					"parkingType" : $('input[name="parkingType"]:checked').val(),
 					"parkinglotId": $("#parkinglotId").val()
 				}
 			

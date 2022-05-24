@@ -123,7 +123,9 @@ public class ParkingLotService {
 	public void currentCntUpdate() {
 		List<ParkingLot> plist = pRepository.findAll();
 		for(ParkingLot p : plist) {
+			//정규권 구매차량수
 			int orderCnt = oRepository.countByParkinglotId(p.getParkinglotId(),new Date());
+			//자유주차된 차량수
 			int enterCnt = eRepository.countByParkinglotId(p.getParkinglotId());
 			p.setCurrentCnt(p.getMaxCnt()-orderCnt-enterCnt);
 		}		
