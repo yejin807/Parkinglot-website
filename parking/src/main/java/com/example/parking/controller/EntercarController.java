@@ -1,6 +1,9 @@
 package com.example.parking.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -47,12 +50,18 @@ public class EntercarController {
     @PostMapping("/insert/{parkid}")
     @ResponseBody
     public String insert(@PathVariable Long parkid, @RequestBody EnterCar entercar) {
-        // ParkingLot p = pRepository.findById(car.getParkingId()).get();
-        carService.save(entercar);
-        carService.parkingFeeset(parkid, entercar);
-        return "success";
+       String check = carService.carNumcheck(parkid,entercar);
+       if(check.equals("fail")) {
+    	   return"fail";
+       }
+       else {
+    	   carService.save(entercar);
+    	   carService.parkingFeeset(parkid, entercar);
+    	   return "success";
+       }
     }
 
+    //주차 타입만 있을 때 
     @GetMapping("/list/{parkid}")
     public String list(Model model, @PathVariable Long parkid,
             @PageableDefault(size = 5, sort = "intime", direction = Direction.DESC) Pageable pageable,
@@ -60,8 +69,8 @@ public class EntercarController {
             @RequestParam(required = false, defaultValue = "") String word) {
         System.out.println("word : " + word);
 
-        Page<EnterCar> cars = carService.findAll(word, pageable);
-        Long count = carService.count(word);
+        Page<EnterCar> cars = carService.findByParkingId(parkid,word, pageable);
+        Long count = carService.allcount(parkid,word);
         model.addAttribute("cars", cars);
         model.addAttribute("count", count);
         model.addAttribute("word", word);
@@ -71,6 +80,7 @@ public class EntercarController {
 
     }
 
+    //차번호 검색도 있을 때
     @GetMapping("/listfield")
     public String listfield(Model model,
             @PageableDefault(size = 5, sort = "intime", direction = Direction.DESC) Pageable pageable,
@@ -80,8 +90,8 @@ public class EntercarController {
         System.out.println("word : " + word);
         System.out.println("field : " + field);
         System.out.println("parkid : " + parkid);
-        Page<EnterCar> cars = carService.findSearch(word, field, pageable);
-        Long count = carService.countSearch(word, field);
+        Page<EnterCar> cars = carService.findSearch(parkid,word, field, pageable);
+        Long count = carService.countSearch(parkid,word, field);
         model.addAttribute("cars", cars);
         model.addAttribute("count", count);
         model.addAttribute("word", word);
@@ -109,12 +119,51 @@ public class EntercarController {
     @PostMapping("ticketcheck/{parkid}/{carNum}")
     @ResponseBody
     public int ticketcheck(@PathVariable String carNum, @PathVariable Long parkid, Model model) {
-        OrderTicket oTicket = oRepository.findByParkinglotIdAndCarNum(parkid, carNum);
+    	List<OrderTicket> oTicket = oRepository.findByParkinglotIdAndCarNum(parkid, carNum);
+    	 
+    	//yyyy-MM-dd 포맷 설정
+    	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    	Date now = new Date();
+    	String date = dateFormat.format(now);
+    	int check=0;
+    	
         if (oTicket == null) {
             return 0;
         } else {
-        	return oTicket.getTicketType();
+        	for(OrderTicket orderTicket :oTicket) {
+        		//비교할 date와 today를데이터 포맷으로 변경
+            	Date enddate = orderTicket.getEndDate();
+            	Date startdate = orderTicket.getBuyDate();
+            	Date today = null;
+				try {
+					today = dateFormat.parse(date);
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+            	 
+            	//compareTo메서드를 통한 날짜비교
+            	int endcompare = enddate.compareTo(today); 
+            	//조건문
+            	if(endcompare >= 0) {
+            	  check = orderTicket.getTicketType();
+            	}else if(endcompare < 0) {
+            		check = 2;
+            	}else {
+            		check = orderTicket.getTicketType();;
+            	}
+            	
+            	int startcompare = enddate.compareTo(today); 
+            	//조건문
+            	if(startcompare >= 0) {
+            	  check = orderTicket.getTicketType();
+            	}else if(startcompare < 0) {
+            		check = 2;
+            	}else {
+            		check = orderTicket.getTicketType();;
+            	}
+        	}
         }
+		return check;
     }
 
 }
