@@ -62,10 +62,10 @@ public class RegisterController {
         else {
 
             if (member.getGubun().equals("owner")) {
-                System.out.println("set role owner");
+                // System.out.println("set role owner");
                 member.setRole("ROLE_OWNER");
             } else if (member.getGubun().equals("user")) {
-                member.setRole("ROLE_USER");
+                // member.setRole("ROLE_USER");
                 System.out.println("set role user");
             }
 
