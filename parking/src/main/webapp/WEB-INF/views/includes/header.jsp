@@ -34,7 +34,7 @@
                          <ul class="navbar-nav">
                             <li class="nav-item">
                             <c:if test="${empty principal}">                           
-                                <a class="navbar-brand" href="/register/divideJoin">회원가입</a>
+                                <a class="navbar-brand" href="/register/join">회원가입</a>
                                 <a class="navbar-brand" href="/register/login">로그인</a>
                             </c:if>
                             <c:if test="${not empty principal}">
