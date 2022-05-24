@@ -18,6 +18,7 @@ public class Ticket {
 	@ManyToOne
 	@JoinColumn(name = "parkinglotId")
 	private ParkingLot parkLot;
+	private String username;
 	private int dayFee;
 	private int dayStock;
 	private int weekFee;

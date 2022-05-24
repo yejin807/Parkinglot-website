@@ -16,14 +16,14 @@ public class ParkingLot {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long parkinglotId;// 주차장 id
-    // 사장님 id 넣어야함
+    private String username; // 사장님 id
     private String parkingName; // 주차장명
     private String addr;// 주차장 주소
     private String wido;// 위도
     private String gyeongdo;// 경도
     private String parkinglotTel;// 주차장 전화번호
     private int maxCnt;// 전체 주차수
-    private int currentCnt;// 현재 주차수
+    private int currentCnt;// 현재 주차가능면수
     private int basicFee;// 기본요금
     private int dayFee;// 일간 요금
     private int monthFee;// 월간 요금

@@ -1,8 +1,8 @@
 package com.example.parking.controller;
 
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.parking.config.auth.PrincipalDetails;
 import com.example.parking.model.OrderTicket;
-import com.example.parking.model.ParkingLot;
-import com.example.parking.repository.ParkingLotRepository;
+import com.example.parking.repository.CarRepository;
 import com.example.parking.service.OrderTicketService;
 
 @Controller
@@ -21,11 +21,16 @@ public class OrderController {
 	
 	@Autowired
 	private OrderTicketService oService;
+	
+	@Autowired
+	private CarRepository carRepository;
 
 
 	//정기권 구매
 	@GetMapping("buy/{id}")
-	public String insert(@PathVariable Long id, Model model) {		
+	public String insert(@PathVariable Long id, @AuthenticationPrincipal PrincipalDetails principal, Model model) {
+		if(principal==null) return "redirect:/register/login";
+		model.addAttribute("carlist", carRepository.findByUsername(principal.getUsername()));
 		model.addAttribute("ticket", oService.findByParkinglotId(id));
 		return "/orderticket/buy";
 	}
@@ -65,7 +70,7 @@ public class OrderController {
 		return "redirect:/orderticket/listAll";
 	}
 	
-	//삭제히가
+	//삭제하기
 	@GetMapping("delete/{ticketId}")
 	public String delete(@PathVariable Long ticketId) {
 		oService.delete(ticketId);

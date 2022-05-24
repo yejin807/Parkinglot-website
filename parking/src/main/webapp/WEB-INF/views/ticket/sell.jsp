@@ -9,6 +9,7 @@
 <form action="/ticket/sell" method="post">
 	<input type="hidden" name="parkinglotId" id="parkinglotId" value="${parkinglot.parkinglotId}" />
 	<input type="hidden" name="ticketId" id="ticketId" value="${ticket.ticketId}" />
+	<input type="hidden" name="username" id="username" value="${parkinglot.username}" />
 	
 	<table border="1">
 		<tr>

@@ -5,7 +5,7 @@
 
 
 <div class="container mt-3">
-<h3>정기권재고 리스트(사장님)</h3>
+<h3>정기권재고 리스트(전체)</h3>
 	<table class="table">
 		<tr>
 			<th>주차장명</th>

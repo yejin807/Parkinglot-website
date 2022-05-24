@@ -13,4 +13,7 @@ public interface TicketRepository extends JpaRepository<Ticket, Long>{
 	@Query(value = "select * from ticket where parkinglot_id = ?1", nativeQuery = true)
 	public Ticket findByParkinglotId(Long parkinglotId);
 
+	@Query(value = "select * from ticket where username = ?1", nativeQuery = true)
+	public List<Ticket> findByUsername(String username);
+
 }

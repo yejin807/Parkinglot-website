@@ -31,4 +31,6 @@ public class EnterCar {
 	private Date intime;
 		
 	private int fee;
+	
+	private Long parkinglotId;
 }

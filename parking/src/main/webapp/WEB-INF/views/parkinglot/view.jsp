@@ -62,13 +62,54 @@
 			<td>주차장사진</td>
 			<td colspan="2"><img alt="주차장사진" width="300px" height="300px" src="/${parkinglot.files}"/></td>
 		</tr>
+		<!-- 수정권한 -->
+		<sec:authorize access="hasRole('ROLE_ADMIN')">
 		<tr>
-		<td colspan="3">
-		<button type="button" class="btn btn-primary" onclick="location.href='/parkinglot/update/${parkinglot.parkinglotId}'">수정하기</button>
-		<button type="button" class="btn btn-info" onclick="location.href='/orderticket/buy/${parkinglot.parkinglotId}'">정기권구매</button>
+			<td colspan="3">
+  				<button type="button" class="btn btn-primary" onclick="location.href='/parkinglot/update/${parkinglot.parkinglotId}'">수정하기</button>
+  			</td>
 		</tr>
+		</sec:authorize>
+		<c:if test="${principal.username == parkinglot.username}">
+		<tr>
+			<td colspan="3">
+  				<button type="button" class="btn btn-primary" onclick="location.href='/parkinglot/update/${parkinglot.parkinglotId}'">수정하기</button>
+  				<button type="button" class="btn btn-danger" onclick="funDel(${parkinglot.parkinglotId})")>삭제</button>
+  			</td>
+		</tr>
+		</c:if>
+		<!-- 정기권구매 -->
+		<sec:authorize access="hasRole('ROLE_USER')">
+		<tr>
+			<td colspan="3">
+			<button type="button" class="btn btn-info" onclick="location.href='/orderticket/buy/${parkinglot.parkinglotId}'">정기권구매</button>
+			</td>
+		</tr>
+		</sec:authorize>
 	</table>
 </div>
+
+<script>
+function funDel(id){
+	if(!confirm("정말로 삭제하시겠습니까?")) return;
+	
+	$.ajax({
+		type : "delete",
+		url : "/parkinglot/delete/"+id,
+		success : function(resp) {
+			if (resp == "success") {
+				alert("삭제성공");
+				location.href = "/parkinglot/list";
+			}
+		},
+		error : function(e) {
+			alert("error:" + e);
+		}
+	})
+}
+
+</script>
+
 <script	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f76d9772b2d3161123b4305bff3000b7&libraries=services"></script>
 <script>

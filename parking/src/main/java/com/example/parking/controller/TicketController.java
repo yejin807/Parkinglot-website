@@ -2,6 +2,7 @@ package com.example.parking.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.parking.config.auth.PrincipalDetails;
 import com.example.parking.model.Ticket;
 import com.example.parking.repository.ParkingLotRepository;
 import com.example.parking.service.TicketService;
@@ -42,17 +44,19 @@ public class TicketController {
 	
 	
 	//전체주차장 재고리스트(사장님)
-	@GetMapping("list/{id}")
-	public String list(@PathVariable Long id, Model model) {
-		model.addAttribute("ticketlist", tService.findByParkinglotId(id));
+	@GetMapping("list")
+	public String list(@AuthenticationPrincipal PrincipalDetails principal, Model model) {
+		if(principal==null) return "/register/login";
+		
+		model.addAttribute("ticketlist", tService.list(principal.getUsername()));
 		return "/ticket/list";
 	}
 	
 	//정기권 재고현황(전체)
-	@GetMapping("list")
+	@GetMapping("listAll")
 	public String list(Model model) {
-		model.addAttribute("ticketlist", tService.list());
-		return "/ticket/list";
+		model.addAttribute("ticketlist", tService.listAll());
+		return "/ticket/listAll";
 	}
 
 }

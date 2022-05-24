@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.parking.model.ParkingLot;
 import com.example.parking.model.Ticket;
 import com.example.parking.repository.TicketRepository;
 
@@ -32,17 +31,20 @@ public class TicketService {
 			t.setMonthFee(ticket.getMonthFee());
 			t.setMonthStock(ticket.getMonthStock());
 		}
-		
-		
 	}
 	
-	//주차장별 정규권재고
+	//정규권 재고현황(주차장별)
 	public Ticket findByParkinglotId(Long parkinglotId) {
 		return tPepository.findByParkinglotId(parkinglotId);
 	}
 	
-	//정규권 판매리스트
-	public List<Ticket> list(){
+	//정규권 재고리스트(사장님)
+	public List<Ticket> list(String username){
+		return tPepository.findByUsername(username);
+	}
+
+	//정규권 재고리스트(전체)
+	public List<Ticket> listAll() {
 		return tPepository.findAll();
 	}
 	

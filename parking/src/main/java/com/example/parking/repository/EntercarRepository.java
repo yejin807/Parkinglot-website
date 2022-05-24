@@ -26,4 +26,8 @@ public interface EntercarRepository extends JpaRepository<EnterCar, String>{
 	
 	@Query(value = "select count(*) from enter_car where parking_type like CONCAT('%',:word,'%')",nativeQuery = true)
 	public Long cntParkingTypeSearch(@Param("word") String word);
+
+	//주차장별 주차차량수
+	@Query(value = "select count(*) from enter_car where parkinglot_id=?1",nativeQuery = true)
+	public int countByParkinglotId(Long parkinglotId);
 }

@@ -6,7 +6,12 @@
 <script>
  if(${empty ticket}){
 	 alert("정기권 판매등록이 되지 않았습니다.");
-	 location.href="/parkinglot/list"; //주차장리스트로 이동 필요
+	 location.href="/parkinglot/listAll"; //주차장전체리스트로 이동
+ }
+ 
+ if(${empty carlist}){
+	 alert("등록된 차량이 없습니다. 차량을 등록해 주세요");
+	 location.href="/member/carRegister"; //차량등록 페이지로 이동
  }
 </script>
 
@@ -14,8 +19,13 @@
 <h3>정기권 구매(일반)</h3>
 <form action="/orderticket/buy" method="post">
 	<input type="hidden" name="parkinglotId" id="parkinglotId" value="${ticket.parkLot.parkinglotId}" />
-	<input type="text" name="username" id="username" value="username 입력" />
-	<input type="text" name="carNum" id="carNum" value="carNum 입력" />
+	<input type="text" name="username" id="username" value="${principal.username}" readonly />
+	차량선택 
+	<select name="carNum">
+		<c:forEach items="${carlist}" var="car">
+			<option value="${car.carNum}">${car.carNum}</option> 
+		</c:forEach>
+	</select>
 	
 	<table border="1">
 		<tr>

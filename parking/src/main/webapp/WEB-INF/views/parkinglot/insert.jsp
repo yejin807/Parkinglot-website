@@ -5,8 +5,9 @@
 
 
 <div class="container mt-3">
-<h3>주차장 등록(사장님)</h3>
+<h3>주차장 등록(${principal.username}사장님)</h3>
 <form action="/parkinglot/insert" method="post" enctype="multipart/form-data">
+	사장님ID(username)<input type="text" name="username" id="username" value="${principal.username}" />
 	<table border="1">
 		<tr>
 			<td>주차장명</td>

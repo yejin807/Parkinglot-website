@@ -14,6 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.parking.model.ParkingLot;
+import com.example.parking.repository.CarRepository;
+import com.example.parking.repository.EntercarRepository;
 import com.example.parking.repository.OrderTicketRepository;
 import com.example.parking.repository.ParkingLotRepository;
 
@@ -26,6 +28,9 @@ public class ParkingLotService {
 	
 	@Autowired
 	private OrderTicketRepository oRepository;
+	
+	@Autowired
+	private EntercarRepository eRepository;
 	
 	//주차장 등록
 	@Transactional
@@ -53,8 +58,13 @@ public class ParkingLotService {
 		pRepository.save(parkinglot);
 	}
 	
-	//주차장 리스트
-	public List<ParkingLot> list(){		
+	//주차장 리스트(사장님)
+	public List<ParkingLot> list(String username){		
+		return pRepository.findByUsername(username);
+	}
+	
+	//주차장 리스트(전체)
+	public List<ParkingLot> listAll(){		
 		return pRepository.findAll();
 	}
 
@@ -105,6 +115,17 @@ public class ParkingLotService {
 	@Transactional
 	public void delete(Long id) {
 		pRepository.deleteById(id);
+	}
+
+	//현재 주차가능면수 업데이트
+	@Transactional
+	public void currentCntUpdate() {
+		List<ParkingLot> plist = pRepository.findAll();
+		for(ParkingLot p : plist) {
+			int orderCnt = oRepository.countByParkinglotId(p.getParkinglotId());
+			int enterCnt = eRepository.countByParkinglotId(p.getParkinglotId());
+			p.setCurrentCnt(p.getMaxCnt()-orderCnt-enterCnt);
+		}		
 	}
 
 }
