@@ -35,6 +35,7 @@ public class RegisterController {
     public String joinUser(Model model) {
         Member member = new Member();
         member.setGubun("user");
+
         model.addAttribute("member", member);
         return "/register/join";
     }
@@ -44,6 +45,7 @@ public class RegisterController {
     public String joinOwner(Model model) {
         Member member = new Member();
         member.setGubun("owner");
+
         model.addAttribute("member", member);
         return "/register/join";
     }
@@ -54,11 +56,18 @@ public class RegisterController {
     @ResponseBody
     public ResponseEntity<Object> join(@Validated(ValidationSequence.class) @RequestBody Member member) {
         // Validated -> throws MethodArgumentNotValidException
-
         boolean idExist = memberService.checkUsernameDuplication(member.getUsername());
         if (idExist == true)
             throw new IllegalStateException();
         else {
+
+            if (member.getGubun().equals("owner")) {
+                System.out.println("set role owner");
+                member.setRole("ROLE_OWNER");
+            } else if (member.getGubun().equals("user")) {
+                member.setRole("ROLE_USER");
+                System.out.println("set role user");
+            }
 
             memberService.join(member);
             return new ResponseEntity<>(HttpStatus.OK);

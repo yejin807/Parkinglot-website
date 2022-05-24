@@ -26,6 +26,7 @@ public class PrincipalDetails implements UserDetails {
             return member.getRole();
         });
         return collect;
+
     }
 
     @Override
