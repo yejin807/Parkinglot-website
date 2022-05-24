@@ -11,18 +11,15 @@
 			<td>티켓ID</td>
 			<td>구매자(아이디)</td>
 			<td>주차장명</td>
-			<td>주소</td>
 			<td>티켓종류</td>
 			<td>시작일</td>
 			<td>만료일</td>
-			<td>수정</td>
 		</tr>
 		<c:forEach items="${orderTicketList}" var="orderticket">
 			<tr>
 				<td>${orderticket.ticketId}</td>
-				<td>${orderticket.member.username}</td>
-				<td>${orderticket.parkLot.parkingName}</td>
-				<td>${orderticket.parkLot.addr}</td>
+				<td>${orderticket.username}</td>
+				<td>${orderticket.parkingName}</td>
 				<td><c:choose>
 						<c:when test="${orderticket.ticketType==1}">1일권</c:when>
 						<c:when test="${orderticket.ticketType==2}">7일권</c:when>
@@ -35,8 +32,6 @@
 				<td> 
 					<fmt:formatDate value="${orderticket.endDate}" pattern="yyyy-MM-dd" var="endDate"/>
 					${endDate}
-				</td>
-				<td><button class="btn btn-primary btn-sm" type="button" onclick="location.href='/orderticket/update/${orderticket.ticketId}'">수정</button> 
 				</td>
 			</tr>
 		</c:forEach>

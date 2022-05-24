@@ -22,6 +22,7 @@ public class OrderTicket { //티켓구매
 	private Long ticketId;
 
 	private Long parkinglotId; //주차장ID
+	private String parkingName; //주차장명
 	private String username; //사용자ID
 	private String carNum; //자동차ID
 

@@ -3,6 +3,7 @@ package com.example.parking.service;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
@@ -122,10 +123,9 @@ public class ParkingLotService {
 	public void currentCntUpdate() {
 		List<ParkingLot> plist = pRepository.findAll();
 		for(ParkingLot p : plist) {
-			int orderCnt = oRepository.countByParkinglotId(p.getParkinglotId());
+			int orderCnt = oRepository.countByParkinglotId(p.getParkinglotId(),new Date());
 			int enterCnt = eRepository.countByParkinglotId(p.getParkinglotId());
 			p.setCurrentCnt(p.getMaxCnt()-orderCnt-enterCnt);
 		}		
 	}
-
 }

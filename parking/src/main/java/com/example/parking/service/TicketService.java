@@ -47,6 +47,5 @@ public class TicketService {
 	public List<Ticket> listAll() {
 		return tPepository.findAll();
 	}
-	
 
 }
