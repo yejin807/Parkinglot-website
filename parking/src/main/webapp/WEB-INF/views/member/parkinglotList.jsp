@@ -350,7 +350,7 @@
                 var el = document.createElement('li'),
                     itemStr = '<span class="markerbg marker_' + (index + 1) + '"></span>' +
                         '<div class="info">' +
-                        '   <h5><a href="/parkinglot/view/'+places.parkinglotId+'">' + places.parkingName + '</a></h5>';
+                        '   <h5><a href="/parkinglot/view/' + places.parkinglotId + '">' + places.parkingName + '</a></h5>';
 
 
                 itemStr += '    <span>' + places.addr + '</span>';
@@ -392,13 +392,26 @@
                 while (paginationEl.hasChildNodes()) {
                     paginationEl.removeChild(paginationEl.lastChild);
                 }
+                // 이전 페이지 리스트로 이동
+                //console.log(respPagination.startPage() + respPagination.endPage)
+                if (respPagination.startPage > respPagination.pageSize) {
+                    var el2 = document.createElement('a');
+                    el2.href = "#";
+                    el2.innerHTML = '<';
+                    el2.onclick = (function (i) {
+                        return function () {
+                            gotoPage(keyword, i)
+                        }
+                    })(respPagination.startPage - respPagination.pageSize);
+                    fragment.appendChild(el2);
+                }
 
-                for (i = 1; i <= respPagination.totalPages; i++) {
+                for (i = respPagination.startPage; i <= respPagination.endPage; i++) {
                     var el = document.createElement('a');
                     el.href = "#";
                     el.innerHTML = i;
 
-                    if (i === respPagination.currentPage - 1) {
+                    if (i === respPagination.currentPage) {
                         el.className = 'on';
                     } else {
                         el.onclick = (function (i) {
@@ -410,6 +423,21 @@
 
                     fragment.appendChild(el);
                 }
+
+                // 다음 페이지 리스트 이동
+                if (respPagination.endPage < respPagination.totalPages) {
+                    var el3 = document.createElement('a');
+                    el3.href = "#";
+                    el3.innerHTML = '>';
+                    el3.onclick = (function (i) {
+                        return function () {
+                            gotoPage(keyword, i)
+                        }
+                    })(respPagination.endPage + 1);
+                    fragment.appendChild(el3);
+                }
+
+
                 paginationEl.appendChild(fragment);
             }
 

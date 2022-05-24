@@ -57,22 +57,12 @@ public class MemberService {
     // 비밀번호 제외 update
     @Transactional
     public void update(Member member) {
-        System.out.println(">> " + member.getUsername());
+
         Member contextMember = memberRepository.findById(member.getUsername()).get();
-        System.out.println("contextM >> " + member.getUsername());
-        System.out.println("contextM >> " + member.getPassword());
         contextMember.setEmail(member.getEmail());
         contextMember.setName(member.getName());
         contextMember.setBizNum(member.getBizNum());
         contextMember.setTel(member.getTel());
-
-        // /* 변경된 세션 등록 */
-        // // 이거 안하니까 수정 된다
-        // Authentication authentication = authenticationManager.authenticate(
-        // new UsernamePasswordAuthenticationToken(member.getUsername(),
-        // member.getPassword()));
-        // System.out.println("service update member >>" + authentication);
-        // SecurityContextHolder.getContext().setAuthentication(authentication);
 
     }
 

@@ -82,13 +82,11 @@ public class MemberController {
         memberService.update(member);
         // /* 변경된 세션 등록 */
         // // 이거 안적으면 암호화가 안된 상태로 들어가 있다??
-        // Authentication authentication = authenticationManager.authenticate(
-        // new UsernamePasswordAuthenticationToken(member.getUsername(),
-        // member.getPassword()));
-        // SecurityContextHolder.getContext().setAuthentication(authentication);
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(member.getUsername(),
+                        member.getPassword()));
+        SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        // System.out.println("service updatepwd >>" +
-        // SecurityContextHolder.getContext());
         return new ResponseEntity<>("success", HttpStatus.OK);
 
     }
@@ -137,8 +135,11 @@ public class MemberController {
         System.out.println("list search");
         Map<String, Object> parkingMap = new HashMap<>();
         Page<ParkingLot> parkinglotPage = memberService.listTotal(keyword, pageable);
-        Pagenation pagenation = new Pagenation((int) parkinglotPage.getTotalElements(), parkinglotPage.getNumber(),
-                parkinglotPage.getSize());
+        // Pagenation pagenation = new Pagenation((int)
+        // parkinglotPage.getTotalElements(), parkinglotPage.getNumber(),
+        // parkinglotPage.getSize());
+        Pagenation pagenation = new Pagenation(parkinglotPage);
+        System.out.println(pagenation.toString());
         parkingMap.put("parkingLot", parkinglotPage.getContent());
         parkingMap.put("parkingLotPagenation", pagenation);
         return parkingMap;

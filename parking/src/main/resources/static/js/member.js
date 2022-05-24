@@ -18,7 +18,6 @@ $(document).ready(function () {
             "name": $("#name").val(),
             "bizNum": $("#bizNum").val(),
             "gubun": $("#gubun").val(),
-            "role": "ROLE_USER"
 
         }
 
