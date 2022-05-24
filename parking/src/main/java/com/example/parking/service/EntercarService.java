@@ -51,32 +51,32 @@ public class EntercarService {
 	}
 	
 	
-	public Page<EnterCar> findAll(String word,Pageable pageable){
+	public Page<EnterCar> findByParkingId(Long parkid,String word,Pageable pageable){
 		if(word.equals("전체보기"))
-			return carRepository.findAll(pageable);		
-			return carRepository.findByParkingTypeContaining(word,pageable);
+			return carRepository.findByParkinglotId(parkid,pageable);		
+			return carRepository.findByParkingType(parkid,word,pageable);
 		
 	}
 	
-	public Page<EnterCar> findSearch(String word,String field,Pageable pageable){
+	public Page<EnterCar> findSearch(Long parkid,String word,String field,Pageable pageable){
 		if(word.equals("전체보기"))
-			return carRepository.findByCarNumContaining(field,pageable);
-			return carRepository.bothSearch(word,field,pageable);		
+			return carRepository.findByCarNum(parkid,field,pageable);
+			return carRepository.bothSearch(parkid,word,field,pageable);		
 	}
 	
-	public Long count(String word) {
+	public Long allcount(Long parkid,String word) {
 		if(word.equals("전체보기"))
-			return carRepository.count();
-			return carRepository.cntParkingTypeSearch(word);	
+			return carRepository.allcount(parkid);
+			return carRepository.cntParkingTypeSearch(parkid,word);	
 	}
 	
-	public Long countSearch(String word,String field) {
+	public Long countSearch(Long parkid,String word,String field) {
 		if(word.equals("전체보기")) {
-			return carRepository.cntCarNumSearch(field);
+			return carRepository.cntCarNumSearch(parkid,field);
 		}
 		if(word.isEmpty())
-			return carRepository.cntCarNumSearch(field);
-		return carRepository.cntbothSearch(word,field);	
+			return carRepository.cntCarNumSearch(parkid,field);
+		return carRepository.cntbothSearch(parkid,word,field);	
 	}
 	
 	@Transactional
@@ -85,5 +85,13 @@ public class EntercarService {
 		p.setCurrentCnt(p.getCurrentCnt()+1);
 		carRepository.deleteById(carNum);
 	}
+	public String carNumcheck(Long parkid, EnterCar entercar) {
+		Long c = carRepository.carNumcheck(parkid,entercar.getCarNum());
+		if(c==1) {
+			return "fail"; 
+		}
+		return"success";
+	}
+
 
 }

@@ -12,6 +12,7 @@
 		<h5>주차 가능 대수(${parkinglot.currentCnt})</h5>
 	</div>
 	<div class="container">
+				<input type="hidden" name="parkinglotId" id="parkinglotId" value="${parkinglot.parkinglotId}" />
 		<table class="table table-hover">
 			<thead>
 				<tr>
@@ -32,7 +33,6 @@
 			</thead>
 			<tbody>
 
-				<input type="hidden" name="parkinglotId" id="parkinglotId" value="${parkinglot.parkinglotId}" />
 				
 				<c:forEach items="${cars.content }" var="car" varStatus="st">
 					<tr>

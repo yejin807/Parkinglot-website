@@ -16,10 +16,9 @@ public interface OrderTicketRepository extends JpaRepository<OrderTicket, Long> 
 
     //티켓확인
     @Query(value = "select * from order_ticket where parkinglot_id like CONCAT('%',:parkid,'%') AND car_num like CONCAT('%',:carNum,'%')", nativeQuery = true)
-    public OrderTicket findByParkinglotIdAndCarNum(@Param("parkid") Long parkid, @Param("carNum") String carNum);
+    public List<OrderTicket> findByParkinglotIdAndCarNum(@Param("parkid") Long parkid, @Param("carNum") String carNum);
 
     //주차장별 정규권 구매자수
     @Query(value = "select count(*) from order_ticket where parkinglot_id=?1", nativeQuery = true)
 	public int countByParkinglotId(Long ParkinglotId);
-
 }

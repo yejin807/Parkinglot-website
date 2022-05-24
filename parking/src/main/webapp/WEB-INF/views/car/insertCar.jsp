@@ -85,6 +85,7 @@
 			var dataParam = {
 					"carNum" : $("#carNum").val(),
 					"parkingType" : $('input[name="parkingType"]:checked').val()
+					"parkinglotId": $("#parkinglotId").val()
 				}
 			
 			$.ajax({
@@ -93,10 +94,15 @@
 				contentType:"application/json;charset=utf-8",
 				data:JSON.stringify(dataParam)
 			})
+			
 			.done(function(resp){
 				if(resp=="success"){
 					alert("차 번호:"+$("#carNum").val()+"\n입차를 완료했습니다.")
 					location.href="/car/list/"+$("#parkinglotId").val();
+				}
+				else if(resp == "fail"){
+					alert("이미 입차되어 있는 차량입니다.")
+					$("#carNum").val("");
 				}
 			})
 			.fail(function(e){
