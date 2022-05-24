@@ -8,8 +8,7 @@
 <h3>정기권 구매내역</h3>
 	<table class="table">
 		<tr>
-			<td>주차장아이디(parkinglotId)</td>
-			<td>구매자아이디(username)</td>
+			<td>주차장명</td>
 			<td>차량번호</td>
 			<td>티켓종류</td>
 			<td>시작일</td>
@@ -17,8 +16,7 @@
 		</tr>
 		<c:forEach items="${orderTicketList}" var="orderticket">
 			<tr>
-				<td>${orderticket.parkinglotId}</td>
-				<td>${orderticket.username}</td>
+				<td>${orderticket.parkingName}</td>
 				<td>${orderticket.carNum}</td>
 				<td><c:choose>
 						<c:when test="${orderticket.ticketType==1}">1일권</c:when>

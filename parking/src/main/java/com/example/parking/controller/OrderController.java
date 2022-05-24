@@ -14,6 +14,7 @@ import com.example.parking.config.auth.PrincipalDetails;
 import com.example.parking.model.OrderTicket;
 import com.example.parking.repository.CarRepository;
 import com.example.parking.service.OrderTicketService;
+import com.example.parking.service.TicketService;
 
 @Controller
 @RequestMapping("/orderticket/*")
@@ -23,36 +24,41 @@ public class OrderController {
 	private OrderTicketService oService;
 	
 	@Autowired
+	private TicketService tService;
+	
+	@Autowired
 	private CarRepository carRepository;
-
 
 	//정기권 구매
 	@GetMapping("buy/{id}")
 	public String insert(@PathVariable Long id, @AuthenticationPrincipal PrincipalDetails principal, Model model) {
 		if(principal==null) return "redirect:/register/login";
 		model.addAttribute("carlist", carRepository.findByUsername(principal.getUsername()));
-		model.addAttribute("ticket", oService.findByParkinglotId(id));
+		model.addAttribute("ticket", tService.findByParkinglotId(id));
 		return "/orderticket/buy";
 	}
 	
 	@PostMapping("buy")
-	public String insert(OrderTicket orderticket) {
-		oService.insert(orderticket);
-		return "redirect:/orderticket/list/";
+	public String insert(@AuthenticationPrincipal PrincipalDetails principal, OrderTicket orderticket) {
+		if(principal==null) return "redirect:/register/login";
+		if(oService.findTicket(orderticket)==0) {
+			oService.insert(orderticket);
+		}
+		return "redirect:/orderticket/list";
 	}
 	
 	//티켓구매리스트(일반)
 	@GetMapping("list")
-	public String list(Model model) {
-		//String username = session.getId()
-		model.addAttribute("orderTicketList", oService.list());
+	public String list(@AuthenticationPrincipal PrincipalDetails principal, Model model) {
+		if(principal==null) return "redirect:/register/login";
+		model.addAttribute("orderTicketList", oService.list(principal.getUsername()));
 		return "/orderticket/list";
 	}
 	
 	//티켓구매리스트(전체)
 	@GetMapping("listAll")
 	public String listAll(Model model) {
-		model.addAttribute("orderTicketList", oService.list());
+		model.addAttribute("orderTicketList", oService.listAll());
 		return "/orderticket/listAll";
 	}
 	

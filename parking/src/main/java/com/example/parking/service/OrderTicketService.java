@@ -41,16 +41,11 @@ public class OrderTicketService {
 			t.setMonthStock(t.getMonthStock()-1);
 		}
 		
-		//정기권구매자수 업데이트
-		ParkingLot p = pRepository.findById(orderticket.getParkinglotId()).get();
-		p.setCurrentCnt(p.getCurrentCnt()-1);
-		p.setOrderTicketCount(p.getOrderTicketCount()+1);
-		
 		oRepository.save(orderticket);
 	}
 
 	//티켓구매리스트(전체)
-	public List<OrderTicket> list() {
+	public List<OrderTicket> listAll() {
 		return oRepository.findAll();
 	}
 	
@@ -62,11 +57,6 @@ public class OrderTicketService {
 	//구매티켓 개별조회
 	public OrderTicket findById(Long ticketId) {
 		return oRepository.findById(ticketId).get();
-	}	
-
-	//해당주차장 구매티켓조회
-	public Ticket findByParkinglotId(Long id) {
-		return tRepository.findByParkinglotId(id);
 	}
 
 	@Transactional
@@ -80,6 +70,11 @@ public class OrderTicketService {
 	@Transactional
 	public void delete(Long ticketId) {
 		oRepository.deleteById(ticketId);		
+	}
+
+	//차량번호로 정규권 해당일자 구매티켓 조회
+	public int findTicket(OrderTicket orderticket) {
+		return oRepository.findTicket(orderticket.getParkinglotId(), orderticket.getCarNum(), orderticket.getBuyDate());
 	}
 
 	

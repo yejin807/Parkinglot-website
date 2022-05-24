@@ -18,7 +18,7 @@
 <div class="container mt-3">
 <h3>정기권 구매(일반)</h3>
 <form action="/orderticket/buy" method="post">
-	<input type="hidden" name="parkinglotId" id="parkinglotId" value="${ticket.parkLot.parkinglotId}" />
+	<input type="text" name="parkinglotId" id="parkinglotId" value="${ticket.parkLot.parkinglotId}" readonly/>
 	<input type="text" name="username" id="username" value="${principal.username}" readonly />
 	차량선택 
 	<select name="carNum">
@@ -30,7 +30,7 @@
 	<table border="1">
 		<tr>
 			<td>주차장명</td>
-			<td>${ticket.parkLot.parkingName}</td>
+			<td><input type="text" name="parkingName" id="parkingName" value="${ticket.parkLot.parkingName}" readonly/></td>
 		</tr>
 		<tr>
 			<td colspan="3">재고수량</td>
@@ -63,7 +63,7 @@
 		<tr>
 		<td colspan="3">
 		<button type="button" class="btn btn-primary" id="btnBuy">구매하기</button>
-		<button type="button" class="btn btn-secondary" onclick="location.href='/parkinglot/list'">주차장리스트로</button></td>
+		<button type="button" class="btn btn-secondary" onclick="location.href='/parkinglot/listAll'">주차장리스트로</button></td>
 		</tr>
 	</table>
 	</form>

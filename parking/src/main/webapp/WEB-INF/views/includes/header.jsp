@@ -29,6 +29,7 @@
                                 <a class="navbar-brand" href="/parkinglot/listAll">주차장리스트(전체)</a>
                                 <sec:authorize access="hasRole('ROLE_USER')">
                                     <a class="navbar-brand" href="/member/carRegister">차량등록</a>
+                                    <a class="navbar-brand" href="/orderticket/list">정기권구매리스트</a>
                                 </sec:authorize>
                                 <sec:authorize access="hasRole('ROLE_OWNER')">
                                     <a class="navbar-brand" href="/parkinglot/list">주차장리스트(사장님)</a>

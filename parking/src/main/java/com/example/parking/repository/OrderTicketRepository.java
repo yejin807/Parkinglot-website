@@ -1,5 +1,6 @@
 package com.example.parking.repository;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -19,6 +20,10 @@ public interface OrderTicketRepository extends JpaRepository<OrderTicket, Long> 
     public List<OrderTicket> findByParkinglotIdAndCarNum(@Param("parkid") Long parkid, @Param("carNum") String carNum);
 
     //주차장별 정규권 구매자수
-    @Query(value = "select count(*) from order_ticket where parkinglot_id=?1", nativeQuery = true)
-	public int countByParkinglotId(Long ParkinglotId);
+    @Query(value = "select count(*) from order_ticket where parkinglot_id=?1 and DATE(?2) BETWEEN buy_date AND end_date", nativeQuery = true)
+	public int countByParkinglotId(Long ParkinglotId, Date date);
+
+    //구입날짜에 기존 정규티켓 구매여부 조회
+    @Query(value = "select count(*) from order_ticket where parkinglot_id=?1 and car_num = ?2 and DATE(?3) BETWEEN buy_date AND end_date", nativeQuery = true)
+	public int findTicket(Long parkinglotId, String carNum, Date buyDate);
 }
