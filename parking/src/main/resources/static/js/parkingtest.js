@@ -152,7 +152,7 @@ function outticketBtn(num,ticket,increaseticket,parkid){
 		})
 		.done( function(resp) {
 				alert("차 번호:"+num+"출차완료")
-				location.href = "/car/list"+parkid
+				location.href = "/car/list/"+parkid
 				})
 				.fail(function(e){
 					alert("차 번호:"+num+"출차실패")

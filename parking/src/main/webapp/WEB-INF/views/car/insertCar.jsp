@@ -12,7 +12,7 @@
 	<div class="container mt-5">		
 			<div class="form-group">
 
-					
+						<input type="hidden" name="checked_car" value="">
 						<input type="hidden" name="parkinglotId" id="parkinglotId" value="${parkinglot.parkinglotId }" >
 						<input type="hidden" name="maxCnt" id="maxCnt" value="${parkinglot.maxCnt }" class="form-control">
 						<input type="hidden" name="currentCnt" id="currentCnt" value="${parkinglot.currentCnt }" class="form-control">
@@ -24,7 +24,7 @@
 						<input type="text" id="carNum" placeholder="차 번호를 입력하세요" name="carNum" class="form-control">
 					</div>
 					<div class="col align-self-end">
-						<button type="button" class="btn btn-dark" id="ticketSearch">티켓 유무 검색</button>  
+						<button type="button" class="btn btn-dark" id="ticketSearch">차량 확인</button>  
 					</div>		          
             </div>
 		
@@ -32,22 +32,22 @@
             	<label for="carType">정기권 사용 :</label>
 		            <div class="form-check-inline">
 					  <label class="form-check-label">
-					    <input type="radio" class="form-check-input" name="optradio" value = "3" id = "parkingType" name ="parkingType">월주차
+					    <input type="radio" class="form-check-input" name="parkingType" value = "3" id = "parkingType" name ="parkingType">월주차
 					  </label>
 					</div>
 					<div class="form-check-inline">
 					  <label class="form-check-label">
-					    <input type="radio" class="form-check-input" name="optradio" value = "2" id = "parkingType" name ="parkingType">주주차
+					    <input type="radio" class="form-check-input" name="parkingType" value = "2" id = "parkingType" name ="parkingType">주주차
 					  </label>
 					</div>
 					<div class="form-check-inline disabled">
 					  <label class="form-check-label">
-					    <input type="radio" class="form-check-input" name="optradio" value = "1" id = "parkingType" name ="parkingType">일주차
+					    <input type="radio" class="form-check-input" name="parkingType" value = "1" id = "parkingType" name ="parkingType">일주차
 					  </label>
 					</div>
 					<div class="form-check-inline disabled">
 					  <label class="form-check-label">
-					    <input type="radio" class="form-check-input" name="optradio" value = "0" id = "parkingType" name ="parkingType" checked="checked">자유주차
+					    <input type="radio" class="form-check-input" name="parkingType" value = "0" id = "parkingType" name ="parkingType" checked="checked">자유주차
 					  </label>
 					</div>
             </div>
@@ -58,6 +58,7 @@
 
 		 <script>
 			$("#ticketSearch").click(function(){
+				$("input[name=checked_car]").val('y');
 
 				
 				if(!$("#carNum").val()){
@@ -98,6 +99,11 @@
 				$("#carNum").focus();
 				return false;
 			}
+			if($("input[name='checked_car']").val()==''){
+		        alert('차량 확인을 해주세요.');
+		        $("input[name='checked_car']").eq(0).focus();
+		        return false;
+		    	}
 			
 			if($("#currentCnt").val()<=0){
 				alert("만차입니다.")
