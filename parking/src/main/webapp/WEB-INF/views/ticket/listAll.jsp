@@ -3,10 +3,14 @@
 	
 <%@ include file="/WEB-INF/views/includes/header.jsp"%>
 
+<div class="jumbotron jumbotron-fluid">
+	<div class="container">
+		<h3>정기권재고 전체리스트</h3>
+	</div>
+</div>
 
 <div class="container mt-3">
-<h3>정기권재고 리스트(전체)</h3>
-	<table class="table">
+	<table class="table table-hover">
 		<tr>
 			<th>주차장명</th>
 			<th>1일권</th>

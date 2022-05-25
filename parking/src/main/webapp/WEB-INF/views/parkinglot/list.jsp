@@ -3,9 +3,14 @@
     
 <%@ include file="/WEB-INF/views/includes/header.jsp"%>
 
+<div class="jumbotron jumbotron-fluid">
+	<div class="container">
+		<h3>주차장 현황</h3>
+	</div>
+</div>
+
 <div class="container">
-<h3>주차장 현황 ( ${principal.username} 사장님)</h3>
-<table class="table table-hover">
+<table class="table table-hover text-center">
 <thead>
 <tr>
 	<th>주차장명</th>
@@ -20,7 +25,7 @@
 <tbody>
 <c:forEach items="${parkinglotlist}" var="parkinglot">
 	<tr>
-		<td><a href="/parkinglot/view/${parkinglot.parkinglotId}"><strong>${parkinglot.parkingName}</strong></a></td>
+		<td><a href="/parkinglot/view/${parkinglot.parkinglotId}">${parkinglot.parkingName}</a></td>
 		<td>${parkinglot.addr}</td>
 		<td>${parkinglot.maxCnt}</td>
 		<td>${parkinglot.currentCnt}</td>
@@ -38,5 +43,3 @@
 </tbody>
 </table>
 </div>
-</body>
-</html>

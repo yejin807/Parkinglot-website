@@ -3,85 +3,86 @@
 	
 <%@ include file="/WEB-INF/views/includes/header.jsp"%>
 
-<div class="container mt-3">
-<h3>주차장 상세보기(사장님)</h3>
-	<input type="hidden" name="parkinglotId" id="parkinglotId" value="${parkinglot.parkinglotId}" />
-	<table border="1">
-		<tr>
-			<td>주차장명</td>
-			<td colspan="2">${parkinglot.parkingName}</td>
-		</tr>
-		<tr>
-			<td>주소</td>
-			<td>${parkinglot.addr}</td>
-			<td style="width: 300px; height: 300px"><div id="map" style="width: 300px; height: 300px; display: none"></div></td>
-		</tr>
-		<tr>
-			<td>연락처</td>
-			<td colspan="2">${parkinglot.parkinglotTel}</td>
-		</tr>
-		<tr>
-			<td>운영방식</td>
-			<td colspan="2">${parkinglot.operatingType}</td>
-		</tr>
+<div class="jumbotron jumbotron-fluid">
+	<div class="container">
+		<h3>주차장 상세보기</h3>
+	</div>
+</div>
 
+<div class="container">
+	<input type="hidden" name="parkinglotId" id="parkinglotId" value="${parkinglot.parkinglotId}" />
+	<table class="table">
 		<tr>
-			<td>운영시간</td>
-			<td colspan="2">${parkinglot.openTime} ~ ${parkinglot.closeTime}</td>
+			<th>주차장명</th>
+			<td colspan="3">${parkinglot.parkingName}</td>
 		</tr>
 		<tr>
-			<td>전체주차면수</td>
-			<td colspan="2">${parkinglot.maxCnt}</td>
+			<th>주차장주소</th>
+			<td colspan="3">${parkinglot.addr}</td>
 		</tr>
 		<tr>
-			<td>현재주차면수</td>
-			<td colspan="2">${parkinglot.currentCnt}</td>
+			<th>주차장사진</th>
+			<td><img alt="주차장사진" width="200px" height="200px" src="/${parkinglot.files}"/></td>
+			<th>위치(지도)</th>
+			<td>
+				<div id="map" style="width: 200px; height: 200px; display: none"></div>
+			</td>
 		</tr>
 		<tr>
-			<td>기본요금(10분당)</td>
-			<td colspan="2">
+			<th>연락처</th>
+			<td colspan="3">${parkinglot.parkinglotTel}</td>
+		</tr>
+		<tr>
+			<th>운영방식</th>
+			<td>${parkinglot.operatingType}</td>
+			<th>운영시간</th>
+			<td>${parkinglot.openTime} ~ ${parkinglot.closeTime}</td>
+		</tr>
+		<tr>
+			<th>전체주차면수</th>
+			<td>${parkinglot.maxCnt}</td>
+			<th>현재주차가능대수</th>
+			<td>${parkinglot.currentCnt}</td>
+		</tr>
+		<tr>
+			<th>기본요금(10분당)</th>
+			<td colspan="3">
 				<fmt:formatNumber type="number" maxFractionDigits="3" value="${parkinglot.basicFee}" var="basicFee"/>
 				${basicFee}원
 			</td>
 		</tr>
 		<tr>
-			<td>일주차요금</td>
-			<td colspan="2">
+			<th>일주차요금</th>
+			<td>
 				<fmt:formatNumber type="number" maxFractionDigits="3" value="${parkinglot.dayFee}" var="dayFee"/>
 				${dayFee}원
 			</td>
-		</tr>
-		<tr>
-			<td>월주차요금</td>
-			<td colspan="2">
+			<th>월주차요금</th>
+			<td>
 				<fmt:formatNumber type="number" maxFractionDigits="3" value="${parkinglot.monthFee}" var="monthFee"/>
 				${monthFee}원
 			</td>
 		</tr>
-		<tr>
-			<td>주차장사진</td>
-			<td colspan="2"><img alt="주차장사진" width="300px" height="300px" src="/${parkinglot.files}"/></td>
-		</tr>
 		<!-- 수정권한 -->
 		<sec:authorize access="hasRole('ROLE_ADMIN')">
-		<tr>
-			<td colspan="3">
-  				<button type="button" class="btn btn-primary" onclick="location.href='/parkinglot/update/${parkinglot.parkinglotId}'">수정하기</button>
-  			</td>
-		</tr>
+			<tr>
+				<td colspan="4">
+	  				<button type="button" class="btn btn-primary" onclick="location.href='/parkinglot/update/${parkinglot.parkinglotId}'">수정하기</button>
+	  			</td>
+			</tr>
 		</sec:authorize>
 		<c:if test="${principal.username == parkinglot.username}">
-		<tr>
-			<td colspan="3">
-  				<button type="button" class="btn btn-primary" onclick="location.href='/parkinglot/update/${parkinglot.parkinglotId}'">수정하기</button>
-  				<button type="button" class="btn btn-danger" onclick="funDel(${parkinglot.parkinglotId})")>삭제</button>
-  			</td>
-		</tr>
+			<tr>
+				<td colspan="4">
+	  				<button type="button" class="btn btn-primary" onclick="location.href='/parkinglot/update/${parkinglot.parkinglotId}'">수정하기</button>
+	  				<button type="button" class="btn btn-danger" onclick="funDel(${parkinglot.parkinglotId})")>삭제</button>
+	  			</td>
+			</tr>
 		</c:if>
 		<!-- 정기권구매 -->
 		<sec:authorize access="hasRole('ROLE_USER')">
 		<tr>
-			<td colspan="3">
+			<td colspan="4">
 			<button type="button" class="btn btn-info" onclick="location.href='/orderticket/buy/${parkinglot.parkinglotId}'">정기권구매</button>
 			</td>
 		</tr>

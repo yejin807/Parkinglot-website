@@ -3,88 +3,107 @@
 	
 <%@ include file="/WEB-INF/views/includes/header.jsp"%>
 
-<div class="container mt-3">
-<h3>주차장 정보수정(사장님)</h3>
+<div class="jumbotron jumbotron-fluid">
+	<div class="container">
+		<h3>주차장 정보수정</h3>
+	</div>
+</div>
+
+<div class="container">
 <form action="/parkinglot/update" method="post"	enctype="multipart/form-data">
 <input type="hidden" name="parkinglotId" id="parkinglotId" value="${parkinglot.parkinglotId}" />
-
-	<table border="1">
+	<table class="table">
 		<tr>
-			<td>주차장명</td>
-			<td colspan="2"><input type="text" name="parkingName" id="parkingName" value="${parkinglot.parkingName}"/></td>
+			<th>주차장명</th>
+			<td colspan="3"><input class="form-control" type="text" name="parkingName" id="parkingName" value="${parkinglot.parkingName}"/></td>
 		</tr>
 		<tr>
-			<td>주소</td>
-			<td><input type="text" name="addr" id="addr" value="${parkinglot.addr}" readonly> <input
-				type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br />
-				위도<input type="text" name="wido" id="wido" value="${parkinglot.wido}" readonly><br/>
-				경도<input type="text" name="gyeongdo" id="gyeongdo" value="${parkinglot.gyeongdo}" readonly></td>
-			<td style="width: 300px; height: 300px"><div id="map" style="width: 300px; height: 300px; display: none"></div></td>
+			<th rowspan="2">주차장주소</th>
+			<td colspan="3">
+				<button class="btn btn-primary btn-sm" type="button" onclick="sample5_execDaumPostcode()">주소 검색</button>
+			</td>
 		</tr>
 		<tr>
-			<td>연락처(휴대폰)</td>
-			<td colspan="2"><input type="text" name="parkinglotTel" id="parkinglotTel" value="${parkinglot.parkinglotTel}"/></td>
+			<td colspan="3">
+				<input class="form-control" type="text" name="addr" id="addr" value="${parkinglot.addr}" readonly>			
+				<!-- 위도/경도 -->
+				<input type="hidden" name="wido" id="wido" value="${parkinglot.wido}" readonly>
+				<input type="hidden" name="gyeongdo" id="gyeongdo" value="${parkinglot.gyeongdo}" readonly>
+			</td>
 		</tr>
 		<tr>
-			<td>운영방식</td>
-			<td colspan="2">
-				<select name="operatingType" id="operatingType">
+			<th>주차장사진</th>
+			<td><img alt="주차장사진" width="200px" height="200px" src="/${parkinglot.files}"/>
+				<input class="form-control" type="file" name="upload" id="upload"/>
+			</td>
+			<th>위치(지도)</th>
+			<td>
+				<div id="map" style="width: 250px; height: 250px; display: none"></div>
+			</td>
+		</tr>
+		
+		<tr>
+			<th>연락처</th>
+			<td colspan="3"><input class="form-control" type="text" name="parkinglotTel" id="parkinglotTel" value="${parkinglot.parkinglotTel}"/></td>
+		</tr>
+		<tr>
+			<th>운영방식</th>
+			<td colspan="3">
+				<div class="form-inline">
+				<select class="form-control" name="operatingType" id="operatingType">
 					<option value="공영">공영</option>
 					<option value="민간">민간</option>
 				</select>
+				</div>
 			</td>
 		</tr>
 
 		<tr>
-			<td>운영시간</td>
-			<td>시작시간 
-					<select name="openTime" id="openTime">
-					<option value="06:00">06:00</option>
-					<option value="07:00">07:00</option>
-					<option value="08:00">08:00</option>
-					<option value="09:00">09:00</option>
-					<option value="10:00">10:00</option>
-					<option value="11:00">11:00</option>
-					<option value="12:00">12:00</option>
-					</select>
-			</td>
-			<td>종료시간 
-					<select name="closeTime" id="closeTime">
-					<option value="20:00">20:00</option>
-					<option value="21:00">21:00</option>
-					<option value="22:00">22:00</option>
-					<option value="23:00">23:00</option>
-					<option value="24:00">24:00</option>
-					</select>
-			</td>
-		</tr>
-		<tr>
-			<td>전체주차면수</td>
-			<td colspan="2"><input type="text" name="maxCnt" id="maxCnt" value="${parkinglot.maxCnt}" />대</td>
-		</tr>
-		<tr>
-			<td>기본요금(10분당)</td>
-			<td colspan="2">
-			<input type="text" name="basicFee" id="basicFee" value="${parkinglot.basicFee}" />원</td>
-		</tr>
-		<tr>
-			<td>일주차요금</td>
-			<td colspan="2">
-			<input type="text" name="dayFee" id="dayFee" value="${parkinglot.dayFee}"/>원</td>
-		</tr>
-		<tr>
-			<td>월주차요금</td>
-			<td colspan="2">
-			<input type="text" name="monthFee" id="monthFee" value="${parkinglot.monthFee}"/>원</td>
-		</tr>
-		<tr>
-			<td>사진등록</td>
-			<td colspan="2">
-				<input type="file" name="upload" id="upload"/>
+			<th>운영시간</th>
+			<td colspan="3">
+				<div class="form-inline">
+				<label class="form-lable mr-1" for="openTime">시작시간</label>
+				<select class="form-control mr-3" name="openTime" id="openTime">
+				<option value="06:00">06:00</option>
+				<option value="07:00">07:00</option>
+				<option value="08:00">08:00</option>
+				<option value="09:00">09:00</option>
+				<option value="10:00">10:00</option>
+				<option value="11:00">11:00</option>
+				<option value="12:00">12:00</option>
+				</select>
+				<label class="form-lable mr-1" for="closeTime">종료시간</label>
+				<select class="form-control mr-3" name="closeTime" id="closeTime">
+				<option value="20:00">20:00</option>
+				<option value="21:00">21:00</option>
+				<option value="22:00">22:00</option>
+				<option value="23:00">23:00</option>
+				<option value="24:00">24:00</option>
+				</select>
+				</div>
 			</td>
 		</tr>
 		<tr>
-		<td colspan="3">
+			<th>전체주차면수(대)</th>
+			<td colspan="3"><input class="form-control" type="text" name="maxCnt" id="maxCnt" value="${parkinglot.maxCnt}" /></td>
+		</tr>
+		<tr>
+			<th>기본요금(10분당/원)</th>
+			<td colspan="3">
+			<input class="form-control" type="text" name="basicFee" id="basicFee" value="${parkinglot.basicFee}" /></td>
+		</tr>
+		<tr>
+			<th>일주차요금(원)</th>
+			<td colspan="3">
+			<input class="form-control" type="text" name="dayFee" id="dayFee" value="${parkinglot.dayFee}"/></td>
+		</tr>
+		<tr>
+			<th>월주차요금(원)</th>
+			<td colspan="3">
+			<input class="form-control" type="text" name="monthFee" id="monthFee" value="${parkinglot.monthFee}"/></td>
+		</tr>
+		<tr>
+		<td colspan="4">
 		<button type="submit" class="btn btn-primary" id="btnUpdate" >수정</button>
 		<button type="reset" class="btn btn-secondary">취소</button></td>
 		</tr>
@@ -234,6 +253,3 @@ map.setCenter(coords);
 marker.setPosition(coords)
 
 </script>
-
-</body>
-</html>
