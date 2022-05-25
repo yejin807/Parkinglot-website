@@ -37,11 +37,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf()
                 .disable()
                 .authorizeHttpRequests()
-                .antMatchers("/", "/register/**", "/js/**", "/img/**", "/lib/**") // 접근 허용
+                .antMatchers("/", "/js/**", "/img/**", "/lib/**", "/vendor/**", "/scss/**", "/css/**",
+                        "//dapi.kakao.com/v2/maps/sdk.js?appkey=f76d9772b2d3161123b4305bff3000b7&libraries=services",
+                        "http://t1.daumcdn.net/**",
+                        "/register/**",
+                        "/member/parkinglotList/**",
+                        "/member/list/**",
+                        "/parkinglot/view/**") // 접근
+                // 허용
                 .permitAll()
                 .anyRequest()
                 .permitAll()
-                //.authenticated()
+                // .authenticated()
                 // // .antMatchers("/admin/*").hasRole("ROLE_ADMIN")
                 .and()
                 .formLogin()
