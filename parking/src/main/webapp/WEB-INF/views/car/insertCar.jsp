@@ -5,7 +5,7 @@
 
 <div class="jumbotron jumbotron-fluid">
 		<div class="container">
-		<h1>입차 등록</h1>
+		<h3>입차 등록</h3>
 		</div>
 	</div>
 
@@ -73,7 +73,7 @@
 				.done(function(resp){
 					if(resp == "-1"){
 						alert("이미 입차되어 있는 차량입니다.")
-						$("#carNum").val("");
+						$("#carNum").focus();
 						return;
 					}
 					if(resp=="0"){

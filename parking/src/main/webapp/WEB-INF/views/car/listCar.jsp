@@ -7,7 +7,7 @@
 	
 	<div class="jumbotron jumbotron-fluid">
 		<div class="container">
-		<h1>입차 목록(${count})</h1>
+		<h3>입차 목록(${count})</h3>
 		<h5>주차 가능 대수(${parkinglot.currentCnt})</h5>
 		</div>
 	</div>
@@ -84,10 +84,10 @@
 			<c:choose>
 				<c:when test="${cars.first }">
 				[First]
-				<a href="?page=${cars.totalPages }&word=${word}">다음</a>
+				<a href="?page=${cars.number-1 }&word=${word}">다음</a>
 				</c:when>
 				<c:when test="${cars.last }">
-					<a href="?page=${cars.totalPages }&word=${word}">이전</a>
+					<a href="?page=${cars.number+1 }&word=${word}">이전</a>
 				</c:when>
 			</c:choose>
 
