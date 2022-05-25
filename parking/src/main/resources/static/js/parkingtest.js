@@ -13,35 +13,34 @@
 		} 
 
 		
-		function mleftday(parkid,carNum,id1,id2){
+		function mleftday(parkid,carNum,id1,id2,intime){
 		$.ajax({
 			type : "get",
 			url : "/car/ticketendcheck/"+carNum+"/"+parkid
 		})
 		.done( function(resp) {
 			if(resp=="non"){
-			const day = new Date();			
-			const day1 = new Date(day.setMonth(day.getMonth() + 1));
-			const day2 = day1.toISOString().substring(0,10);
-				document.getElementById(id1).innerHTML = day2;
+				//종료일 구하기
+			const today = new Date();			
+			const enterday = new Date(intime);
+			const endday = enterday.setMonth(enterday.getMonth() + 1);
+			const outday = new Date(endday);
+			const outday2 = outday.toISOString().substring(0,10);
+			document.getElementById(id1).innerHTML = outday2;
 				
-				const leftMSec = day1.getTime() - day.getTime(); 
-				const useday = Math.floor(leftMSec / (1000 * 3600 * 24));
-			
-			const mleftday = 30 - useday;
-			document.getElementById(id2).innerHTML = mleftday;
+				//남은 일수 구하기
+			const leftMSec = outday.getTime() - today.getTime(); 
+			const useday = Math.floor(leftMSec / (1000 * 3600 * 24));
+			document.getElementById(id2).innerHTML = useday;
 				
 			}else{
 				document.getElementById(id1).innerHTML = resp;
-				const date3 = new Date();
-			
+				
+				const date3 = new Date();			
 				const date4 = new Date(resp);
-				const leftMSec = date4.getTime() - date3.getTime(); 
-			
-			const useday = Math.floor(leftMSec / (1000 * 3600 * 24));
-			
-			const mleftday = 30 - useday;
-			document.getElementById(id2).innerHTML = mleftday;
+				const leftMSec = date4.getTime() - date3.getTime(); 			
+				const useday = Math.floor(leftMSec / (1000 * 3600 * 24));			
+				document.getElementById(id2).innerHTML = useday;
 			
 			}
 				})
@@ -53,35 +52,32 @@
 		}
 		
 		
-		function wleftday(parkid,carNum,id1,id2){
+		function wleftday(parkid,carNum,id1,id2,intime){
 		$.ajax({
 			type : "get",
 			url : "/car/ticketendcheck/"+carNum+"/"+parkid
 		})
 		.done( function(resp) {
 			if(resp=="non"){
-			const day = new Date();			
-			const day1 = new Date(day.setDate(day.getDate() + 7));
-			const day2 = day1.toISOString().substring(0,10);
-				document.getElementById(id1).innerHTML = day2;
-				
-				const leftMSec = day1.getTime() - day.getTime(); 
-				const useday = Math.floor(leftMSec / (1000 * 3600 * 24));
-			
-			const mleftday = 7 - useday;
-			document.getElementById(id2).innerHTML = mleftday;
+			const today = new Date();//오늘
+			const enterday = new Date(intime);
+			const endday = enterday.setDate(enterday.getDate() + 7);
+			const outday = new Date(endday);
+			const outday2 = outday.toISOString().substring(0,10);
+			document.getElementById(id1).innerHTML = outday2;	
+							
+			const leftMSec = outday.getTime() - today.getTime(); 
+			const useday = Math.floor(leftMSec / (1000 * 3600 * 24));
+			document.getElementById(id2).innerHTML = useday;
 				
 			}else{
 				document.getElementById(id1).innerHTML = resp;
-				const date3 = new Date();
-			
+				
+				const date3 = new Date();			
 				const date4 = new Date(resp);
-				const leftMSec = date4.getTime() - date3.getTime(); 
-			
-			const useday = Math.floor(leftMSec / (1000 * 3600 * 24));
-			
-			const mleftday = 7 - useday;
-			document.getElementById(id2).innerHTML = mleftday;
+				const leftMSec = date4.getTime() - date3.getTime(); 			
+				const useday = Math.floor(leftMSec / (1000 * 3600 * 24));
+				document.getElementById(id2).innerHTML = useday;
 			
 			}
 				})
@@ -91,22 +87,7 @@
 			
 			
 		}
-		
-		
-		function wleftdays(endtime,id){
-					
-					const date5 = new Date();
-					
-					const date6 = new Date(endtime);
 			
-					const leftMSec = date6.getTime() - date5.getTime(); 
-					
-					const useday = Math.floor(leftMSec / (1000 * 3600 * 24));
-					
-					const wleftday = 7 - useday;
-					document.getElementById(id).innerHTML = wleftday;
-			}
-		
 		function fee(intime,id,increase){
 			
 			const date7 = new Date();

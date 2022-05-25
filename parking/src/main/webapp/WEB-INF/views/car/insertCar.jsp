@@ -46,14 +46,11 @@
 					url:"/car/ticketcheck/"+$("#parkinglotId").val()+"/"+$("#carNum").val()
 				})
 				.done(function(resp){
-					alert(resp)
 					if(resp=="0"){
 						alert("정기권 구매 차량아닙니다.\n입차 정보를 입력하세요")
-						alert(resp)
 					}else if(resp=="5"){
 						alert("정기권 구매 차량이지만 입차 기간이 아닙니다.")
 					} else {
-						alert(resp)
 						alert("정기권 구매 차량입니다.")
 					}
 					$("input:radio[name='parkingType']:input[value='"+resp+"']").attr("checked",true)

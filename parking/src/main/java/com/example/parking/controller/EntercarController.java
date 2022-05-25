@@ -135,11 +135,14 @@ public class EntercarController {
             	int endcompare = enddate.compareTo(today); 
             	int startcompare = startdate.compareTo(today); 
             	//조건문
-            	if(endcompare >= 0 && startcompare == 0) {
+            	if(endcompare >= 0 && startcompare <= 0) {
             		Date check = orderTicket.getEndDate();
+            		System.out.println(check);
             		day = dateFormat.format(check);
+            		System.out.println(day);
             	}
         	}
+        	System.out.println(day);
         	return day;
         }    	
 

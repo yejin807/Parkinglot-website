@@ -41,20 +41,21 @@
 							<input type="hidden" name="basicFee" id="basicFee" value="${parkinglot.basicFee }">
 							<input type="hidden" name="dayFee" id="dayFee" value="${parkinglot.dayFee }">
 							<input type="hidden" name="monthFee" id="monthFee" value="${parkinglot.monthFee }">
+							<input type="hidden" name="intime" id="intime" value="${car.intime }">
 							</td>
 						<td>${car.parkingType }</td>
 						<c:choose>
 							<c:when test="${car.parkingType eq '월주차' }">
 								<td>
 								종료일: <span id='spanID00${st.index}'></span> / <span id='spanID1${st.index}'></span> 
-								<script>mleftday(${parkinglot.parkinglotId },'${car.carNum }','spanID00${st.index}','spanID1${st.index}')</script>일 남음</td>
+								<script>mleftday(${parkinglot.parkinglotId },'${car.carNum }','spanID00${st.index}','spanID1${st.index}','${car.intime }')</script>일 남음</td>
 								<td>월주차</td>
 								<td><button type="button" class="btn btn-danger"
 										onclick="outticketBtn(${car.carNum },'${car.parkingType }',${parkinglot.monthFee },${parkinglot.parkinglotId })">출차</button></td>
 							</c:when>
 							<c:when test="${car.parkingType eq '주주차' }">
 								<td>종료일: <span id='spanID01${st.index}'></span>  / <span id='spanID2${st.index}'></span> 
-								<script>wleftday(${parkinglot.parkinglotId },'${car.carNum }','spanID01${st.index}','spanID2${st.index}')</script>일 남음</td>
+								<script>wleftday(${parkinglot.parkinglotId },'${car.carNum }','spanID01${st.index}','spanID2${st.index}','${car.intime }')</script>일 남음</td>
 								<td>주주차</td>
 								<td><button type="button" class="btn btn-danger"
 										onclick="outticketBtn(${car.carNum },'${car.parkingType }',${parkinglot.dayFee },${parkinglot.parkinglotId })">출차</button></td>
