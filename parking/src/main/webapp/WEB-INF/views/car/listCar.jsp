@@ -4,12 +4,12 @@
 <%@ include file="/WEB-INF/views/includes/header.jsp"%>
 <html xmlns:th="http://www.thymeleaf.org">
 <script src="/js/parkingtest.js"></script>
-
-
-<div class="jumbotron jumbotron-fluid">
-	<div class="container mb-5">
+	
+	<div class="jumbotron jumbotron-fluid">
+		<div class="container">
 		<h1>입차 목록(${count})</h1>
 		<h5>주차 가능 대수(${parkinglot.currentCnt})</h5>
+		</div>
 	</div>
 	<div class="container">
 				<input type="hidden" name="parkinglotId" id="parkinglotId" value="${parkinglot.parkinglotId}" />
@@ -108,6 +108,4 @@
 				</form>
 			</div>
 		</div>
-
-	</div>
 </div>
