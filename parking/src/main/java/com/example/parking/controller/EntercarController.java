@@ -181,10 +181,10 @@ public class EntercarController {
             	  break;
             	}else if(endcompare < 0 || startcompare > 0) {
             		check = 5;
-            		break;
+            		
             	}else {
             		check = 4;
-            		break;
+            		
             	}
         
         	}
