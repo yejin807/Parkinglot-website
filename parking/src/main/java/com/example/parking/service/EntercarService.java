@@ -83,8 +83,8 @@ public class EntercarService {
 		carRepository.deleteById(carNum);
 	}
 
-	public String carNumcheck(Long parkid, EnterCar entercar) {
-		Long c = carRepository.carNumcheck(parkid, entercar.getCarNum());
+	public String carNumcheck(Long parkid, String carNum) {
+		Long c = carRepository.carNumcheck(parkid, carNum);
 		if (c == 1) {
 			return "fail";
 		}

@@ -50,15 +50,11 @@ public class EntercarController {
     @PostMapping("/insert/{parkid}")
     @ResponseBody
     public String insert(@PathVariable Long parkid, @RequestBody EnterCar entercar) {
-       String check = carService.carNumcheck(parkid,entercar);
-       if(check.equals("fail")) {
-    	   return"fail";
-       }
-       else {
+  
     	   carService.save(entercar);
     	   carService.parkingFeeset(parkid, entercar);
     	   return "success";
-       }
+
     }
 
     //주차 타입만 있을 때 
@@ -111,88 +107,96 @@ public class EntercarController {
     @GetMapping("ticketendcheck/{carNum}/{parkid}")
     @ResponseBody
     public String ticketendcheck(@PathVariable String carNum, @PathVariable Long parkid, Model model) {
-    	List<OrderTicket> oTicket = oRepository.findByParkinglotIdAndCarNum(parkid, carNum);
-    	
-    	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    	Date now = new Date();
-    	String date = dateFormat.format(now);
-    	String day = null;
-    	
-    	if (oTicket.isEmpty()) {
-            return "non";
-        } else {
-        	for(OrderTicket orderTicket :oTicket) {
-            	Date enddate = orderTicket.getEndDate();
-            	Date startdate = orderTicket.getBuyDate();
-            	Date today = null;
-				try {
-					today = dateFormat.parse(date);
-				} catch (ParseException e) {
-					e.printStackTrace();
-				}
-            	 
-            	//compareTo메서드를 통한 날짜비교
-            	int endcompare = enddate.compareTo(today); 
-            	int startcompare = startdate.compareTo(today); 
-            	//조건문
-            	if(endcompare >= 0 && startcompare <= 0) {
-            		Date check = orderTicket.getEndDate();
-            		System.out.println(check);
-            		day = dateFormat.format(check);
-            		System.out.println(day);
-            	}
-        	}
-        	System.out.println(day);
-        	return day;
-        }    	
 
+        	 List<OrderTicket> oTicket = oRepository.findByParkinglotIdAndCarNum(parkid, carNum);
+          	
+    	     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    	     Date now = new Date();
+    	     String date = dateFormat.format(now);
+    	     String day = null;
+    	     
+        	 if (oTicket.isEmpty()) {
+        		 
+                 return "non";
+             } else {
+             	for(OrderTicket orderTicket :oTicket) {
+                 	Date enddate = orderTicket.getEndDate();
+                 	Date startdate = orderTicket.getBuyDate();
+                 	Date today = null;
+     				try {
+     					today = dateFormat.parse(date);
+     				} catch (ParseException e) {
+     					e.printStackTrace();
+     				}
+                 	 
+                 	//compareTo메서드를 통한 날짜비교
+                 	int endcompare = enddate.compareTo(today); 
+                 	int startcompare = startdate.compareTo(today); 
+                 	//조건문
+                 	if(endcompare >= 0 && startcompare <= 0) {
+                 		Date check = orderTicket.getEndDate();
+                 		System.out.println(check);
+                 		day = dateFormat.format(check);
+                 		System.out.println(day);
+                 	}
+             	}
+             	System.out.println(day);
+             	return day;
+             }
     }
 
     @PostMapping("ticketcheck/{parkid}/{carNum}")
     @ResponseBody
     public int ticketcheck(@PathVariable String carNum, @PathVariable Long parkid, Model model) {
-    	List<OrderTicket> oTicket = oRepository.findByParkinglotIdAndCarNum(parkid, carNum);
-    	 
-    	//yyyy-MM-dd 포맷 설정
-    	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    	Date now = new Date();
-    	String date = dateFormat.format(now);
-    	int check=0;
     	
-        if (oTicket == null) {
-            return 0;
-        } else {
-        	for(OrderTicket orderTicket :oTicket) {
-        		//비교할 date와 today를데이터 포맷으로 변경
-            	Date enddate = orderTicket.getEndDate();
-            	Date startdate = orderTicket.getBuyDate();
-            	Date today = null;
-				try {
-					today = dateFormat.parse(date);
-				} catch (ParseException e) {
-					e.printStackTrace();
-				}
-            	 
-            	//compareTo메서드를 통한 날짜비교
-            	int endcompare = enddate.compareTo(today); 
-            	int startcompare = startdate.compareTo(today); 
-            	System.out.println("end:"+endcompare);
-            	System.out.println("start:"+startcompare);
-            	//조건문
-            	if(endcompare >= 0 && startcompare <= 0) {
-            	  check = orderTicket.getTicketType();
-            	  break;
-            	}else if(endcompare < 0 || startcompare > 0) {
-            		check = 5;
-            		
-            	}else {
-            		check = 4;
-            		
+    	String checking = carService.carNumcheck(parkid,carNum);
+    	
+    	 
+    	 if(checking.equals("fail")) {
+      	   return -1;
+         }
+         else {
+        	 List<OrderTicket> oTicket = oRepository.findByParkinglotIdAndCarNum(parkid, carNum);
+          	
+        	 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+         	Date now = new Date();
+         	String date = dateFormat.format(now);
+         	int check=0;
+    	     
+         	if (oTicket == null) {
+                return 0;
+            }else {
+            	for(OrderTicket orderTicket :oTicket) {
+            		//비교할 date와 today를데이터 포맷으로 변경
+                	Date enddate = orderTicket.getEndDate();
+                	Date startdate = orderTicket.getBuyDate();
+                	Date today = null;
+    				try {
+    					today = dateFormat.parse(date);
+    				} catch (ParseException e) {
+    					e.printStackTrace();
+    				}
+                	 
+                	//compareTo메서드를 통한 날짜비교
+                	int endcompare = enddate.compareTo(today); 
+                	int startcompare = startdate.compareTo(today); 
+                	System.out.println("end:"+endcompare);
+                	System.out.println("start:"+startcompare);
+                	//조건문
+                	if(endcompare >= 0 && startcompare <= 0) {
+                	  check = orderTicket.getTicketType();
+                	  break;
+                	}else if(endcompare < 0 || startcompare > 0) {
+                		check = 5;
+                		
+                	}else {
+                		check = 4;
+                		
+                	}
+            
             	}
-        
-        	}
-        }
-		return check;
+            }
+         	return check;
+         }
     }
-
 }
