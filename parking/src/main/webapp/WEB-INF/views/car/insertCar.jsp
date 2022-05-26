@@ -3,13 +3,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file="/WEB-INF/views/includes/header.jsp"%>
 
-<div class="jumbotron jumbotron-fluid">
-		<div class="container">
-		<h3>입차 등록</h3>
-		</div>
-	</div>
+<div class="pagename">
+	<h1>입차 등록</h1>
+</div>
 
-	<div class="container mt-5">		
+
+	<div class="page">		
 			<div class="form-group">
 
 						<input type="hidden" name="checked_car" value="">

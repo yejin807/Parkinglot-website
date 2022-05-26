@@ -30,6 +30,11 @@ public class RegisterController {
         return "/register/divideJoin";
     }
 
+    @GetMapping("choicejoin")
+    public String choicejoin() {
+        return "/register/choiceJoin";
+    }
+    
     // 일반 사용자 회원가입 페이지로 이동
     @GetMapping("join/user")
     public String joinUser(Model model) {

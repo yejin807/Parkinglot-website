@@ -2,16 +2,15 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ include file="/WEB-INF/views/includes/header.jsp"%>
-<html xmlns:th="http://www.thymeleaf.org">
 <script src="/js/parkingtest.js"></script>
+
+<div class="pagename">
+	<h1>입차 목록(${count})</h1>
+	<h5>주차 가능 대수(${parkinglot.currentCnt})</h5>
+</div>
 	
-	<div class="jumbotron jumbotron-fluid">
-		<div class="container">
-		<h3>입차 목록(${count})</h3>
-		<h5>주차 가능 대수(${parkinglot.currentCnt})</h5>
-		</div>
-	</div>
-	<div class="container">
+
+	<div class="page">
 				<input type="hidden" name="parkinglotId" id="parkinglotId" value="${parkinglot.parkinglotId}" />
 		<table class="table table-hover">
 			<thead>
