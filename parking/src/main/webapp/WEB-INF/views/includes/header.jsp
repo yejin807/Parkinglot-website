@@ -20,7 +20,6 @@
                                 </sec:authorize>
 
                                 <sec:authorize access="isAnonymous()">
-                                    <li><a href="/register/choicejoin">회원가입</a></li>
                                     <li><a href="/register/login">로그인</a></li>
                                 </sec:authorize>
 

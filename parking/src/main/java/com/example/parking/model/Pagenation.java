@@ -23,11 +23,11 @@ public class Pagenation {
     private boolean next; // 다음 버튼
 
     public Pagenation(Page page) {
-        System.out.println(">>" + page.getNumber());
+        System.out.println("pagenattion page number >> " + page.getNumber());
         this.perPage = page.getSize();
         this.totalRecordCount = (int) page.getTotalElements();
         this.currentPage = page.getNumber() + 1;
-        this.pageSize = 2;
+        this.pageSize = 5;
         this.totalPages = page.getTotalPages();
         this.startPage = ((currentPage - 1) / pageSize * pageSize + 1);
         this.endPage = startPage + pageSize - 1;

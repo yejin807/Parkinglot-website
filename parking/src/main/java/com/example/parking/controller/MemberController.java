@@ -130,16 +130,17 @@ public class MemberController {
     @GetMapping("list")
     @ResponseBody
     public Map<String, Object> getparkingList(
-            @PageableDefault(size = 3, sort = "parkinglotId", direction = Sort.Direction.DESC, page = 0) Pageable pageable,
+            @PageableDefault(size = 6, sort = "parkinglotId", direction = Sort.Direction.DESC, page = 0) Pageable pageable,
             @RequestParam(required = false, defaultValue = "") String keyword) {
-        System.out.println("list search");
+
         Map<String, Object> parkingMap = new HashMap<>();
         Page<ParkingLot> parkinglotPage = memberService.listTotal(keyword, pageable);
         // Pagenation pagenation = new Pagenation((int)
         // parkinglotPage.getTotalElements(), parkinglotPage.getNumber(),
         // parkinglotPage.getSize());
+        System.out.println("controller keyword >>" + keyword);
         Pagenation pagenation = new Pagenation(parkinglotPage);
-        System.out.println(pagenation.toString());
+        System.out.println("controller search content >>> " + parkinglotPage.getContent());
         parkingMap.put("parkingLot", parkinglotPage.getContent());
         parkingMap.put("parkingLotPagenation", pagenation);
         return parkingMap;
