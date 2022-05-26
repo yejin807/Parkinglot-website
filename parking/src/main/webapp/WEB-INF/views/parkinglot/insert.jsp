@@ -3,11 +3,12 @@
 	
 <%@ include file="/WEB-INF/views/includes/header.jsp"%>
 
-<div class="jumbotron jumbotron-fluid">
-	<div class="container">
-		<h3>주차장 등록하기</h3>
-	</div>
+
+<div class="pagename">
+	<h1>주차장 등록하기</h1>
 </div>
+
+<div class="page">
 
 <div class="container">
 <form action="/parkinglot/insert" method="post"	enctype="multipart/form-data">
@@ -247,3 +248,4 @@
 		}).open();
 	}
 </script>
+</div>

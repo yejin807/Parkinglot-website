@@ -1,48 +1,60 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
+
 <%@ include file="/WEB-INF/views/includes/header.jsp"%>
 
-<div class="container mt-3">
-<h3>정기권 정보수정</h3>
-<form action="/orderticket/update" method="post">	
-	<table class="table">
-		<tr>
-			<td>티켓ID</td>
-			<td><input type="text" name ="ticketId" value="${orderticket.ticketId}" readonly/></td>
-		</tr>
-		<tr>
-			<td>주차장명</td>
-			<td><input type="text" name ="parkingName" value="${orderticket.parkLot.parkingName}" readonly/></td>
-		</tr>
-		<tr>
-			<td>구매자(아이디)</td>
-			<td><input type="text" name ="username" value="${orderticket.member.username}" readonly/></td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				<select name="ticketType" id="ticketType" onChange="changeEndDate()">
-					<option value="1">1일권</option>
-					<option value="2">7일권</option>
-					<option value="3">30일권</option>
-				</select>
-				시작일 
-				<fmt:formatDate value="${orderticket.buyDate}" pattern="yyyy-MM-dd" var="buyDate"/>
-				<input type ="date" name="buyDate" id="buyDate" value="${buyDate}" onChange="changeEndDate()"/> / 
-				만료일 
-				<fmt:formatDate value="${orderticket.endDate}" pattern="yyyy-MM-dd" var="endDate"/>
-				<input type ="date" name="endDate" id="endDate" value="${endDate}" readonly/>
-			</td>
-		</tr>
-		<tr>
-		<td colspan="2">
-			<button type="button" class="btn btn-primary" id="btnUpdate">수정하기</button>
-			<button type="button" class="btn btn-danger" onclick="funDel(${orderticket.ticketId})">삭제하기</button>
-			<button type="button" class="btn btn-secondary" onclick="location.href='/orderticket/listAll'">전체구매리스트</button></td>
-		</tr>
-	</table>
-	</form>
+
+<div class="pagename">
+	<h1>정기권 정보수정</h1>
 </div>
+
+<div class="page">
+	<div class="container mt-3">
+		<form action="/orderticket/update" method="post">
+			<table class="table">
+				<tr>
+					<td>티켓ID</td>
+					<td><input type="text" name="ticketId"
+						value="${orderticket.ticketId}" readonly /></td>
+				</tr>
+				<tr>
+					<td>주차장명</td>
+					<td><input type="text" name="parkingName"
+						value="${orderticket.parkLot.parkingName}" readonly /></td>
+				</tr>
+				<tr>
+					<td>구매자(아이디)</td>
+					<td><input type="text" name="username"
+						value="${orderticket.member.username}" readonly /></td>
+				</tr>
+				<tr>
+					<td colspan="2"><select name="ticketType" id="ticketType"
+						onChange="changeEndDate()">
+							<option value="1">1일권</option>
+							<option value="2">7일권</option>
+							<option value="3">30일권</option>
+					</select> 시작일 <fmt:formatDate value="${orderticket.buyDate}"
+							pattern="yyyy-MM-dd" var="buyDate" /> <input type="date"
+						name="buyDate" id="buyDate" value="${buyDate}"
+						onChange="changeEndDate()" /> / 만료일 <fmt:formatDate
+							value="${orderticket.endDate}" pattern="yyyy-MM-dd" var="endDate" />
+						<input type="date" name="endDate" id="endDate" value="${endDate}"
+						readonly /></td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<button type="button" class="btn btn-primary" id="btnUpdate">수정하기</button>
+						<button type="button" class="btn btn-danger"
+							onclick="funDel(${orderticket.ticketId})">삭제하기</button>
+						<button type="button" class="btn btn-secondary"
+							onclick="location.href='/orderticket/listAll'">전체구매리스트</button>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</div>
+
 <script>
 
 //티켓타입

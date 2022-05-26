@@ -3,11 +3,12 @@
 
 <%@ include file="/WEB-INF/views/includes/header.jsp"%>
 
-<div class="jumbotron jumbotron-fluid">
-	<div class="container">
-		<h3>정기권 판매등록</h3>
-	</div>
+
+<div class="pagename">
+	<h1>정기권 판매등록</h1>
 </div>
+
+<div class="page">
 
 <div class="container">
 	<form action="/ticket/sell" method="post">
@@ -79,6 +80,8 @@
 		</table>
 	</form>
 </div>
+</div>
+
 <script>
 	$("#btnSell").click(
 			function() {
@@ -134,5 +137,3 @@
 				$("form").submit();
 			})
 </script>
-</body>
-</html>

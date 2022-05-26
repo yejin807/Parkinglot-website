@@ -1,115 +1,128 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
+
 <%@ include file="/WEB-INF/views/includes/header.jsp"%>
 
-<div class="jumbotron jumbotron-fluid">
+
+<div class="pagename">
+	<h1>주차장 정보수정</h1>
+</div>
+
+<div class="page">
+
 	<div class="container">
-		<h3>주차장 정보수정</h3>
+		<form action="/parkinglot/update" method="post"
+			enctype="multipart/form-data">
+			<input type="hidden" name="parkinglotId" id="parkinglotId"
+				value="${parkinglot.parkinglotId}" />
+			<table class="table">
+				<tr>
+					<th>주차장명</th>
+					<td colspan="3"><input class="form-control" type="text"
+						name="parkingName" id="parkingName"
+						value="${parkinglot.parkingName}" /></td>
+				</tr>
+				<tr>
+					<th rowspan="2">주차장주소</th>
+					<td colspan="3">
+						<button class="btn btn-primary btn-sm" type="button"
+							onclick="sample5_execDaumPostcode()">주소 검색</button>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="3"><input class="form-control" type="text"
+						name="addr" id="addr" value="${parkinglot.addr}" readonly>
+						<!-- 위도/경도 --> <input type="hidden" name="wido" id="wido"
+						value="${parkinglot.wido}" readonly> <input type="hidden"
+						name="gyeongdo" id="gyeongdo" value="${parkinglot.gyeongdo}"
+						readonly></td>
+				</tr>
+				<tr>
+					<th>주차장사진</th>
+					<td><img alt="주차장사진" width="200px" height="200px"
+						src="/${parkinglot.files}" /> <input class="form-control"
+						type="file" name="upload" id="upload" /></td>
+					<th>위치(지도)</th>
+					<td>
+						<div id="map" style="width: 250px; height: 250px; display: none"></div>
+					</td>
+				</tr>
+
+				<tr>
+					<th>연락처</th>
+					<td colspan="3"><input class="form-control" type="text"
+						name="parkinglotTel" id="parkinglotTel"
+						value="${parkinglot.parkinglotTel}" /></td>
+				</tr>
+				<tr>
+					<th>운영방식</th>
+					<td colspan="3">
+						<div class="form-inline">
+							<select class="form-control" name="operatingType"
+								id="operatingType">
+								<option value="공영">공영</option>
+								<option value="민간">민간</option>
+							</select>
+						</div>
+					</td>
+				</tr>
+
+				<tr>
+					<th>운영시간</th>
+					<td colspan="3">
+						<div class="form-inline">
+							<label class="form-lable mr-1" for="openTime">시작시간</label> <select
+								class="form-control mr-3" name="openTime" id="openTime">
+								<option value="06:00">06:00</option>
+								<option value="07:00">07:00</option>
+								<option value="08:00">08:00</option>
+								<option value="09:00">09:00</option>
+								<option value="10:00">10:00</option>
+								<option value="11:00">11:00</option>
+								<option value="12:00">12:00</option>
+							</select> <label class="form-lable mr-1" for="closeTime">종료시간</label> <select
+								class="form-control mr-3" name="closeTime" id="closeTime">
+								<option value="20:00">20:00</option>
+								<option value="21:00">21:00</option>
+								<option value="22:00">22:00</option>
+								<option value="23:00">23:00</option>
+								<option value="24:00">24:00</option>
+							</select>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<th>전체주차면수(대)</th>
+					<td colspan="3"><input class="form-control" type="text"
+						name="maxCnt" id="maxCnt" value="${parkinglot.maxCnt}" /></td>
+				</tr>
+				<tr>
+					<th>기본요금(10분당/원)</th>
+					<td colspan="3"><input class="form-control" type="text"
+						name="basicFee" id="basicFee" value="${parkinglot.basicFee}" /></td>
+				</tr>
+				<tr>
+					<th>일주차요금(원)</th>
+					<td colspan="3"><input class="form-control" type="text"
+						name="dayFee" id="dayFee" value="${parkinglot.dayFee}" /></td>
+				</tr>
+				<tr>
+					<th>월주차요금(원)</th>
+					<td colspan="3"><input class="form-control" type="text"
+						name="monthFee" id="monthFee" value="${parkinglot.monthFee}" /></td>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<button type="submit" class="btn btn-primary" id="btnUpdate">수정</button>
+						<button type="reset" class="btn btn-secondary">취소</button>
+					</td>
+				</tr>
+			</table>
+		</form>
 	</div>
 </div>
 
-<div class="container">
-<form action="/parkinglot/update" method="post"	enctype="multipart/form-data">
-<input type="hidden" name="parkinglotId" id="parkinglotId" value="${parkinglot.parkinglotId}" />
-	<table class="table">
-		<tr>
-			<th>주차장명</th>
-			<td colspan="3"><input class="form-control" type="text" name="parkingName" id="parkingName" value="${parkinglot.parkingName}"/></td>
-		</tr>
-		<tr>
-			<th rowspan="2">주차장주소</th>
-			<td colspan="3">
-				<button class="btn btn-primary btn-sm" type="button" onclick="sample5_execDaumPostcode()">주소 검색</button>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="3">
-				<input class="form-control" type="text" name="addr" id="addr" value="${parkinglot.addr}" readonly>			
-				<!-- 위도/경도 -->
-				<input type="hidden" name="wido" id="wido" value="${parkinglot.wido}" readonly>
-				<input type="hidden" name="gyeongdo" id="gyeongdo" value="${parkinglot.gyeongdo}" readonly>
-			</td>
-		</tr>
-		<tr>
-			<th>주차장사진</th>
-			<td><img alt="주차장사진" width="200px" height="200px" src="/${parkinglot.files}"/>
-				<input class="form-control" type="file" name="upload" id="upload"/>
-			</td>
-			<th>위치(지도)</th>
-			<td>
-				<div id="map" style="width: 250px; height: 250px; display: none"></div>
-			</td>
-		</tr>
-		
-		<tr>
-			<th>연락처</th>
-			<td colspan="3"><input class="form-control" type="text" name="parkinglotTel" id="parkinglotTel" value="${parkinglot.parkinglotTel}"/></td>
-		</tr>
-		<tr>
-			<th>운영방식</th>
-			<td colspan="3">
-				<div class="form-inline">
-				<select class="form-control" name="operatingType" id="operatingType">
-					<option value="공영">공영</option>
-					<option value="민간">민간</option>
-				</select>
-				</div>
-			</td>
-		</tr>
-
-		<tr>
-			<th>운영시간</th>
-			<td colspan="3">
-				<div class="form-inline">
-				<label class="form-lable mr-1" for="openTime">시작시간</label>
-				<select class="form-control mr-3" name="openTime" id="openTime">
-				<option value="06:00">06:00</option>
-				<option value="07:00">07:00</option>
-				<option value="08:00">08:00</option>
-				<option value="09:00">09:00</option>
-				<option value="10:00">10:00</option>
-				<option value="11:00">11:00</option>
-				<option value="12:00">12:00</option>
-				</select>
-				<label class="form-lable mr-1" for="closeTime">종료시간</label>
-				<select class="form-control mr-3" name="closeTime" id="closeTime">
-				<option value="20:00">20:00</option>
-				<option value="21:00">21:00</option>
-				<option value="22:00">22:00</option>
-				<option value="23:00">23:00</option>
-				<option value="24:00">24:00</option>
-				</select>
-				</div>
-			</td>
-		</tr>
-		<tr>
-			<th>전체주차면수(대)</th>
-			<td colspan="3"><input class="form-control" type="text" name="maxCnt" id="maxCnt" value="${parkinglot.maxCnt}" /></td>
-		</tr>
-		<tr>
-			<th>기본요금(10분당/원)</th>
-			<td colspan="3">
-			<input class="form-control" type="text" name="basicFee" id="basicFee" value="${parkinglot.basicFee}" /></td>
-		</tr>
-		<tr>
-			<th>일주차요금(원)</th>
-			<td colspan="3">
-			<input class="form-control" type="text" name="dayFee" id="dayFee" value="${parkinglot.dayFee}"/></td>
-		</tr>
-		<tr>
-			<th>월주차요금(원)</th>
-			<td colspan="3">
-			<input class="form-control" type="text" name="monthFee" id="monthFee" value="${parkinglot.monthFee}"/></td>
-		</tr>
-		<tr>
-		<td colspan="4">
-		<button type="submit" class="btn btn-primary" id="btnUpdate" >수정</button>
-		<button type="reset" class="btn btn-secondary">취소</button></td>
-		</tr>
-	</table>
-</form>
-</div><script>
+<script>
 $("#btnInsert").click(function(){
 	if($("#parkingName").val()==""){
 		alert("주차장명을 입력해주세요");
@@ -193,8 +206,10 @@ $("#btnInsert").click(function(){
 });
 </script>
 
-<script	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f76d9772b2d3161123b4305bff3000b7&libraries=services"></script>
+<script
+	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f76d9772b2d3161123b4305bff3000b7&libraries=services"></script>
 <script>
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 	mapOption = {
