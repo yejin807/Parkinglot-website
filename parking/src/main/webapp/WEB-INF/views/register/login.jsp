@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
     <%@ include file="/WEB-INF/views/includes/links.jsp" %>
 
-        <body class="loginBody">
-
+        <body class="bodybg">
+<!-- <a href="/"><img src="/images/parking-lot.png" style="height:67px;width:67px;"></a> -->
             <div class="row justify-content-center">
 
                 <div class="col-xl-10 col-lg-12 col-md-9">

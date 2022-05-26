@@ -22,7 +22,7 @@ public class CustomLoginSuccess implements AuthenticationSuccessHandler {
         authentication.getAuthorities().forEach(authority -> roleNames.add(authority.getAuthority()));
         // System.out.println("roleNames : " + roleNames);
         // System.out.println("login success");
-        response.sendRedirect("/member/mypage");
+        response.sendRedirect("/");
 
     }
 

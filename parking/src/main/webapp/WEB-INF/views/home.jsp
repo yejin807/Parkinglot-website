@@ -13,7 +13,7 @@
 
         </head>
 
-        <body>
+        <body >
             <section class="header">
                 <nav class="nav-container ">
                     <div class="nav-container-links d-flex justify-content-between align-content-center">
@@ -37,19 +37,12 @@
                             </sec:authorize>
 
                             <sec:authorize access="isAuthenticated()">
-                                <li><a href="/member/update">${principal.username}님(회원변경)</a></li>
+                                <li><a href="/member/mypage">마이페이지</a></li>
                                 <li><a href="/register/logout">로그아웃</a></li>
                             </sec:authorize>
                         </ul>
                     </div>
-                    <!-- <a href="/"><img src="/images/parking-lot.png"></a> -->
-                    <!-- 
-            <div class="nav-links">
-                <ul>
-                    <li><a href="/register/login">로그인</a></li>
-                </ul>
-            </div> -->
-                </nav>
+                    </nav>
 
                 <div class="text-box">
                     <h1>지금 사용 가능한 주차장은 어디?</h1>

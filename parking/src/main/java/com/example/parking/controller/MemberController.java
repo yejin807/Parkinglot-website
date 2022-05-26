@@ -18,13 +18,16 @@ import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.net.http.HttpRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -67,10 +70,30 @@ public class MemberController {
         return "/member/mypage";
     }
 
+    @GetMapping("beforeUpdate")
+    public String beforeupdateFor() {
+        return "/member/beforeUpdate";
+    }
+
+    @PostMapping("beforeUpdate")
+    public String beforeupdate(String password, Model model, RedirectAttributes rattr,
+            @AuthenticationPrincipal PrincipalDetails principal) {
+
+        if (!memberService.checkPassword(principal.getUsername(), password)) {
+            rattr.addFlashAttribute("errorMsg", "비밀번호가 틀렸습니다");
+            return "redirect:/member/beforeUpdate";
+        }
+
+        rattr.addFlashAttribute("password", password);
+        return "redirect:/member/update";
+    }
+
     // 사용자 정보 수정 페이지 이동
     @GetMapping("update")
-    public String updateForm(Model model, @AuthenticationPrincipal PrincipalDetails principal) {
+    public String updateForm(Model model, @ModelAttribute("password") String password,
+            @AuthenticationPrincipal PrincipalDetails principal) {
         Member member = memberService.findById(principal.getUsername());
+        member.setPassword(password);
         model.addAttribute("member", member);
         return "/member/update";
     }
@@ -97,7 +120,6 @@ public class MemberController {
     // 비밀번호 변경 페이지 이동
     @GetMapping("updatePwd")
     public String updatePwdForm() {
-        // System.out.println("controller >>" + SecurityContextHolder.getContext());
         return "/member/updatePwd";
     }
 
@@ -116,8 +138,8 @@ public class MemberController {
 
     @DeleteMapping("delete")
     public ResponseEntity<String> delete(String username) {
+        System.out.println(">>" + username);
         memberService.delete(username);
-
         return new ResponseEntity<>("success", HttpStatus.OK);
     }
 
@@ -138,9 +160,7 @@ public class MemberController {
 
         Map<String, Object> parkingMap = new HashMap<>();
         Page<ParkingLot> parkinglotPage = memberService.listTotal(keyword, pageable);
-        // Pagenation pagenation = new Pagenation((int)
-        // parkinglotPage.getTotalElements(), parkinglotPage.getNumber(),
-        // parkinglotPage.getSize());
+
         System.out.println("controller keyword >>" + keyword);
         Pagenation pagenation = new Pagenation(parkinglotPage);
         System.out.println("controller search content >>> " + parkinglotPage.getContent());

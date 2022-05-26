@@ -34,12 +34,8 @@
                                 name="bizNum" value="${member.bizNum}" readonly>
                         </div>
                     </c:if>
-
-                    <button type="button" class="btn btn-dark" id="btnParkinglotList"
-                        onclick="location.href='/member/parkinglotList'">주차장 조회</button>
-
                     <button type="button" class="btn btn-success" id="btnUpdateAccForm"
-                        onclick="location.href='/member/update'">update
+                        onclick="location.href='/member/beforeUpdate'">update
                         account</button>
 
                 </div>

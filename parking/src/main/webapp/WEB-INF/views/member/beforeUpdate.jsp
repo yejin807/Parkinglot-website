@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
     <%@ include file="/WEB-INF/views/includes/links.jsp" %>
 
-        <body class="loginBody">
+        <body class="bodybg">
 
             <div class="row justify-content-center">
 
@@ -14,22 +14,18 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">비밀번호 입력</h1>
                                     </div>
-                                    <form action="/register/login" method="post">
-
+                                    <form action="/member/beforeUpdate" method="post">
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
                                                 name="password" id="password" placeholder="비밀번호">
                                         </div>
-                                        <c:if test="${not empty errorMsg }">
-                                            <b class="mb-2">${errorMsg}</b>
-                                        </c:if>
+                                    <c:if test="${not empty errorMsg }">
+                                        <b class="mb-2">${errorMsg}</b>
+                                    </c:if>
                                         <button class="btn btn-primary btn-user btn-block mt-3"
-                                            id="btnLogin">Login</button>
+                                            id="btnLogin">확인</button>
                                     </form>
-                                    <hr>
-
-
-
+                               
                                 </div>
                             </div>
 

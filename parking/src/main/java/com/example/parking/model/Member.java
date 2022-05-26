@@ -2,6 +2,7 @@ package com.example.parking.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -54,6 +55,6 @@ public class Member {
     private String gubun; // 구분 : 사업자, 개인
     private String role; // 권한
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Car> car;
 }

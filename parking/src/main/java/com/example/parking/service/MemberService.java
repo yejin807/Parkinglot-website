@@ -50,6 +50,17 @@ public class MemberService {
         return memberRepository.existsById(username);
     }
 
+    public boolean checkPassword(String username, String rawPassword) {
+        Member member = memberRepository.findById(username).get();
+        String encPassword = member.getPassword();
+
+        if (bcryptPasswordEncoder.matches(rawPassword, encPassword)) {
+            return true;
+        }
+
+        return false;
+    }
+
     public Member findById(String username) {
         return memberRepository.findById(username).get();
     }

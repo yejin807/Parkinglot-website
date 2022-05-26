@@ -25,7 +25,7 @@
                         </sec:authorize>
 
                         <sec:authorize access="isAuthenticated()">
-                            <li><a href="/member/update">${principal.username}님(회원변경)</a></li>
+                            <li><a href="/member/mypage">마이페이지</a></li>
                             <li><a href="/register/logout">로그아웃</a></li>
                         </sec:authorize>
                     </ul>
