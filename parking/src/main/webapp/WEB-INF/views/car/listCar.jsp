@@ -5,8 +5,8 @@
 <script src="/js/parkingtest.js"></script>
 
 <div class="pagename">
-	<h1>입차 목록(${count})</h1>
-	<h5>주차 가능 대수(${parkinglot.currentCnt})</h5>
+	<h1>입차 목록(${count})/</h1>
+	<h3>주차 가능 대수(${parkinglot.currentCnt})</h3>
 </div>
 	
 
@@ -79,8 +79,8 @@
 				</c:forEach>
 			</tbody>
 		</table>
-		<div class="d-flex justify-content-between mt-5 mr-auto">
-			<c:choose>
+		
+		<%-- 	<c:choose>
 				<c:when test="${cars.first }">
 				[First]
 				<a href="?page=${cars.number-1 }&word=${word}">다음</a>
@@ -88,7 +88,7 @@
 				<c:when test="${cars.last }">
 					<a href="?page=${cars.number+1 }&word=${word}">이전</a>
 				</c:when>
-			</c:choose>
+			</c:choose> --%>
 
 
 
@@ -96,7 +96,7 @@
 				<a href="?page=${pageNum-1}&word=${word}">${ pageNum}</a>
 			</c:forEach>
 
-			<div>
+			
 				<form class="form-inline" action="/car/listfield" method="get">
 					<input type="hidden" name="parkid" value="${parkinglot.parkinglotId }">
 					<input type="hidden" name="word" value="${word }"> <input
@@ -105,6 +105,6 @@
 					<button class="btn btn-secondary">Search</button>
 
 				</form>
-			</div>
-		</div>
+			
+		
 </div>
