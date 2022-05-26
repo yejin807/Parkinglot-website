@@ -13,7 +13,7 @@
                                 </sec:authorize>
 
                                 <sec:authorize access="hasRole('ROLE_OWNER')">
-                                    <li><a href="/parkinglot/list">주차장 현황</a></li>
+                                    <li><a href="/parkinglot/list">주차장 관리</a></li>
                                     <li><a href="/parkinglot/insert">주차장 등록</a></li>
                                     <li><a href="/ticket/list">정기권 재고현황</a></li>
 
