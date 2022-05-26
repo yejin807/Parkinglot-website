@@ -89,6 +89,28 @@ nav img{
 .nav-links ul li:hover::after{
     width: 100%;   
 }
+
+.outer {
+  text-align: center;
+}
+
+.inner {
+  display: flex;
+  justify-content: center;
+}
+
+.inner a{
+    color: #777;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.inner a:hover{
+    font-size: 25px;
+    transition: 0.5s;
+}
+
+
 .text-box{
     width: 90%;
     color: #fff;
@@ -199,4 +221,10 @@ nav img{
     margin-left: 100px;
     margin-right: 100px;
     margin-bottom: 100px;
+}
+
+a{
+    color: #777;
+    text-decoration: none;
+    font-size: 20px;
 }

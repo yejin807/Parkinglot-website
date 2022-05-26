@@ -123,7 +123,7 @@ function outBtn(num,time,increasebasic,parkid){
 			alert("요금은 "+increasebasic+" 원 입니다.")
 				
 			}else{
-			let usefee = increasebasic*((useMin - 10)/10)+1500;
+			let usefee = increasebasic*((useMin - 10)/10)+increasebasic;
 			alert("요금은 "+usefee+"원 입니다.")				
 			}
 			
@@ -140,11 +140,11 @@ function outBtn(num,time,increasebasic,parkid){
 				})
 }
 
-function outticketBtn(num,ticket,increaseticket,parkid){
+function outticketBtn(num,ticket,parkid){
 	if(!confirm("차 번호:"+num+" 출차 할까요?"))
 			return false;
 			
-		alert("요금은"+increaseticket+" 원 입니다.")
+		alert(ticket+" 차량입니다.")
 			
 	$.ajax({
 		type : "DELETE",
