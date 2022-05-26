@@ -51,7 +51,7 @@
 					<th>연락처</th>
 					<td colspan="3"><input class="form-control" type="text"
 						name="parkinglotTel" id="parkinglotTel"
-						value="${parkinglot.parkinglotTel}" /></td>
+						value="${parkinglot.parkinglotTel}" placeholder="휴대폰 번호를 입력해주세요"/></td>
 				</tr>
 				<tr>
 					<th>운영방식</th>
@@ -93,22 +93,22 @@
 				<tr>
 					<th>전체주차면수(대)</th>
 					<td colspan="3"><input class="form-control" type="text"
-						name="maxCnt" id="maxCnt" value="${parkinglot.maxCnt}" /></td>
+						name="maxCnt" id="maxCnt" value="${parkinglot.maxCnt}" placeholder="숫자(1자리이상) 입력해주세요"/></td>
 				</tr>
 				<tr>
 					<th>기본요금(10분당/원)</th>
 					<td colspan="3"><input class="form-control" type="text"
-						name="basicFee" id="basicFee" value="${parkinglot.basicFee}" /></td>
+						name="basicFee" id="basicFee" value="${parkinglot.basicFee}" placeholder="숫자(3자리이상) 입력해주세요"/></td>
 				</tr>
 				<tr>
 					<th>일주차요금(원)</th>
 					<td colspan="3"><input class="form-control" type="text"
-						name="dayFee" id="dayFee" value="${parkinglot.dayFee}" /></td>
+						name="dayFee" id="dayFee" value="${parkinglot.dayFee}" placeholder="숫자(3자리이상) 입력해주세요"/></td>
 				</tr>
 				<tr>
 					<th>월주차요금(원)</th>
 					<td colspan="3"><input class="form-control" type="text"
-						name="monthFee" id="monthFee" value="${parkinglot.monthFee}" /></td>
+						name="monthFee" id="monthFee" value="${parkinglot.monthFee}" placeholder="숫자(3자리이상) 입력해주세요"/></td>
 				</tr>
 				<tr>
 					<td colspan="4">
