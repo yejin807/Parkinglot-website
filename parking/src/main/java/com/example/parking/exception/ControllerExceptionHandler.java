@@ -37,4 +37,10 @@ public class ControllerExceptionHandler {
         errorMap.put("username", "중복된 아이디입니다.");
         return new ResponseEntity<>(errorMap, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(java.lang.NullPointerException.class)
+
+    public String handleNullException(Exception e) {
+        return "/home";
+    }
 }

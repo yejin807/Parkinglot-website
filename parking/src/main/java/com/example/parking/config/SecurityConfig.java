@@ -41,7 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .anyRequest()
                 .permitAll()
-                //.authenticated()
+                // .authenticated()
                 // // .antMatchers("/admin/*").hasRole("ROLE_ADMIN")
                 .and()
                 .formLogin()
@@ -52,7 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .logoutUrl("/register/logout")
-                .logoutSuccessUrl("/register/login")
+                .logoutSuccessUrl("/")
                 .invalidateHttpSession(true);
 
     }

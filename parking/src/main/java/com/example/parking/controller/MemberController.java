@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.example.parking.config.auth.PrincipalDetails;
@@ -60,7 +61,9 @@ public class MemberController {
     public String mypage(Model model, @AuthenticationPrincipal PrincipalDetails principal) {
 
         Member member = memberService.findById(principal.getUsername());
+        List<Car> carList = carService.findAll(member.getUsername());
         model.addAttribute("member", member);
+        model.addAttribute("carList", carList);
         return "/member/mypage";
     }
 

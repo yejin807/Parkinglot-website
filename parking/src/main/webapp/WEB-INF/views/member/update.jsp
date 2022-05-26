@@ -37,9 +37,6 @@
                     <span class="error" id="errorBizNum"></span>
                 </c:if>
 
-                <button type="button" class="btn btn-dark" id="btnParkinglotList"
-                    onclick="location.href='/member/parkinglotList'">주차장 조회</button>
-
                 <button type="button" class="btn btn-success" id="btnUpdateAcc">정보 수정</button>
 
                 <button type="button" class="btn btn-success" id="btnUpdatePwdForm"
@@ -51,8 +48,6 @@
                     onclick="location.href='/member/mypage'">수정
                     취소</button>
 
-                <button type="button" class="btn btn-dark" id="btnLogout"
-                    onclick="location.href='/register/logout'">로그아웃</button>
 
             </div>
         </body>

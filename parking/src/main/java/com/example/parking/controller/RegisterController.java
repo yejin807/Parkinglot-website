@@ -34,7 +34,7 @@ public class RegisterController {
     public String choicejoin() {
         return "/register/choiceJoin";
     }
-    
+
     // 일반 사용자 회원가입 페이지로 이동
     @GetMapping("join/user")
     public String joinUser(Model model) {
@@ -70,8 +70,8 @@ public class RegisterController {
                 // System.out.println("set role owner");
                 member.setRole("ROLE_OWNER");
             } else if (member.getGubun().equals("user")) {
-                // member.setRole("ROLE_USER");
-                System.out.println("set role user");
+                member.setRole("ROLE_USER");
+                // System.out.println("set role user");
             }
 
             memberService.join(member);

@@ -11,17 +11,17 @@
 
         <div class="row mt-0">
             <div class="course-col container d-flex flex-column mt-5">
-                <a href="/register/join/owner">
+                <a href="/register/join/owner" class="border border-dark rounded-3">
                     <h3 class="mt-5 mb-5">주차장 사장님 회원가입</h3>
-                    <img src="/images/plane-tickets.png">
+                    <img src="/images/plane-tickets.png" class="mb-5">
                     <!-- //<div class="layer"> -->
                     <!-- //</div> -->
                 </a>
             </div>
             <div class="course-col container d-flex flex-column mt-5">
-                <a href="/register/join/user">
+                <a href="/register/join/user" class="border border-dark rounded-3">
                     <h3 class="mt-5 mb-5">주차장 이용자 회원가입</h3>
-                    <img src="/images/car-key.png">
+                    <img src="/images/car-key.png" class="mb-5">
                     <!-- //<div class="layer"> -->
                     <!-- //</div> -->
                 </a>
