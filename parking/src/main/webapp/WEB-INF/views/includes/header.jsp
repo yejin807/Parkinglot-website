@@ -4,7 +4,7 @@
             <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                 <!DOCTYPE html>
                 <html>
-               
+
                 <sec:authorize access="isAuthenticated()">
                     <sec:authentication property="principal" var="principal" />
                 </sec:authorize>
@@ -17,38 +17,38 @@
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
                 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                 <link rel="stylesheet" href="/css/style.css">
-                <link rel="preconnect" href="https://fonts.googleapis.com"> 
-                <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
-                 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
-                
+                <link rel="preconnect" href="https://fonts.googleapis.com">
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+                <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+
                 <section class="sub-header">
-                        <nav class="nav-container">
-                            <a href="/"><img src="/images/parking-lot.png"></a>
-                            <div class="nav-container-links">
-                                <ul>
-                                    <li><a href="/parkinglot/listAll">주차장 전체리스트</a></li>
-                                        <sec:authorize access="hasRole('ROLE_USER')">
-                                            <li><a href="/member/carRegister">차량등록</a></li>
-                                            <li><a href="/orderticket/list">정기권 리스트</a></li>
-                                        </sec:authorize>
+                    <nav class="nav-container">
+                        <a href="/"><img src="/images/parking-lot.png"></a>
+                        <div class="nav-container-links">
+                            <ul>
+                                <li><a href="/parkinglot/listAll">주차장 전체리스트</a></li>
+                                <sec:authorize access="hasRole('ROLE_USER')">
+                                    <li><a href="/member/carRegister">차량등록</a></li>
+                                    <li><a href="/orderticket/list">정기권 리스트</a></li>
+                                </sec:authorize>
 
-                                        <sec:authorize access="hasRole('ROLE_OWNER')">
-                                            <li><a href="/parkinglot/list">주차장 현황</a></li>
-                                            <li><a href="/parkinglot/insert">주차장 등록</a></li>
-                                            <li><a href="/ticket/list">정기권 재고현황</a></li>
-                                        <li><a href="/register/join/user">일반 사용자 회원 회원 가입</a></li>
-                                        </sec:authorize>
+                                <sec:authorize access="hasRole('ROLE_OWNER')">
+                                    <li><a href="/parkinglot/list">주차장 현황</a></li>
+                                    <li><a href="/parkinglot/insert">주차장 등록</a></li>
+                                    <li><a href="/ticket/list">정기권 재고현황</a></li>
 
-                                        <sec:authorize access="isAnonymous()">
-                                            <li><a href="/register/choicejoin">회원가입</a></li>
-                                            <li><a href="/register/login">로그인</a></li>
-                                        </sec:authorize>
+                                </sec:authorize>
 
-                                        <sec:authorize access="isAuthenticated()">
-                                            <li><a href="/member/update">${principal.username}님(회원변경)</a></li>
-                                           <li><a href="/register/logout">로그아웃</a></li>
-                                        </sec:authorize>
-                                </ul>
-                            </div>
-                        </nav>
-                    </section>
+                                <sec:authorize access="isAnonymous()">
+                                    <li><a href="/register/choicejoin">회원가입</a></li>
+                                    <li><a href="/register/login">로그인</a></li>
+                                </sec:authorize>
+
+                                <sec:authorize access="isAuthenticated()">
+                                    <li><a href="/member/update">${principal.username}님(회원변경)</a></li>
+                                    <li><a href="/register/logout">로그아웃</a></li>
+                                </sec:authorize>
+                            </ul>
+                        </div>
+                    </nav>
+                </section>
