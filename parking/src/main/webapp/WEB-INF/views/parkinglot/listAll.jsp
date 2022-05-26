@@ -51,5 +51,6 @@
 			})
 		}
 	</script>
-
 </div>
+
+<%@ include file="/WEB-INF/views/includes/footer.jsp"%>

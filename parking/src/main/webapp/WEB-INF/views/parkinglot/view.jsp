@@ -92,12 +92,13 @@
 </div>
 
 <script>
-function funDel(id){
+function funDel(parkinglotId){
 	if(!confirm("정말로 삭제하시겠습니까?")) return;
 	
 	$.ajax({
 		type : "delete",
-		url : "/parkinglot/delete/"+id,
+		url : "/parkinglot/delete",
+		data : {"parkinglotId":parkinglotId},
 		success : function(resp) {
 			if (resp == "success") {
 				alert("삭제성공");
@@ -144,5 +145,5 @@ map.setCenter(coords);
 marker.setPosition(coords)
 </script>
 
-</body>
-</html>
+
+<%@ include file="/WEB-INF/views/includes/footer.jsp"%>

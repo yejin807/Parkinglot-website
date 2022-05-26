@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.parking.config.auth.PrincipalDetails;
 import com.example.parking.model.ParkingLot;
@@ -81,5 +83,13 @@ public class ParkinglotController {
         String uploadFolder = session.getServletContext().getRealPath("/");
         pService.update(parkinglot, uploadFolder);
         return "redirect:/parkinglot/list";
+    }
+    
+    //주차장 삭제하기(삭제)
+    @DeleteMapping("delete")
+    @ResponseBody
+    public String delete(Long parkinglotId) {
+    	pService.delete(parkinglotId);
+    	return "success";
     }
 }

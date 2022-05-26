@@ -197,3 +197,5 @@ $("#btnBuy").click(function(){
 })
 
 </script>
+
+<%@ include file="/WEB-INF/views/includes/footer.jsp"%>
