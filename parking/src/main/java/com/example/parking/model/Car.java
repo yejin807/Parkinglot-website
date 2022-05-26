@@ -13,7 +13,7 @@ public class Car {
     @Id
     private String carNum; // 차량번호
     private String carName; // 차량이름
-    private String carType; // 차량타입(소형,대형)
+    //private String carType; // 차량타입(소형,대형)
 
     @ManyToOne
     @JoinColumn(name = "username")

@@ -155,8 +155,8 @@ $(document).ready(function () {
     $("#btnCarRegister").click(function () {
         var postStr = {
             "carNum": $("#carNum").val(),
-            "carName": $("#carName").val(),
-            "carType": $(":input:radio[name=carType]:checked").val()
+            "carName": $("#carName").val()
+           // "carType": $(":input:radio[name=carType]:checked").val()
         }
 
         $.ajax({
