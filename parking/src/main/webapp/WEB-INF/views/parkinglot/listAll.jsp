@@ -29,11 +29,11 @@
                                 <td>${parkinglot.maxCnt}</td>
                                 <td>${parkinglot.currentCnt}</td>
                                 <td>
-                                    <button type="button" class="btn btn-primary btn-sm"
+                                    <button type="button" class="btn btn-primary"
                                         onclick="location.href='/ticket/sell/${parkinglot.parkinglotId}'">수정</button>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-info btn-sm"
+                                    <button type="button" class="btn btn-info"
                                         onclick="location.href='/car/list/${parkinglot.parkinglotId}'">입차현황</button>
                                 </td>
                             </tr>

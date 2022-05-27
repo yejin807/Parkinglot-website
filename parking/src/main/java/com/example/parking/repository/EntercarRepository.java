@@ -36,7 +36,7 @@ public interface EntercarRepository extends JpaRepository<EnterCar, String>{
 	@Query(value = "select count(*) from enter_car where parkinglot_id like CONCAT('%',:parkid,'%') AND parking_type like CONCAT('%',:word,'%')",nativeQuery = true)
 	public Long cntParkingTypeSearch(@Param("parkid") Long parkid,@Param("word") String word);
 
-	@Query(value = "select count(*) from enter_car where parkinglot_id like CONCAT('%',:parkid,'%') AND car_num like CONCAT('%',:carNum,'%')",nativeQuery = true)
+	@Query(value = "select count(*) from enter_car where parkinglot_id = :parkid and car_num = :carNum",nativeQuery = true)
 	public Long carNumcheck(@Param("parkid") Long parkid,@Param("carNum") String carNum);
 
 	Page<EnterCar> findByParkinglotId(Long parkid,Pageable pageable);

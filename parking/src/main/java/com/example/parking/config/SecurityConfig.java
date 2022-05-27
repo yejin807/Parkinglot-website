@@ -41,6 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/register/**",
                         "/member/parkinglotList/**",
                         "/member/list/**",
+                        "/parkinglot/view/**",
                         "http://t1.daumcdn.net/**",
                         "//dapi.kakao.com/v2/maps/sdk.js?appkey=f76d9772b2d3161123b4305bff3000b7&libraries=services") // 접근
                                                                                                                       // 허용
