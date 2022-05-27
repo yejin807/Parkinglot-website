@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.example.parking.exception.ValidationSequence;
@@ -96,9 +97,10 @@ public class MemberService {
         System.out.println("service updatepwd >>" + SecurityContextHolder.getContext());
     }
 
-    public void delete(String username) {
-        memberRepository.deleteById(username);
-        SecurityContextHolder.clearContext();
+    @Transactional
+    public void deleteByAdmin(String username) {
+        memberRepository.deleteByUsername(username);
+        System.out.println(memberRepository.deleteByUsername(username));
     }
 
     public Page<ParkingLot> listTotal(String keyword, Pageable pageable) {
@@ -120,6 +122,16 @@ public class MemberService {
         }
         System.out.println("palin");
         return parkingLotRepository.findAll(pageable);
+    }
+
+    //// 관리자
+    public List<Member> findAll() {
+        return memberRepository.findAll();
+    }
+
+    public void delete(String username) {
+        memberRepository.deleteById(username);
+        SecurityContextHolder.clearContext();
     }
 
 }

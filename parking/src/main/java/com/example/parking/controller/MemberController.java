@@ -184,4 +184,36 @@ public class MemberController {
 
     }
 
+    ////// (관리자)
+
+    // 회원 전체보기
+    @GetMapping("/admin/listAll")
+    public String memberList(Model model) {
+        List<Member> memberList = memberService.findAll();
+        model.addAttribute("memberList", memberList);
+        return "/admin/memberList";
+    }
+
+    // 회원 삭제
+    @DeleteMapping("/admin/delete")
+    public ResponseEntity memberDelete(String username) {
+        memberService.deleteByAdmin(username);
+        return new ResponseEntity<>("success", HttpStatus.OK);
+    }
+
+    @PostMapping("/admin/memberView")
+    public String memberView(@RequestParam(value = "bntAdminMemberUpdate") String username, Model model) {
+        System.out.println("@@@" + username);
+        model.addAttribute("member", memberService.findById(username));
+        return "/admin/memberView";
+    }
+
+    @PutMapping("/admin/memberUpdate")
+    public ResponseEntity memberUpdate(@Validated({
+            ValidationGroups.UpdateCheckGroup.class }) @RequestBody Member member) {
+        memberService.update(member);
+        return new ResponseEntity<>("success", HttpStatus.OK);
+
+    }
+
 }
