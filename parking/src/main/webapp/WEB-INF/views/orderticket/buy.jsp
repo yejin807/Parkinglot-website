@@ -22,16 +22,17 @@
 <div class="page">
 	<div class="container mt-3">
 		<form action="/orderticket/buy" method="post">
+		<input type="hidden" name="parkinglotId" value="${ticket.parkLot.parkinglotId}" readonly /></td>
 			<table class="table">
 				<tr>
 					<td>주차장명</td>
-					<td colspan="2"><input class="form-control" type="text"
-						name="parkinglotId" id="parkinglotId"
-						value="${ticket.parkLot.parkingName}" readonly /></td>
+					<td colspan="2">
+					<input class="form-control" type="text"	name="parkingName" id="parkingName" value="${ticket.parkLot.parkingName}" readonly /></td>
 				</tr>
 				<tr>
 					<td>구매자(아이디)</td>
-					<td colspan="2"><input class="form-control" type="text" name="username"
+					<td colspan="2">
+					<input class="form-control" type="text" name="username"
 						id="username" value="${principal.username}" readonly /></td>
 				</tr>
 				<tr>

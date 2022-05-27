@@ -76,8 +76,6 @@
 					<td colspan="4">
 						<button type="button" class="btn btn-primary"
 							onclick="location.href='/parkinglot/update/${parkinglot.parkinglotId}'">수정하기</button>
-						<button type="button" class="btn btn-danger"
-							onclick="funDel(${parkinglot.parkinglotId})" )>삭제</button>
 					</td>
 				</tr>
 			</c:if>

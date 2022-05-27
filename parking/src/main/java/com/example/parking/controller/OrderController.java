@@ -30,7 +30,7 @@ public class OrderController {
 	@Autowired
 	private CarRepository carRepository;
 
-	//정기권 구매
+	//정기권 구매폼
 	@GetMapping("buy/{id}")
 	@PreAuthorize("hasRole('ROLE_USER')")
 	public String insert(@PathVariable Long id, @AuthenticationPrincipal PrincipalDetails principal, Model model) {
@@ -39,6 +39,7 @@ public class OrderController {
 		return "/orderticket/buy";
 	}
 	
+	//정기권 구매
 	@PostMapping("buy")
 	@PreAuthorize("hasRole('ROLE_USER')")
 	public String insert(OrderTicket orderticket) {
