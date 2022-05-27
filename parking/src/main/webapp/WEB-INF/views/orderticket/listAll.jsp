@@ -18,6 +18,7 @@
 				<td>티켓종류</td>
 				<td>시작일</td>
 				<td>만료일</td>
+				<td>수정</td>
 			</tr>
 			<c:forEach items="${orderTicketList}" var="orderticket">
 				<tr>
@@ -33,6 +34,8 @@
 							pattern="yyyy-MM-dd" var="buyDate" /> ${buyDate}</td>
 					<td><fmt:formatDate value="${orderticket.endDate}"
 							pattern="yyyy-MM-dd" var="endDate" /> ${endDate}</td>
+					<td><button type="button" class="btn btn-primary btn-sm"
+								onclick="location.href='/orderticket/update/${orderticket.ticketId}'">수정</button></td>
 				</tr>
 			</c:forEach>
 		</table>

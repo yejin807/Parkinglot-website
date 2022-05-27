@@ -20,27 +20,32 @@
 </div>
 
 <div class="page">
-
 	<div class="container mt-3">
 		<form action="/orderticket/buy" method="post">
-			<input type="text" name="parkinglotId" id="parkinglotId"
-				value="${ticket.parkLot.parkinglotId}" readonly /> <input
-				type="text" name="username" id="username"
-				value="${principal.username}" readonly /> 차량선택 <select
-				name="carNum">
-				<c:forEach items="${carlist}" var="car">
-					<option value="${car.carNum}">${car.carNum}</option>
-				</c:forEach>
-			</select>
-
-			<table border="1">
+			<table class="table">
 				<tr>
 					<td>주차장명</td>
-					<td><input type="text" name="parkingName" id="parkingName"
+					<td colspan="2"><input class="form-control" type="text"
+						name="parkinglotId" id="parkinglotId"
 						value="${ticket.parkLot.parkingName}" readonly /></td>
 				</tr>
 				<tr>
-					<td colspan="3">재고수량</td>
+					<td>구매자(아이디)</td>
+					<td colspan="2"><input class="form-control" type="text" name="username"
+						id="username" value="${principal.username}" readonly /></td>
+				</tr>
+				<tr>
+					<td>차량선택</td>
+					<td colspan="2">
+						<select class="form-control" name="carNum">
+								<c:forEach items="${carlist}" var="car">
+									<option value="${car.carNum}">${car.carNum}</option>
+								</c:forEach>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="3">재고수량(매)</td>
 				</tr>
 				<tr>
 					<fmt:formatNumber type="number" maxFractionDigits="3"
@@ -57,25 +62,30 @@
 					</td>
 				</tr>
 				<tr>
-					<td><input type="text" id="dayStock"
-						value="${ticket.dayStock}" readonly />매</td>
-					<td><input type="text" id="weekStock"
-						value="${ticket.weekStock}" readonly />매</td>
-					<td><input type="text" id="monthStock"
-						value="${ticket.monthStock}" readonly />매</td>
+					<td><input class="form-control" type="text" id="dayStock"
+						value="${ticket.dayStock}" readonly /></td>
+					<td><input class="form-control" type="text" id="weekStock"
+						value="${ticket.weekStock}" readonly /></td>
+					<td><input class="form-control" type="text" id="monthStock"
+						value="${ticket.monthStock}" readonly /></td>
 				</tr>
 				<tr>
 					<td colspan="3">구매신청</td>
 				</tr>
 				<tr>
-					<td colspan="3"><select name="ticketType" id="ticketType"
-						onChange="changeEndDate()">
-							<option value="1">1일권</option>
-							<option value="2">7일권</option>
-							<option value="3">30일권</option>
-					</select> 시작일 <input type="date" name="buyDate" id="buyDate"
-						onChange="changeEndDate()" /> / 만료일 <input type="date"
-						name="endDate" id="endDate" readonly /></td>
+					<td colspan="3">
+						<div class="form-inline">
+						<select class="form-control" name="ticketType"
+							id="ticketType" onChange="changeEndDate()">
+								<option value="1">1일권</option>
+								<option value="2">7일권</option>
+								<option value="3">30일권</option>
+						</select> 시작일 <input class="form-control" type="date" name="buyDate"
+							id="buyDate" onChange="changeEndDate()" /> / 만료일 <input
+							class="form-control" type="date" name="endDate" id="endDate"
+							readonly />
+						</div>
+					</td>
 				</tr>
 				<tr>
 					<td colspan="3">

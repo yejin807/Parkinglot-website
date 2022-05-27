@@ -2,6 +2,7 @@ package com.example.parking.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +26,7 @@ public class TicketController {
 	private ParkingLotRepository pRepository;
 	
 	//정기권판매폼
+	@PreAuthorize("hasRole('ROLE_OWNER')")
 	@GetMapping("sell/{id}")
 	public String insert(@PathVariable Long id, Model model) {
 		model.addAttribute("parkinglot", pRepository.findById(id).get());
@@ -33,7 +35,8 @@ public class TicketController {
 	}
 	
 	//정기권판매등록
-	@PostMapping("sell")
+	@PreAuthorize("hasRole('ROLE_OWNER')")
+	@PostMapping("sell")	
 	public String insert(Long parkinglotId, Ticket ticket) {
 		
 		ticket.setParkLot(pRepository.findById(parkinglotId).get());
@@ -44,16 +47,19 @@ public class TicketController {
 	
 	
 	//전체주차장 재고리스트(사장님)
+	@PreAuthorize("hasRole('ROLE_OWNER')")
 	@GetMapping("list")
-	public String list(@AuthenticationPrincipal PrincipalDetails principal, Model model) {
-		if(principal==null) return "/register/login";
-		
+	public String list(@AuthenticationPrincipal PrincipalDetails principal, Model model) {		
 		model.addAttribute("ticketlist", tService.list(principal.getUsername()));
+		if(principal.getMember().getRole().equals("ROLE_ADMIN")) {
+        	return "redirect:/ticket/listAll";
+        } 
 		return "/ticket/list";
 	}
 	
 	//정기권 재고현황(전체)
-	@GetMapping("listAll")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@GetMapping("listAll")	
 	public String list(Model model) {
 		model.addAttribute("ticketlist", tService.listAll());
 		return "/ticket/listAll";

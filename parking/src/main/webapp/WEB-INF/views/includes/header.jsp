@@ -22,7 +22,7 @@
                         
                         <!-- 관리자 -->
                         <sec:authorize access="hasRole('ROLE_ADMIN')">
-                            <li><a href="/parkinglot/listAll">주차장관리</a></li>
+                            <li><a href="/parkinglot/listAll">주차장 관리</a></li>
                             <li><a href="/orderticket/listAll">구매티켓관리</a></li>
                             <li><a href="/member/listAll">회원관리</a></li>
                         </sec:authorize>

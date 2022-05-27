@@ -62,6 +62,8 @@ public class OrderTicketService {
 	@Transactional
 	public void update(OrderTicket orderticket) {
 		OrderTicket o = oRepository.findById(orderticket.getTicketId()).get();
+		o.setUsername(orderticket.getUsername());
+		o.setCarNum(orderticket.getCarNum());
 		o.setTicketType(orderticket.getTicketType());
 		o.setBuyDate(orderticket.getBuyDate());
 		o.setEndDate(orderticket.getEndDate());

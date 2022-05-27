@@ -4,6 +4,7 @@ package com.example.parking.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,12 +27,14 @@ public class ParkinglotController {
     private ParkingLotService pService;
     
     // 주차장등록폼(사장님)
+    @PreAuthorize("hasRole('ROLE_OWNER')")
     @GetMapping("insert")
     public String insert() {
         return "/parkinglot/insert";
     }
 
     // 주차장등록(사장님)
+    @PreAuthorize("hasRole('ROLE_OWNER')")
     @PostMapping("insert")
     public String insert(ParkingLot parkinglot, HttpSession session) {
 
@@ -43,8 +46,8 @@ public class ParkinglotController {
 
     // 주차장리스트(사장님)
     @GetMapping("list")
+    @PreAuthorize("hasRole('ROLE_OWNER')")
     public String list(@AuthenticationPrincipal PrincipalDetails principal, Model model) {
-    	if(principal ==null) return "redirect:/register/login";
     	//주차장 주차가능면수 업데이트
     	pService.currentCntUpdate();
     	
@@ -54,6 +57,7 @@ public class ParkinglotController {
     
     // 주차장리스트(전체)
     @GetMapping("listAll")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String list(Model model) {
     	//주차장 주차가능면수 업데이트
     	pService.currentCntUpdate();
@@ -78,14 +82,19 @@ public class ParkinglotController {
 
     // 주차장수정하기(사장님)
     @PostMapping("update")
-    public String update(ParkingLot parkinglot, HttpSession session) {
+    public String update(@AuthenticationPrincipal PrincipalDetails principal, ParkingLot parkinglot, HttpSession session) {
         //String uploadFolder = session.getServletContext().getRealPath("/")+"\\resources\\img";
+    	
         String uploadFolder = session.getServletContext().getRealPath("/");
         pService.update(parkinglot, uploadFolder);
+        if(principal.getMember().getRole().equals("ROLE_ADMIN")) {
+        	return "redirect:/parkinglot/listAll";
+        }  
         return "redirect:/parkinglot/list";
     }
     
     //주차장 삭제하기(삭제)
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("delete")
     @ResponseBody
     public String delete(Long parkinglotId) {
