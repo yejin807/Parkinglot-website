@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.net.URI;
 import java.net.http.HttpRequest;
 import java.util.HashMap;
 import java.util.List;
@@ -125,14 +127,22 @@ public class MemberController {
 
     // 비밀번호 변경
     @PutMapping("updatePwd")
-    public ResponseEntity<Object> updatePwd(@AuthenticationPrincipal PrincipalDetails principal, String password) {
+    public ResponseEntity<Object> updatePwd(@AuthenticationPrincipal PrincipalDetails principal, String password,
+            @RequestParam(required = false) String username) {
+        System.out.println(username);
+        if (username != null) {
+            // System.out.println("$$$$$$" + username);
+            Member member = memberService.findById(username);
+            member.setPassword(password);
+            memberService.updateUserPwd(member);
+
+            return new ResponseEntity<>("admin", HttpStatus.OK);
+        }
 
         Member member = principal.getMember();
         member.setPassword(password);
-
         memberService.updatePwd(member);
-
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>("user", HttpStatus.OK);
 
     }
 
@@ -177,10 +187,17 @@ public class MemberController {
 
     @PostMapping("carRegister")
     public ResponseEntity carRegister(@RequestBody Car car, @AuthenticationPrincipal PrincipalDetails principal) {
-        Member member = principal.getMember();
-        car.setMember(member);
-        carService.carRegister(car);
-        return new ResponseEntity<>("success", HttpStatus.OK);
+
+        boolean carNumExist = carService.checkCarNumDuplicated(car.getCarNum());
+        if (carNumExist == true) {
+            String errorMsg = "이미 등록되어있는 차량입니다";
+            return new ResponseEntity<>(errorMsg, HttpStatus.BAD_REQUEST);
+        } else {
+            Member member = principal.getMember();
+            car.setMember(member);
+            carService.carRegister(car);
+            return new ResponseEntity<>("success", HttpStatus.OK);
+        }
 
     }
 
@@ -202,7 +219,7 @@ public class MemberController {
     }
 
     @PostMapping("/admin/memberView")
-    public String memberView(@RequestParam(value = "bntAdminMemberUpdate") String username, Model model) {
+    public String memberView(String username, Model model) {
         System.out.println("@@@" + username);
         model.addAttribute("member", memberService.findById(username));
         return "/admin/memberView";
@@ -214,6 +231,13 @@ public class MemberController {
         memberService.update(member);
         return new ResponseEntity<>("success", HttpStatus.OK);
 
+    }
+
+    // 비밀번호 변경 페이지 이동
+    @PostMapping("/admin/updateMemberPwd")
+    public String updateUserPwdForm(String username, Model model) {
+        model.addAttribute("username", username);
+        return "/member/updatePwd";
     }
 
 }

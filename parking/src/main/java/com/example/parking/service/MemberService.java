@@ -108,7 +108,7 @@ public class MemberService {
         // Page<ParkingLot> parkinglotPage;
         // Pagenation pagenation;
         if (keyword != "") {
-            System.out.println("search");
+            // System.out.println("search");
             // parkinglotPage =
             // parkingLotRepository.findByAddrContainingOrParkingNameContaining(keyword,
             // keyword,
@@ -132,6 +132,14 @@ public class MemberService {
     public void delete(String username) {
         memberRepository.deleteById(username);
         SecurityContextHolder.clearContext();
+    }
+
+    @Transactional
+    public void updateUserPwd(Member member) {
+        Member contextMember = memberRepository.findById(member.getUsername()).get();
+        String rawPassword = member.getPassword();
+        String encPassword = bcryptPasswordEncoder.encode(rawPassword);
+        contextMember.setPassword(encPassword);
     }
 
 }

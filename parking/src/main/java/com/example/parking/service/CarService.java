@@ -18,7 +18,11 @@ public class CarService {
     }
 
     public List<Car> findAll(String username) {
-        return carRepository.findAll();
+        return carRepository.findByUsername(username);
+    }
+
+    public boolean checkCarNumDuplicated(String carNum) {
+        return carRepository.existsById(carNum);
     }
 
 }

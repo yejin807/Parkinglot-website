@@ -20,6 +20,7 @@
                             <th>사업자번호</th>
                             <th>수정</th>
                             <th>삭제</th>
+                            <th>비밀번호 재설정</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -38,13 +39,21 @@
                                 </c:if>
                                 <td>
                                     <form method="post" action="/member/admin/memberView">
-                                        <button class="btn btn-primary btn-sm" value="${member.username}"
-                                            id="bntAdminMemberUpdate" name="bntAdminMemberUpdate">수정</button>
+                                        <input type="hidden" name="username" value="${member.username}">
+                                        <button class="btn btn-primary btn-sm" id="bntAdminMemberUpdate"
+                                            name="bntAdminMemberUpdate">수정</button>
                                     </form>
                                 </td>
                                 <td>
                                     <button type="button" class="btn btn-secondary btn-sm" data-mid="${member.username}"
                                         id="bntAdminMemberDel">삭제</button>
+                                </td>
+                                <td>
+                                    <form method="post" action="/member/admin/updateMemberPwd">
+                                        <input type="hidden" name="username" value="${member.username}">
+                                        <button class="btn btn-primary btn-sm" id="bntAdminMemberUpdatePwd"
+                                            name="bntAdminMemberUpdatePwd">재설정</button>
+                                    </form>
                                 </td>
                             </tr>
                         </c:forEach>
