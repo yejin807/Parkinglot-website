@@ -67,4 +67,5 @@
                 </sec:authorize>
                 
             </div>
-        </body>
+
+            <%@ include file="/WEB-INF/views/includes/footer.jsp" %>

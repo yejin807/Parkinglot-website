@@ -144,7 +144,22 @@ $(document).ready(function () {
             });
     });
 
+	//차량등록시 에러메시지 초기화
+	$("#carNum").focusin(function () {
+			 $("#error").text("");
+	})
+	
     $("#btnCarRegister").click(function () {
+	
+		if($("#carNum").val()=="") {
+			alert("차량번호를 입력해주세요.")
+			return;	
+		}
+		if($("#carName").val()=="") {
+			alert("차량이름을 입력해주세요.")
+			return;	
+		}
+				
         var postStr = {
             carNum: $("#carNum").val(),
             carName: $("#carName").val(),
@@ -166,6 +181,8 @@ $(document).ready(function () {
                 console.log(
                     "fail update account :" + resp.responseText + "/" + resp.status
                 );
+                $("#carNum").val("");
+                $("#carName").val("");
                 $("#error").text(resp.responseText)
             });
     });
