@@ -104,7 +104,7 @@ function funDel(parkinglotId){
 		success : function(resp) {
 			if (resp == "success") {
 				alert("삭제성공");
-				location.href = "/parkinglot/list";
+				location.href = "/parkinglot/listAll";
 			}
 		},
 		error : function(e) {
