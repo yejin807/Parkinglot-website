@@ -44,7 +44,7 @@ public class ParkinglotController {
     // 주차장리스트(사장님)
     @GetMapping("list")
     public String list(@AuthenticationPrincipal PrincipalDetails principal, Model model) {
-    	if(principal==null) return "redirect:/register/login";
+    	if(principal ==null) return "redirect:/register/login";
     	//주차장 주차가능면수 업데이트
     	pService.currentCntUpdate();
     	
