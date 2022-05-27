@@ -19,6 +19,7 @@
 					<th>시작일</th>
 					<th>만료일</th>
 					<th>비고</th>
+					<th>정기권</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -42,6 +43,7 @@
 							</c:if> <c:if test="${orderticket.endDate>=today}">
 								<span style="color: blue">사용가능</span>
 							</c:if></td>
+						<td><button type="button" class="btn btn-info btn-sm" onclick="location.href='/orderticket/buy/${orderticket.parkinglotId}'">추가구매</button></td>
 					</tr>
 				</c:forEach>
 			</tbody>

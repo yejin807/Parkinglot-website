@@ -38,19 +38,18 @@
 			<c:forEach items="${cars.content }" var="car" varStatus="st">
 				<tr>
 
-					<td>${car.carNum}<input type="hidden" name="basicFee"
-						id="basicFee" value="${parkinglot.basicFee }"> <input
-						type="hidden" name="dayFee" id="dayFee"
-						value="${parkinglot.dayFee }"> <input type="hidden"
-						name="monthFee" id="monthFee" value="${parkinglot.monthFee }">
-						<input type="hidden" name="intime" id="intime"
-						value="${car.intime }">
+					<td>${car.carNum}
+						<input type="hidden" name="basicFee" id="basicFee" value="${parkinglot.basicFee }"> 
+						<input type="hidden" name="dayFee" id="dayFee" value="${parkinglot.dayFee }"> 
+						<input type="hidden" name="monthFee" id="monthFee" value="${parkinglot.monthFee }">
+						<input type="hidden" name="intime" id="intime" value="${car.intime}">
 					</td>
 					<td>${car.parkingType }</td>
 					<c:choose>
 						<c:when test="${car.parkingType eq '월주차' }">
-							<td>종료일: <span id='spanID00${st.index}'></span> / <span
-								id='spanID1${st.index}'></span> <script>mleftday(${parkinglot.parkinglotId },'${car.carNum }','spanID00${st.index}','spanID1${st.index}','${car.intime }')</script>일
+							<td>종료일: <span id='spanID00${st.index}'></span> / 
+								<span id='spanID1${st.index}'></span> 
+								<script>mleftday(${parkinglot.parkinglotId },'${car.carNum }','spanID00${st.index}','spanID1${st.index}','${car.intime }')</script>일
 								남음
 							</td>
 							<td>월주차</td>
@@ -58,8 +57,9 @@
 									onclick="outticketBtn('${car.carNum }','${car.parkingType }',${parkinglot.parkinglotId })">출차</button></td>
 						</c:when>
 						<c:when test="${car.parkingType eq '주주차' }">
-							<td>종료일: <span id='spanID01${st.index}'></span> / <span
-								id='spanID2${st.index}'></span> <script>wleftday(${parkinglot.parkinglotId },'${car.carNum }','spanID01${st.index}','spanID2${st.index}','${car.intime }')</script>일
+							<td>종료일: <span id='spanID01${st.index}'></span> / 
+								<span id='spanID2${st.index}'></span> 
+								<script>wleftday(${parkinglot.parkinglotId },'${car.carNum }','spanID01${st.index}','spanID2${st.index}','${car.intime }')</script>일
 								남음
 							</td>
 							<td>주주차</td>
@@ -98,10 +98,7 @@
 				</c:if>
 			</c:forEach>
 		</div>
-
-
 	</div>
-
 
 	<form class="form-inline mt-5" action="/car/listfield" method="get">
 		<input type="hidden" name="parkid" value="${parkinglot.parkinglotId }">
@@ -109,8 +106,7 @@
 			type="text" name="field" id="field" class="form-control"
 			placeholder="차 번호 검색">
 		<button class="btn btn-secondary">Search</button>
-
 	</form>
-
-
 </div>
+
+<%@ include file="/WEB-INF/views/includes/footer.jsp"%>
