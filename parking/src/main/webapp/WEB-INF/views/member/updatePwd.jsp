@@ -8,13 +8,13 @@
             </sec:authorize>
             <div class="form-group">
                 <label for="pwd">새 비밀번호 :</label> <input type="password" class="form-control" id="password"
-                    placeholder="Enter new spassword" name="password">
+                    placeholder="비밀번호는 영문과 숫자 조합으로 8 ~ 16자리까지 가능합니다." name="password">
             </div>
 
 
             <div class="form-group">
                 <label for="passwordcheck">새 비밀번호 확인:</label> <input type="password" class="form-control"
-                    id="passwordcheck" placeholder="Enter new password check" name="passwordcheck">
+                    id="passwordcheck" placeholder="비밀번호는 영문과 숫자 조합으로 8 ~ 16자리까지 가능합니다." name="passwordcheck">
             </div>
 
 
