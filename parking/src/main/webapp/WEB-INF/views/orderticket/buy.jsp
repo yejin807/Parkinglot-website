@@ -6,7 +6,7 @@
 <script>
  if(${empty ticket}){
 	 alert("정기권 판매등록이 되지 않았습니다.");
-	 location.href="/parkinglot/listAll"; //주차장전체리스트로 이동
+	 location.href="/member/parkinglotList"; //주차장검색으로
  }
  
  if(${empty carlist}){

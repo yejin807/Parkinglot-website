@@ -47,7 +47,7 @@
 						<button type="button" class="btn btn-danger"
 							onclick="funDel(${orderticket.ticketId})">삭제하기</button>
 						<button type="button" class="btn btn-secondary"
-							onclick="location.href='/orderticket/listAll'">전체구매리스트</button>
+							onclick="location.href='/orderticket/list'">전체구매리스트</button>
 					</td>
 				</tr>
 			</table>

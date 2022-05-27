@@ -37,7 +37,7 @@
 				<th>운영방식</th>
 				<td>${parkinglot.operatingType}</td>
 				<th>운영시간</th>
-				<td>${parkinglot.openTime}~ ${parkinglot.closeTime}</td>
+				<td>${parkinglot.openTime}~${parkinglot.closeTime}</td>
 			</tr>
 			<tr>
 				<th>전체주차면수</th>
@@ -59,15 +59,18 @@
 				<td><fmt:formatNumber type="number" maxFractionDigits="3"
 						value="${parkinglot.monthFee}" var="monthFee" /> ${monthFee}원</td>
 			</tr>
-			<!-- 수정권한 -->
+			<!-- 관리자 -->
 			<sec:authorize access="hasRole('ROLE_ADMIN')">
 				<tr>
 					<td colspan="4">
 						<button type="button" class="btn btn-primary"
 							onclick="location.href='/parkinglot/update/${parkinglot.parkinglotId}'">수정하기</button>
+						<button type="button" class="btn btn-danger"
+							onclick="funDel(${parkinglot.parkinglotId})" )>삭제</button>
 					</td>
 				</tr>
 			</sec:authorize>
+			<!-- 해당 주차장 사장님인 경우 -->
 			<c:if test="${principal.username == parkinglot.username}">
 				<tr>
 					<td colspan="4">

@@ -39,8 +39,9 @@
                         account</button>
 
                 </div>
-
-
+				
+				<sec:authorize access="hasRole('ROLE_USER')"> 
+				<!-- 자동차등록 -->
                 <div>
                     <div class="d-flex justify-content-between">
                         <h5 class="mt-2">소유차량</h5>
@@ -63,5 +64,7 @@
                         </tbody>
                     </table>
                 </div>
+                </sec:authorize>
+                
             </div>
         </body>
