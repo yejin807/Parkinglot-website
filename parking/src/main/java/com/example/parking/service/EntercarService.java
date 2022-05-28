@@ -42,6 +42,7 @@ public class EntercarService {
 		} else {
 			c.setParkingType("자유주차");
 			c.setFee(p.getBasicFee());
+			p.setCurrentCnt(p.getCurrentCnt()-1);
 		}
 	}
 
